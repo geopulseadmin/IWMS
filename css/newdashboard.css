@@ -1,0 +1,906 @@
+.leaflet-control-zoom {
+  position: absolute;
+  left: 96vw;
+  top: 85vh;
+  border: 2px solid darkblue;
+}
+
+
+.leaflet-container .leaflet-control-attribution {
+  display: none;
+}
+
+.leaflet-control-layers-toggle {
+  top: 0;
+}
+
+.leaflet-control-layers-list {
+  width: 150px;
+  height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  font-size: 9px;
+  padding: 0px;
+  /* color: darkblue; */
+}
+
+.leaflet-control-layers-overlays {
+  width: 100%;
+}
+
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+height: 100vh !important;
+overflow: hidden;
+/* padding: 10px; */
+background-color: #e8f5e9;
+}
+
+
+/* .search-bar {
+display: flex;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+.search-bar select,
+.search-bar button {
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+}
+
+.search-bar button {
+background-color: #4caf50;
+color: white;
+cursor: pointer;
+} */
+
+.main-content {
+display: flex;
+width: 100vw;
+max-width: 98vw;
+transition: all 0.3s ease;
+}
+
+.map-container {
+width: 100vw;
+position: relative;
+}
+
+#map {
+position: relative;
+width: 100vw;
+height: 100vh;
+border: 1px solid #ccc;
+border-radius: 10px;
+transition: width 0.3s ease;
+}
+
+.tablestats {
+/* color: #04c; */
+color: darkblue;
+font-size: 53%;
+font-weight: bold;
+padding: 3px;
+text-shadow: black;
+text-transform: uppercase;
+
+/* position: fixed; color: darkblue; font-size: 12px;font-weight: bold;  z-index: 9999; margin-top: 45px; margin-left:0px; */
+}
+.filters {
+width: 20vw;
+margin-left: -5vw;
+background-color: white;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+opacity: 0;
+transition: margin-left 0.3s ease, opacity 0.3s ease;
+}
+
+.filters h3 {
+font-size: 15px;
+margin-top: 15px;
+}
+
+.showCount {
+margin-top: 2%;
+background-color: #9393d633;
+padding: 10px;
+border-radius: 5px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.accordion {
+width: 100%;
+}
+
+.accordion-item {
+border-top: 1px solid #ccc;
+}
+
+.accordion-item:first-child {
+border-top: none;
+}
+
+.accordion-header {
+width: 100%;
+text-align: left;
+padding: 10px;
+background-color: #f1f1f1;
+border: none;
+outline: none;
+cursor: pointer;
+}
+
+.accordion-content {
+display: none;
+padding: 10px;
+background-color: white;
+border-top: 1px solid #ccc;
+}
+
+.toggle-button {
+position: absolute;
+top: 15vh;
+right: 10px;
+z-index: 1000;
+background-color: white;
+color: darkblue;
+border: 2px solid darkblue;
+padding: 8px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+/* leaflet zoom */
+
+.leaflet-control-zoom {
+position: absolute;
+border: 2px solid darkblue;
+color: darkblue;
+}
+
+/* table */
+
+#openTableBtn {
+position: absolute;
+z-index: 999;
+top: 22vh;
+width: auto;
+padding: 6px;
+right: 10px;
+background-color: white;
+border-radius: 5px;
+border: 2px solid #383899;
+}
+
+.tablebtn {
+width: 20px;
+height: 20px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+padding: 30px 10px;
+font-weight: bolder;
+
+}
+
+/*search bar  */
+
+.SearchBar {
+display: flex;
+align-items: center;
+font-size: 12px;
+font-weight: bold;
+}
+
+.SearchBar .form-select,
+.SearchBar .form-control,
+.SearchBar .btn {
+margin-right: 5px;
+font-size: 12px;
+font-weight: bold;
+width: 1% !important;
+height: 4.5%;
+position: absolute;
+top: 2%;
+left: 12.8%;
+/* border-left: 2px solid darkblue !important;
+border-right: 2px solid darkblue !important;
+border-top: 2px solid darkblue !important;
+border-bottom: 2px solid darkblue !important; */
+z-index: 9999999;
+border-radius: 0;
+border-top-left-radius: 10px;
+border-bottom-left-radius: 10px;
+
+
+
+}
+
+/* html */
+
+.filters {
+  margin-bottom: 20px;
+
+}
+
+
+.filter-group {
+  /* margin-bottom: 20px; */
+  padding: 10px;
+  border: 1px solid gray;
+  font-size: 10px;
+}
+.filter-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-group input[type="text"] {
+width: 80%;
+padding: 5px;
+margin-bottom: 10px;
+font-size: 12px;
+font-weight: bold;
+display: none;
+border-radius: 8px;
+border: 2px solid #bbb;
+}
+.filter-group ul {
+list-style-type: none;
+padding: 0;
+display: none;
+}
+.filter-group ul.active,
+.filter-group input[type="text"].active {
+display: block;
+forced-color-adjust: blue;
+}
+.filter-group li {
+  margin-bottom: 5px;
+}
+
+.icon-container {
+position:absolute;
+right:1%; 
+top:0%;
+font-size: 15px;
+}
+
+/* Style the icon */
+.icon-container i {
+color: black; /* Default color */
+}
+
+.abcscroll {
+  height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+/* WebKit (Safari, older Chrome) */
+.abcscroll::-webkit-scrollbar {
+  width: 10px; /* Makes scrollbars thinner */
+}
+
+.abcscroll::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of scrollbar track */
+  border-radius: 10px; /* Rounded corners for scrollbar track */
+}
+
+.abcscroll::-webkit-scrollbar-thumb {
+  background: #888; /* Color of scrollbar handle */
+  border-radius: 10px; /* Rounded corners for scrollbar handle */
+}
+
+.abcscroll::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover state for visibility */
+}
+
+
+#daterange {
+  z-index: 9999;
+  position: fixed !important;
+  padding: 16px;
+  font-size: 13px !important;
+  left: 62%;
+  top: 2.3%;
+  width: 15% !important;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+  height: 3%;
+  }
+  
+  .daterange-container {
+    display: flex;
+    align-items: center;
+    position: relative; 
+  }
+  
+  
+  .daterange-container .fa-solid  {
+    position: fixed !important;
+    top: 4.2%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    left: 75% !important;
+    z-index: 9999 !important;
+  }
+thead th {
+position: sticky !important;
+padding: 0%;
+top: 10%;
+background-color: #506be7;
+z-index: 2;
+}
+
+/* 
+#tablecontainer {
+z-index: 9999;
+position: absolute;
+width: 53%;
+bottom: 20%;
+right: 1%;
+background-color: white;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+max-height: 200px;
+font-size: 10px;
+transition: all 0.3s ease;
+
+} */
+
+
+.tableDetail {
+max-height: 550px; 
+overflow-y: auto; 
+
+border: 1px solid #ccc; 
+background-color: #f9f9f9; 
+
+}
+
+.minimize-button {
+background-color: darkblue;
+color: white;
+border: none;
+padding: 5px;
+cursor: pointer;
+font-size: 15px;
+/* border-radius: 50%; */
+position: absolute;
+right: 0%;
+top:0%;
+z-index: 1000;
+width: 27px;
+height:28px;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+} 
+
+.data-table {
+width: 100%;
+border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+border: 1px solid #ddd;
+padding: 8px;
+}
+
+.data-table th {
+/* background-color: #f2f2f2; */
+background-color: #9393d633;
+color: darkblue;
+text-align: center;
+text-transform: uppercase;
+font-weight: bold;
+}
+
+#data-table tbody tr:hover {
+  background-color: #9393d633;
+  cursor: pointer;
+}
+
+
+.dataTables_wrapper .dataTables_scrollHead {
+overflow: visible;
+}
+
+.dataTables_wrapper .dataTables_scrollBody {
+overflow: auto;
+scrollbar-width: thin;
+text-align: center;
+/* height: 248px;
+max-height: 248px;  */
+}
+
+
+.dataTables_scrollBody{
+  max-height: 196px !important;
+}
+.dataTables_wrapper .dataTables_scrollFoot {
+overflow: visible;
+}
+
+
+
+/* table------------------------------------------- */
+.leaflet-popup-content-wrapper {
+
+  border-radius: 12px;
+ 
+  font-size: 10px;
+  font-weight: bold;
+  }
+
+
+.leaflet-popup-content-wrapper tr,
+td {
+border-bottom: 1px solid;
+padding: 5px;
+margin-left: 2px;
+}
+
+.leaflet-popup-content-wrapper tr td:not(:last-child) {
+border-right: 1px solid;
+}
+
+/* geotag popup */
+
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  border: 2px solid #6c757d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  display: flex;
+  height:  auto;
+  max-height: 500px;
+  width: auto;
+
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+ 
+
+}
+
+
+/* For WebKit browsers (Chrome, Safari) */
+.leaflet-popup-content-wrapper::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.leaflet-popup-content-wrapper:hover::-webkit-scrollbar {
+  width: 5px;  /* Show scrollbar when hovered */
+}
+
+.leaflet-popup-content-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);  /* Custom scrollbar color */
+  border-radius: 12px;
+}
+
+.pagination-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#prevIcon {
+  left: 10px;
+}
+
+#nextIcon {
+  right: 10px;
+}
+
+.pagination-icon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+#popupImage{
+  width: 268px;
+  height: 282px;
+  display: flex;
+  border-radius: 12px;
+}
+.popuptable {
+    width: 100%;
+    /* margin-right: 5px; */
+    margin-top: 5px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 9px;
+}
+
+.popuptable td {
+  border: 1px solid #ddd;
+  font-weight: bold;
+  padding: 5px 0.5px;
+
+}
+
+#featureTitle{
+text-align: left;
+/* padding: 10px; */
+font-weight: bold;
+color: #262626;
+font-size: 13px;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  position: absolute;
+  top: 2px !important;
+  right: 5px !important;
+
+  border: none; 
+  text-align: center;
+  font: 16px / 24px Tahoma, Verdana, sans-serif;
+  color: red;
+  text-decoration: none;
+  background: transparent;
+  font-size: 25px !important;
+  font-weight: bold !important;
+}
+/* geotag */
+
+
+.geopulseaname {
+color: darkblue;
+position: fixed;
+z-index: 99999;
+bottom: 0px;
+right: 15px;
+font-weight: bold;
+font-size: 10px;
+}
+
+
+.logopng {
+height: 60px;
+width: 60px;
+border-radius: 10px;
+padding: 5px;
+position: absolute;
+z-index: 9999;
+top:0%;
+left: 2%;
+}
+
+
+
+#autocomplete-list {
+  position: absolute;
+  z-index: 9999;
+  margin-left:5px;
+  height: auto;
+  border-radius: 10px;
+  width: auto;
+  font-size: 10px;
+  font-weight: bold;
+  z-index: 9999;
+  top: 6.5%;
+  left:13.700%;
+  text-align: left;
+  background-color: #fff;
+  width: 250px;
+  max-width: 230px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  /* scrollbar-color: #8ac0ee #f1f1f1;  */
+  /* scrollbar-width: thin; */
+  line-height: 2.5;
+ }
+ #autocomplete-list:hover {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #9393d633;
+
+}
+.autocomplete-items li {
+  cursor: pointer;
+  list-style: circle;
+}
+
+ /* Scrollbar styles for WebKit browsers */
+#autocomplete-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+#autocomplete-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#autocomplete-list::-webkit-scrollbar-thumb {
+  background-color:#8ac0ee;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+/* table css */
+.dataTables_info{
+  font-weight: bold !important;
+}
+#data-table_filter{
+  font-weight: bold !important;
+  
+}
+#tablecontainer {
+z-index: 9999;
+position: absolute;
+width: 32%;
+bottom: 14%;
+font-weight: bold;
+right: 1%;
+opacity: 0.88;
+/* background-color: white !important; */
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+max-height: 200px;
+font-size: 10px;
+transition: all 0.3s ease;
+
+}
+.tableDetail {
+    max-height: 550px;
+    overflow-y: auto;
+    opacity: 0.88;
+    /* margin-top: 10px; */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+}
+
+
+
+
+
+
+
+
+
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid darkblue;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  top: 2%;
+/* border-radius: 10px 10px 10px 10px; */
+  height: 4%;
+  background-color: white;
+  position: absolute;
+  left: 10%;
+  width: 17%; /* Adjust the width as needed */
+}
+
+.dropdown-icon,
+.search-icon {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  border-right: 1px solid #ccc;
+}
+
+.search-input {
+  border: none;
+  border-right: 2px solid darkblue;
+  border-left: 2px solid darkblue;
+  padding: 10px;
+  outline: none;
+  flex-grow: 1;
+  width: 100%; /* Take up remaining space */
+}
+
+
+.autocomplete-items li:hover {
+  background-color: #9393d633;
+}
+
+
+#data-table tbody tr:hover {
+  background-color: #9393d633;
+  cursor: pointer;
+}
+
+.SearchBar #searchInputDashboard {
+margin-left: 5px;
+height: 4.5%;
+border-radius: 10px;
+
+/* border-radius: 10px; */
+width: 16%;
+position: absolute;
+z-index: 9999;
+top: 2%;
+text-align: left; /* Center align text */
+padding-left: 27px; /* Add padding to move text slightly left */
+left: 12.5%;
+border: 2px solid darkblue;
+}
+
+/* Placeholder styling */
+#searchInputDashboard::placeholder {
+text-align: center; 
+}
+
+
+input::-webkit-input-placeholder {
+color: #aaa; 
+text-align: center; 
+}
+input::-moz-placeholder {
+color: #aaa; 
+text-align: center; 
+}
+input:-ms-input-placeholder {
+color: #aaa; 
+text-align: center; 
+}
+input:-moz-placeholder {
+color: #aaa;
+text-align: center; 
+}
+
+
+.leaflet-popup-pane, .leaflet-control {
+  cursor: pointer;
+}
+
+.leaflet-popup-content {
+  /* width: 181px; */
+}
+
+.popup-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.popup-table td {
+  border: 1px solid #dee2e6;
+  padding: 8px;
+}
+
+.popup-table img {
+  max-height: 350px;
+  max-width: 250px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.popup-table tr:first-child td {
+  text-align: left;
+  font-weight: bold;
+}
+
+.popup-table tr:last-child td {
+  padding-top: 12px;
+}
+
+.popup-table tr:nth-child(2) td {
+  background-color: #f8f9fa;
+}
+
+.popup-table tr:nth-child(odd) td {
+  background-color: #f8f9fa;
+}
+.leaflet-popup-tip {
+  width: 17px;
+  height: 17px;
+  padding: 1px;
+  margin: -10px 0 0 -10px;
+  pointer-events: auto;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  left: 50%;
+  bottom: 100%; /* Moves the tip above the popup */
+  margin-left: -8px; /* Centers the tip horizontally */
+  margin-bottom: -8px; /* Adjusts the tip's vertical position */
+}
+
+.leaflet-popup-content-wrapper tr, td {
+  border-bottom: 1px solid !important;
+  padding: 5px;
+  margin-left: 2px;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+  background: white;
+  color: #333;
+  border: none;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+}
+
+#data-table {
+ 
+  width: 100%;
+  min-height: 50px; 
+  max-height: 300px;
+  overflow-y: auto; 
+ 
+}
+
+#data-table thead tr {
+  background-color: #9393d633;
+}
+#search_type {
+  appearance: none; /* Remove default browser styles */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  padding-right: 25px; /* Adjust padding to make space for the icon */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="black"/></svg>') no-repeat; /* Custom SVG arrow */
+  background-position: right 5px center; /* Default position */
+  background-size: 13px; /* Size of the icon */
+  border: none; /* Remove the default border */
+  border-right: 2px solid darkblue; /* Add a border only to the right side */
+  /* padding: 8px; */
+  width: 23px;
+  border-radius: 0px; /* No rounded corners */
+  outline: none; /* Remove the outline (focus border) when clicked */
+  background-position: right 5px 45%; /* Move icon slightly upward */
+}
+
+
+/* Prevent background change on click */
+#search_type:focus,
+#search_type:active {
+  background-color: transparent; /* Keeps background transparent when focused or clicked */
+  box-shadow: none; /* Removes any outline or shadow */
+  outline: none; /* Ensures no focus outline appears */
+}
+
+#search_type {
+  padding: 7px 15px;
+}
+
+
+
+
+.dataTables_scrollBody {
+  position: relative;
+  width: 100%;
+  max-height: 70vh; /* Set max height as per your requirement */
+  overflow-y: auto; /* Enables vertical scrolling when content exceeds */
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse; /* Ensure it takes full width without extra spaces */
+}
+
+.data-table th, .data-table td {
+  padding: 8px 12px; /* Consistent padding for readability */
+  text-align: left;
+}

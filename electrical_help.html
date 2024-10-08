@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electric_Help page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+           body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa; /* Light grey background */
+        }
+        h1 {
+            margin: 20px 0;
+            font-size: 36px;
+            color: #34495e; /* Dark blue-gray */
+            font-weight: 700;
+        }
+        #video-select {
+            margin: 20px 0;
+        }
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        #videos {
+            width: 250px;
+            height: 40px;
+            border: 2px solid #3498db; /* Primary blue */
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 16px;
+            color: #3498db; /* Primary blue */
+            background-color: white;
+            cursor: pointer;
+        }
+        #videos:focus {
+            outline: none;
+        }
+        #controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: 2px solid #3498db; /* Primary blue */
+            border-radius: 15px;
+            background-color: white;
+            color: #3498db; /* Primary blue */
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background-color: #3498db; /* Primary blue */
+            color: white;
+        }
+        button i {
+            margin-right: 5px;
+        }
+        label {
+            font-size: 20px; 
+            color: #34495e; /* Dark blue-gray */
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ELECTRIC</h1>
+
+    <div id="video-select">
+        <label for="videos">Select a video:</label><br><br>
+        <select id="videos" onchange="loadVideo()">
+            <option value="video/Electrical/1 Recording_cordinates.mp4">Recording cordinates</option>
+            <option value="video/Electrical/2 Selection_of_whole_Ward.mp4">Selection of whole Ward</option>
+            <option value="video/Electrical/3 GIS_mapping.mp4"> GIS mapping</option>
+            <option value="video/Electrical/4 Delete_feature.mp4">Delete</option>
+        </select>
+    </div>
+    <!-- C:\xampp\htdocs\iwms\video\Road\1 Recording coordinates.mp4 -->
+    <div id="video-container">
+        <video id="videoPlayer" controls>
+            <source src="./video/Electrical/1 Recording_cordinates.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="controls">
+        <button onclick="previousVideo()"><i class="fas fa-angle-double-left"></i></button>
+        <button onclick="nextVideo()"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+
+    <script>
+               const videos = ["video/Electrical/1 Recording_cordinates.mp4", "video/Electrical/2 Selection_of_whole_Ward.mp4", "video/Electrical/3 GIS_mapping.mp4","video/Electrical/4 Delete_feature.mp4"];
+
+        let currentVideoIndex = 0;
+
+        function loadVideo() {
+            const videoSelect = document.getElementById('videos');
+            currentVideoIndex = videoSelect.selectedIndex;
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = videos[currentVideoIndex];
+            videoPlayer.play();
+        }
+
+        function previousVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+                document.getElementById('videos').selectedIndex = currentVideoIndex;
+                loadVideo();
+            }
+        }
+
+        function nextVideo() {
+            if (currentVideoIndex < videos.length - 1) {
+                currentVideoIndex++;
+                document.getElementById('videos').selectedIndex = currentVideoIndex;
+                loadVideo();
+            }
+        }
+    </script>
+
+</body>
+</html>

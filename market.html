@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMC</title>
+    <link rel="icon" href="png/pmcjpeg.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      @media screen and (max-width: 768px) {
+        #editFeatureButton {
+          display: none !important;
+        }
+        #saveDataButton {
+          display: none !important;
+        }
+        #deleteFeatureButton {
+          display: none !important;
+        }
+        .draw_feature {
+          display: none !important;
+        }
+      }
+
+      #saveEditGeomButton {
+			border: 2px solid #2b13bb;
+			border-bottom: 2px solid #2b13bb;
+			border-top: 2px solid #2b13bb;
+			border-radius: 5px 5px 5px 5px;
+      background-color: green;
+			position: fixed;
+			color: black;
+			padding: 0px 5px;
+      top: 85%;
+			/* changed from 683px */
+			font-size: 19px;
+			height: 37px;
+			width: 37px;
+			left: 50%;
+			/* changed from 865px */
+		}
+
+		#deleteEditGeomButton {
+			border: 2px solid #2b13bb;
+			border-bottom: 2px solid #2b13bb;
+			border-top: 2px solid #2b13bb;
+			border-radius: 5px 5px 5px 5px;
+			background-color: green;
+			position: fixed;
+			color: black;
+			padding: 0px 5px;
+      top: 85%;
+			/* changed from 683px */
+			font-size: 19px;
+			height: 37px;
+			width: 37px;
+			left: 47%;
+			/* changed from 865px */
+		}
+
+
+
+      @media only screen and (min-width: 992px) {
+        .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+          background-position: -27px 2px !important;
+        }
+        .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+          background-position: -269px 2px !important;
+          display: none !important;
+        }
+        .draw_feature {
+          top: 91% !important;
+          left: 57.6% !important;
+          position: fixed !important;
+          height: 37px !important;
+          width: 37px !important;
+          border: 2px solid #2b13bb !important;
+          border-radius: 5px 5px 5px 5px !important;
+        }
+        .custom-button {
+          width: auto;
+          padding: 9px 5px;
+          background-color: #fff;
+          /* color: darkblue; */
+          font-weight: bold;
+          font-size: 9px !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px !important;
+          cursor: pointer;
+          position: fixed !important;
+          top: 89.5% !important;
+          left: 60.45% !important;
+          height: 37px !important;
+          width: 37px !important;
+          transition: background-color 0.1s;
+        }
+
+        .leaflet-draw-draw-polygon {
+          left: 53.9% !important;
+          position: fixed !important;
+          top: 91% !important;
+          height: 37px !important;
+          width: 37px !important;
+          border-bottom: 2px solid #2b13bb !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px !important;
+        }
+        .leaflet-draw-draw-circlemarker {
+          top: 91%;
+          left: 50.2%;
+          position: fixed !important;
+          border-bottom: 2px solid #2b13bb;
+          border: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb !important;
+          /* border-top: none; */
+          width: 37px !important;
+          height: 37px !important;
+          border-radius: 5px 5px 5px 5px !important;
+        }
+        #saveDataButton {
+          border: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          position: fixed;
+          color: black;
+          padding: 5px 5px;
+          display: none;
+          top: 91%;
+          font-size: 17px;
+          height: 37px;
+          width: 37px;
+          left: 69.1%;
+        }
+        #editFeatureButton {
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          height: 37px !important;
+          width: 37px !important;
+          display: none;
+          position: fixed;
+          font-size: 15px !important;
+          top: 91%;
+          left: 65.3%;
+          padding: 3px 5px !important;
+          background: white;
+          border-bottom: 2px solid #2b13bb;
+        }
+        #deleteFeatureButton {
+          border: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          color: black;
+          padding: 3px 7px;
+          display: none;
+          position: fixed;
+          top: 91%;
+          font-size: 14px;
+          height: 37px;
+          width: 37px;
+          left: 72.9%;
+        }
+        #save-button {
+          /* border: 2px solid rgb(187, 187, 187); */
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          color: black;
+          padding: 7px;
+          display: none;
+          position: fixed;
+          border: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb;
+          top: 91%;
+          height: 37px;
+          width: 37px;
+          left: 50.100%;
+          font-size: 15px;
+          border-bottom: 2px solid #2b13bb;
+        }
+        .leaflet-draw-actions {
+          display: none;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: fixed !important;
+          left: 520px !important;
+          top: 86vh !important;
+          white-space: nowrap;
+        }
+        .delete-button {
+          border: 2px solid #2b13bb;
+          padding: 6px 7.3px;
+          font-size: 14px;
+          border-radius: 5px 5px 5px 5px;
+          display: block;
+          background-color: white;
+          color: black;
+          cursor: pointer;
+          left: 42.600%;
+          position: fixed;
+          top: 91% !important;
+          height: 37px;
+          width: 37px;
+          display: none;
+          border-top: 2px solid #2b13bb !important;
+          border-bottom: 2px solid #2b13bb !important;
+          border-left: 2px solid #2b13bb !important;
+          border-right: 2px solid #2b13bb !important;
+        }
+        .leaflet-control-edit-interior {
+          font-size: 15px;
+          padding: 2px 9px;
+          position: fixed !important;
+          height: 37px !important;
+          width: 37px !important;
+          top: 91% !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px !important;
+          display: none;
+          left: 46.300% !important;
+          border-bottom: 2px solid #2b13bb !important;
+        }
+      }
+      @media only screen and (min-width: 1400px) {
+        .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+          background-position: -27px 2px !important;
+        }
+        .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-circlemarker {
+          background-position: -269px 2px !important;
+        }
+        .draw_feature {
+          top: 91% !important;
+          left: 49% !important;
+          position: fixed;
+          height: 37px;
+          width: 37px;
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+        }
+        .custom-button {
+          width: auto;
+          padding: 9px 5px;
+          background-color: #fff;
+          /* color: darkblue; */
+          font-weight: bold;
+          font-size: 9px !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px !important;
+          cursor: pointer;
+          position: fixed !important;
+          top: 89.6% !important;
+          left: 50.9% !important;
+          height: 37px !important;
+          width: 36px !important;
+          transition: background-color 0.1s;
+        }
+        .leaflet-draw-draw-polygon {
+          left: 46.400% !important;
+          position: fixed !important;
+          top: 91% !important;
+          height: 37px !important;
+          width: 37px !important;
+          border-bottom: 2px solid #2b13bb !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px !important;
+        }
+        .leaflet-draw-draw-circlemarker {
+          top: 91%;
+          left: 46.5%;
+          position: fixed !important;
+          border-bottom: 2px solid #2b13bb;
+          border: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb !important;
+          /* border-top: none; */
+          width: 37px !important;
+          height: 37px !important;
+          border-radius: 5px 5px 5px 5px !important;
+        }
+        #saveDataButton {
+          border: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          position: fixed;
+          color: black;
+          padding: 5px 5px;
+          display: none;
+          top: 91%;
+          font-size: 15px;
+          height: 37px;
+          width: 37px;
+          left: 56.5%;
+        }
+        #editFeatureButton {
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          height: 37px !important;
+          width: 37px !important;
+          display: none;
+          position: fixed;
+          top: 91%;
+          left: 53.99%;
+          /* padding: 3px 5px !important; */
+          background: white;
+          border-bottom: 2px solid #2b13bb;
+        }
+        #deleteFeatureButton {
+          border: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          color: black;
+          padding: 3px 7px;
+          display: none;
+          position: fixed;
+          top: 91%;
+          font-size: 14px;
+          height: 37px;
+          width: 37px;
+          left: 58.98%;
+        }
+        .delete-button {
+          border: 2px solid #2b13bb;
+          padding: 6px 7.3px;
+          font-size: 14px;
+          border-radius: 5px 5px 5px 5px;
+          display: block;
+          background-color: white;
+          color: black;
+          cursor: pointer;
+          left: 38.800%;
+          position: fixed;
+          top: 91%;
+          height: 37px;
+          width: 37px;
+          display: none;
+          border-top: 2px solid #2b13bb !important;
+          border-bottom: 2px solid #2b13bb !important;
+          border-left: 2px solid #2b13bb !important;
+          border-right: 2px solid #2b13bb !important;
+        }
+        .leaflet-control-edit-interior {
+          font-size: 15px;
+          position: fixed !important;
+          height: 37px !important;
+          width: 37px !important;
+          top: 91% !important;
+          border: 2px solid #2b13bb;
+          border-radius: 5px 5px 5px 5px !important;
+          display: none;
+          left: 43.800% !important;
+          border-bottom: 2px solid #2b13bb !important;
+        }
+        #save-button {
+          /* border: 2px solid rgb(187, 187, 187); */
+          border-radius: 5px 5px 5px 5px;
+          background-color: white;
+          color: black;
+          padding: 7px;
+          display: none;
+          position: fixed;
+          border: 2px solid #2b13bb;
+          border-top: 2px solid #2b13bb;
+          border-bottom: 2px solid #2b13bb;
+          top: 91%;
+          height: 37px;
+          width: 37px;
+          left: 41.300%;
+          font-size: 15px;
+          border-bottom: 2px solid #2b13bb;
+        }
+        .leaflet-draw-actions {
+          display: none;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: fixed !important;
+          left: 40% !important;
+          top: 86% !important;
+          white-space: nowrap;
+        }
+      }
+
+      #helpButton .icon {
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+      }
+
+      #helpButton {
+        position: absolute;
+        top: 18%;
+        left: 7.5%;
+        transform: translateX(-50%);
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        z-index: 1000;
+        padding: 10px;
+      }
+
+      #helpButton:hover::after {
+        content: "HELP";
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 12px;
+        white-space: nowrap;
+        z-index: 1000;
+        display: none;
+      }
+
+      #helpButton:hover::after {
+        display: block;
+      }
+      
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  #helpButton {
+    top: 18%;
+    left: 3%; 
+  }
+  
+  #helpButton:hover::after {
+    top: 18%;
+    left: 3%;
+  }
+}
+
+/* Laptop view (901px to 1200px) */
+@media only screen and (min-width: 901px) and (max-width: 1200px) {
+  #helpButton {
+    top: 18%;
+    left: 2.5%;
+  }
+  
+  #helpButton:hover::after {
+    top: 18%;
+    left: 2.5%;
+  }
+}
+
+/* Desktop view (1201px and up) */
+@media only screen and (min-width: 1201px) {
+  #helpButton {
+    top: 18%;
+    left: 2.5%;
+  }
+  
+  #helpButton:hover::after {
+    top: 18%;
+    left: 2.5%;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  #helpButton {
+    top: 15%;
+    left: 1.5%;
+  }
+  
+  #helpButton:hover::after {
+    top: 15%;
+    left: 1.5%;
+  }
+}
+    </style>
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+      integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script src="https://unpkg.com/togeojson@1.1.0/togeojson.js"></script>
+
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css"
+    />
+
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://unpkg.com/@turf/turf@6.3.0/turf.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+
+    <script src="libs/Leaflet.MousePosition-master/src/L.Control.MousePosition.js"></script>
+    <link
+      rel="stylesheet"
+      href="libs/Leaflet.MousePosition-master/src/L.Control.MousePosition.css"
+    />
+
+    <link rel="stylesheet" href="libs/polyline-measure/line-measure.css" />
+    <script src="libs/polyline-measure/line-measure.js"></script>
+    <link
+      rel="stylesheet"
+      href="libs/leaflet-measure-master/leaflet-measure.css"
+    />
+    <script src="libs/leaflet-measure-master/leaflet-measure.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-geometryutil@0.10.3/src/leaflet.geometryutil.min.js"></script>
+
+    <script src="libs/feat.js"></script>
+    <!-- 
+	<link rel="stylesheet" href="libs/leaflet-wms-legend/leaflet.wmslegend.css" />
+	<script src="libs/leaflet-wms-legend/leaflet.wmslegend.js"></script> -->
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <p href="https://geopulsea.com/" class="geopulseaname">
+      @GeoPulse Analytics
+    </p>
+
+    <div>
+      <img src="png/pmcjpeg.png" alt="" class="logopng1" />
+    </div>
+
+    <div id="table-container">
+      <table
+        id="workTable"
+        class="table table-bordered table-hover"
+        style="width: 100% !important; font-size: 10px"
+      >
+        <thead></thead>
+
+        <tbody id="workTableData"></tbody>
+      </table>
+    </div>
+
+    <button id="helpButton" onclick="openHelpPage()">
+      <i class="fas fa-question icon"></i>
+    </button>
+
+
+    <script src="feedback.js"></script>
+    <script src="js/config.js"></script>
+
+    <script src="js/market.js"></script>
+
+    <script>
+     function toggleSelectLayerButton(show) {
+      var saveBtn = document.getElementById('editFeatureButton');
+      var editBtn = document.getElementById('saveDataButton');
+      var deleteBtn = document.getElementById('deleteFeatureButton');
+      var deleteBtnEdit = document.getElementById('deleteEditGeomButton');
+      var saveBtnEdit = document.getElementById('saveEditGeomButton');
+      if (saveBtn && editBtn) {
+        saveBtn.style.display = show ? 'block' : 'none';
+        editBtn.style.display = show ? 'block' : 'none';
+        deleteBtn.style.display = show ? 'block' : 'none';
+        
+      }
+      if(deleteBtnEdit && saveBtnEdit ){
+        deleteBtnEdit.style.display = show ? 'none' : 'block'
+        saveBtnEdit.style.display = show ? 'none' : 'block'
+      }
+    }
+
+      // Create a custom control
+      var editControl = L.control({ position: "topleft" });
+
+      // var department = localStorage.getItem("department");
+
+      var editableLayers = new L.FeatureGroup().addTo(map);
+      var selectedFeature = null;
+      let coordinatesData = [];
+		  let uniqueIds = [];
+
+
+      function performTask() {
+          map.on("click", function (e) {
+            let size = map.getSize();
+            let bbox = map.getBounds().toBBoxString();
+            let layer = "pmc:Bhavan";
+
+            var url = `https://iwmsgis.pmc.gov.in/geoserver/pmc/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(
+              e.containerPoint.x
+            )}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${
+              size.x
+            }&HEIGHT=${size.y}&BBOX=${bbox}`;
+
+            fetch(url)
+              .then((response) => response.json())
+              .then((data) => {
+                addUniqueFeatures(data);
+              });
+          });
+
+          function addUniqueFeatures(data) {
+              if (data.features.length === 0) return; // Return if no features
+              const feature = data.features[0];
+              let isDuplicate = uniqueIds.some((layer) => {
+                return layer === feature.id;
+              });
+
+              if (!isDuplicate) {
+                highlightFeature(data);
+              }
+            } 
+
+          function highlightFeature(featureData) {
+            // Check if any features are present in the featureData
+            if (
+              !featureData ||
+              !featureData.features ||
+              featureData.features.length === 0
+            )
+              // Clear existing editable layers
+            editableLayers.clearLayers();
+            var feature = featureData.features[0];
+            uniqueIds.push(feature.id);
+            feature.geometry.coordinates.forEach((polygonCoords) => {
+                    coordinatesData.push(L.polygon(polygonCoords[0].map((coord) => [coord[1], coord[0]])));
+                });
+              coordinatesData.forEach((layer) => {
+                // Set the style to red
+                layer.setStyle({ color: 'red',weight: 3, opacity: 1, fillOpacity: 0.5, });
+                editableLayers.addLayer(layer);
+            });
+            if (editableLayers.getLayers().length > 0) {
+              map.fitBounds(editableLayers.getBounds());
+            }
+          }
+          editableLayers.on("contextmenu", function (e) {
+            // Check if there is a selected feature
+
+            toggleSelectLayerButton(true);
+
+            if (editableLayers.getLayers().length > 0) {
+              selectedFeature = editableLayers.getLayers()[0];
+  
+              // Get the coordinates of the right-clicked point
+              var latlng = e.latlng;
+              var popupContent = "<h5>Selected Feature</h5>";
+
+              if (localStorage.getItem("conceptual_form_data_temp")) {
+                const formDataFromStorage = JSON.parse(
+                  localStorage.getItem("conceptual_form_data_temp")
+                );
+
+                $("#table-container").show();
+                let contentData = "<tr>";
+                for (const property in formDataFromStorage) {
+                  contentData += `<tr><th>${property}</th><td>${formDataFromStorage[property]}</td></tr>`;
+                }
+                contentData += "</tr>";
+                $("#workTableData").html(contentData);
+              }
+              document
+                .getElementById("saveDataButton")
+                .addEventListener("click", function () {
+                  var featureData = selectedFeature.toGeoJSON();
+                //  var featureId = featureData.features[0].id;
+                  let formDataFromStorage;
+                  let formDataTemp = localStorage.getItem("conceptual_form_data_temp");
+                  if (formDataTemp) {
+                    localStorage.setItem("conceptual_form_data", formDataTemp);
+                    formDataFromStorage = JSON.parse(formDataTemp);
+                  }
+
+                  var roadLength = formDataFromStorage && formDataFromStorage.hasOwnProperty("Length")? formDataFromStorage.Length: 10;
+                  var bufferWidth = formDataFromStorage &&  formDataFromStorage.hasOwnProperty("Width") ? formDataFromStorage.Width : 20;
+                  let selectCoordinatesData = editableLayers.getLayers().map((layer) => layer.toGeoJSON());
+                  localStorage.setItem("selectCoordinatesData",JSON.stringify(selectCoordinatesData));
+
+                  selectCoordinatesData.map((selectCoordinatesDataSingle) => {
+                    let area = turf.area(selectCoordinatesDataSingle);
+                    var payload = JSON.stringify({
+                      geoJSON: JSON.stringify(selectCoordinatesDataSingle),
+                      roadLength: roadLength,
+                      bufferWidth: bufferWidth,
+                      gis_id: lastInsertedId,
+                      department: department,
+                      selectCoordinatesData: selectCoordinatesDataSingle,
+                      area: area,
+                      geometryType:selectCoordinatesDataSingle.geometry.type,
+                    });
+
+                    $.ajax({
+                      type: "POST",
+                      url: "APIS/gis_update.php",
+                      data: payload,
+                      contentType: "application/json",
+                      success: function (response) {
+                        Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "Success",
+                          text: "Saved Successfully",
+                          showConfirmButton: false,
+                          showCloseButton: true,
+                          customClass: {
+                            popup: "custom-modal-class",
+                            icon: "custom-icon-class",
+                            title: "custom-title-class",
+                            content: "custom-text-class",
+                            closeButton: "custom-close-button-class",
+                          },
+                          showClass: {
+                            popup: "swal2-show",
+                            backdrop: "swal2-backdrop-show",
+                            icon: "swal2-icon-show",
+                          },
+                          hideClass: {
+                            popup: "swal2-hide",
+                            backdrop: "swal2-backdrop-hide",
+                            icon: "swal2-icon-hide",
+                          },
+                          didOpen: () => {
+                            // Apply custom styles directly to the modal elements
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.width = "400px"; // Set your desired width
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.height = "250px"; // Set your desired height
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.transition = "all 0.5s ease";
+                            document.querySelector(
+                              ".custom-icon-class"
+                            ).style.fontSize = "10px"; // Set your desired icon size
+                            document.querySelector(
+                              ".custom-icon-class"
+                            ).style.transition = "all o.5s ease";
+                            document.querySelector(
+                              ".custom-title-class"
+                            ).style.fontSize = "1.5em"; // Set your desired title size
+                            document.querySelector(
+                              ".custom-text-class"
+                            ).style.fontSize = "1em"; // Set your desired text size
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.backgroundColor = "#f44336"; // Red background color
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.color = "white"; // White text color
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.borderRadius = "0"; // Rounded corners
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.padding = "5px"; // Padding around the close button
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.fontSize = "20px"; // Font size of the close button
+                          },
+                        });
+
+                        setTimeout(() => {
+                          //	window.location.href = `geometry_page.html?id=`+response.lastInsertIdIWMS+`&department=Building`+`&lastInsertedId=`+lastInsertedId;
+                        }, 2100);
+                      },
+                      error: function (xhr, status, error) {
+                        console.error("Save failed:", error);
+                      },
+                    });
+
+                    let centroid = turf.centroid(
+                      selectCoordinatesDataSingle
+                    );
+                    var formData = new FormData();
+                    formData.append("proj_id", worksAaApprovalId);
+                    formData.append("latitude",selectCoordinatesDataSingle.geometry.coordinates[0][0][0]);
+                    formData.append("longitude",selectCoordinatesDataSingle.geometry.coordinates[0][0][1]);
+                    formData.append("polygon_area", area);
+                    formData.append("polygon_centroid",JSON.stringify(centroid.geometry.coordinates));
+                    formData.append(  "geometry",JSON.stringify(selectCoordinatesDataSingle.geometry.coordinates?.map((coordinates) => coordinates.slice().reverse())));
+                    formData.append("road_no", struct_no);
+                    formData.append("user_id", user_id);
+                    $.ajax({
+                      type: "POST",
+                      url: "https://iwms.punecorporation.org/api/gis-data",
+                      data: formData,
+                      processData: false, 
+                      contentType: false,
+                      success: function (response) {
+                        window.location.href = response.data.redirect_Url;
+                      },
+                      error: function (xhr, status, error) {
+                        console.error("Save failed:", error);
+                      },
+                    });
+                  });
+                });
+            }
+          });
+
+          // Change the button text to "Finish"
+          var button = document.querySelector(".custom-button");
+          button.innerHTML = "Finish";
+
+          // Change the button's onclick function to stop the task
+          button.onclick = function () {
+            button.innerHTML =
+              '<img src="png/003-selection.png" alt="" style="width:20px; height:20px;" title="SELECT-FEATURE">';
+            // Remove the click event listener from the map
+            var drawFeatureButton = document.querySelector(".draw_feature");
+            if (drawFeatureButton) {
+              drawFeatureButton.removeAttribute("disabled");
+            }
+
+            map.off("click");
+            toggleSelectLayerButton(false);
+            // Reset any ongoing operation here
+          };
+      }
+
+      function updatePopup(layer) {
+        let content;
+        var coordinates = layer._latlngs[0];
+        var turfCoords = coordinates.map(function (coord) {
+          return [coord.lng, coord.lat];
+        });
+
+        if (layer instanceof L.Polyline) {
+          var line = turf.lineString(turfCoords);
+          var length = turf.length(line, { units: "meters" });
+          content = length.toFixed(2) + " M"; // Fixed length to 2 decimal places
+        } else if (layer instanceof L.Polygon) {
+          var polygon = turf.polygon([turfCoords]);
+          var area = turf.area(polygon);
+          content = area.toFixed(2) + " SQM"; // Fixed area to 2 decimal places
+        }
+
+        if (!layer._popup) {
+          layer.bindPopup(content);
+        } else {
+          layer.setPopupContent(content);
+        }
+        layer.openPopup();
+      }
+
+     
+      document.getElementById("editFeatureButton").addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          coordinatesData.forEach((layer) => {
+            if (layer.editing) {
+                    layer.editing.enable();
+                    updatePopupEdit(layer);
+                    layer.on('edit', function () {
+                      updatePopupEdit(layer);
+                    });
+                }
+            });
+        });
+      document
+        .getElementById("deleteFeatureButton")
+        .addEventListener("click", function () {
+          if (!selectedFeature) {
+            alert("No feature selected!");
+            return;
+          }
+
+          editableLayers.removeLayer(selectedFeature);
+          selectedFeature = null;
+        });
+
+      editControl.onAdd = function (map) {
+        var button = L.DomUtil.create("button", "custom-button");
+        button.innerHTML =
+          '<img src="png/003-selection.png" alt="" style="width:20px; height:20px;" title="SELECT FEATURE">';
+        button.onclick = function () {
+          var drawFeatureButton = document.querySelector(".draw_feature");
+          if (
+            button.innerHTML ===
+            '<img src="png/003-selection.png" alt="" style="width:20px; height:20px;" title="SELECT FEATURE">'
+          ) {
+            button.innerHTML = "Finish";
+            performTask();
+
+            // Remove the draw control if it's currently added
+            if (isDrawControlAdded) {
+              map.removeControl(drawControl);
+              isDrawControlAdded = false;
+            }
+
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", true);
+            } else {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+          } else {
+            button.innerHTML =
+              '<img src="png/003-selection.png" alt="" style="width:20px; height:20px; position: fixed;" title="SELECT FEATURE">';
+            // Finish or reset any ongoing operation here
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+
+            // button.innerHTML = 'Select Feature';
+            // Add the draw control back if it's not currently added
+            if (!isDrawControlAdded) {
+              map.addControl(drawControl);
+              isDrawControlAdded = true;
+            }
+
+            // Show the custom draw controls button
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+          }
+        };
+        return button;
+      };
+
+      editControl.addTo(map);
+
+      // /////////////////////////////////////////// 14-03-2024 for adding the selection on the map ////////////////////////////////////////
+
+      // added for on click of button only saleection edit vertices will work
+
+      // Add click event listeners to the buttons
+      document
+        .getElementById("drawButton")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "#ccc"; // Change background color when clicked
+        });
+
+      document
+        .getElementById("editButton")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "#ccc"; // Change background color when clicked
+        });
+
+      // Customize the zoom control position
+      map.zoomControl.setPosition("bottomright");
+    </script>
+
+    <script>
+      function openHelpPage() {
+        window.open("building_help.html", "_blank");
+      }
+    </script>
+  </body>
+</html>

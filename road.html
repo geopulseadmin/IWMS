@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PMC</title>
+    <link rel="icon" href="png/pmcjpeg.png" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/road.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+      integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
+    <script src="https://unpkg.com/togeojson@1.1.0/togeojson.js"></script>
+
+    <script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css"
+    />
+
+    <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+
+    <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script src="https://unpkg.com/@turf/turf@6.3.0/turf.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+      integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+
+    <script src="libs/Leaflet.MousePosition-master/src/L.Control.MousePosition.js"></script>
+    <link
+      rel="stylesheet"
+      href="libs/Leaflet.MousePosition-master/src/L.Control.MousePosition.css"
+    />
+
+    <link rel="stylesheet" href="libs/polyline-measure/line-measure.css" />
+    <script src="libs/polyline-measure/line-measure.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="libs/leaflet-measure-master/leaflet-measure.css"
+    />
+
+  </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geometryutil/0.9.3/leaflet.geometryutil.min.js"></script>
+
+    <script src="libs/feat.js"></script>
+
+    <!-- measuement -->
+
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-measure@3.1.0/dist/leaflet-measure.css" /> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+
+  <body>
+    <div id="map"></div>
+    <p href="https://geopulsea.com/" class="geopulseaname">
+      @GeoPulse Analytics
+    </p>
+
+    <div>
+      <img src="png/pmcjpeg.png" alt="" class="logopng1" />
+    </div>
+
+    <div id="table-container">
+      <button id="toggle-btn"><i class="fas fa-minus"></i></button>
+      <table
+        id="workTable"
+        class="table table-bordered table-hover"
+        style="width: 100% !important; font-size: 10px"
+      >
+        <thead></thead>
+
+        <tbody id="workTableData"></tbody>
+      </table>
+    </div>
+
+    <button id="helpButton" onclick="openHelpPage()">
+      <i class="fas fa-question icon"></i>
+    </button>
+
+    <!-- <button id="feedbackButton">
+  <i class="fas fa-arrow-left icon"></i>
+</button>
+<div id="sidebar">
+ 
+</div> -->
+    <script src="feedback.js"></script>
+    <script src="js/config.js"></script>
+
+    <script src="js/road.js"></script>
+    <!-- <script src="js/mainmodal/legend.js"></script> -->
+    <!-- <script src="js/mainmodal/contextMenu.js"></script> -->
+
+  <!-- <script src="js/mainmodal/legend.js"></script> -->
+  <!-- <script src="js/mainmodal/contextMenu.js"></script> -->
+
+  <script>
+
+
+    function toggleSelectLayerButton(show) {
+      var saveBtn = document.getElementById('editFeatureButton');
+      var editBtn = document.getElementById('saveDataButton');
+      var deleteBtn = document.getElementById('deleteFeatureButton');
+      var deleteBtnEdit = document.getElementById('deleteEditGeomButton');
+      var saveBtnEdit = document.getElementById('saveEditGeomButton');
+      if (saveBtn && editBtn) {
+        saveBtn.style.display = show ? 'block' : 'none';
+        editBtn.style.display = show ? 'block' : 'none';
+        deleteBtn.style.display = show ? 'block' : 'none';
+        
+      }
+      if(deleteBtnEdit && saveBtnEdit ){
+        deleteBtnEdit.style.display = show ? 'none' : 'block'
+        saveBtnEdit.style.display = show ? 'none' : 'block'
+      }
+    }
+
+      $(document).ready(function () {
+        $("#searchInputDashboard").autocomplete({
+          minLength: 3,
+          source: function (request, response) {
+            let searchTerm = request.term;
+            let searchType = $("#search_type").val();
+
+            if (searchTerm.length >= 3 && searchType) {
+              let cqlFilter = `${searchType} ILIKE '%${searchTerm}%'`;
+
+              let geoServerURL = `https://iwmsgis.pmc.gov.in/geoserver/pmc/wfs?service=WFS&version=1.1.0&request=GetFeature&typeName=IWMS_point&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(
+                cqlFilter
+              )}`;
+
+              $.getJSON(geoServerURL, function (data) {
+                let suggestions = data.features.map(
+                  (feature) => feature.properties[searchType]
+                );
+
+                suggestions = suggestions.filter(
+                  (value, index, self) => self.indexOf(value) === index
+                );
+
+                suggestions = suggestions.slice(0, 10);
+                response(suggestions);
+              });
+            } else {
+              response([]);
+            }
+          },
+          select: function (event, ui) {
+            $("#searchInputDashboard").val(ui.item.label);
+
+            let searchType = $("#search_type").val();
+            let cqlFilterSelected = `${searchType} = '${ui.item.label}'`;
+            fitbou(cqlFilterSelected);
+            wms_layer15.setParams({
+              CQL_FILTER: cqlFilterSelected,
+              styles: "pointhighlight",
+            });
+
+            return false;
+          },
+        });
+      });
+
+      // Create a custom control
+      var editControl = L.control({ position: "topleft" });
+
+      // var department = localStorage.getItem("department");
+
+      var editableLayers = new L.FeatureGroup().addTo(map);
+      var selectedFeature = null;
+
+      let coordinatesData = [];
+      let uniqueIds = [];
+
+      function performTask() {
+          map.on("click", function (e) {
+            let size = map.getSize();
+            let bbox = map.getBounds().toBBoxString();
+            let layers = ["pmc:Exist_Road", "pmc:OSM_Road"];
+              let queryLayers = layers.join(',');
+
+              var url = `https://iwmsgis.pmc.gov.in/geoserver/pmc/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${queryLayers}&STYLES&LAYERS=${queryLayers}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(
+                e.containerPoint.x
+              )}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+
+
+
+            fetch(url)
+              .then((response) => response.json())
+              .then((data) => {
+                addUniqueFeatures(data);
+              });
+          });
+
+          function addUniqueFeatures(data) {
+              if (data.features.length === 0) return; // Return if no features
+              const feature = data.features[0];
+              let isDuplicate = uniqueIds.some((layer) => {
+                return layer === feature.id;
+              });
+
+              if (!isDuplicate) {
+                highlightFeature(data);
+              }
+            } 
+
+          function highlightFeature(featureData) {
+            // Check if any features are present in the featureData
+            if (
+              !featureData ||
+              !featureData.features ||
+              featureData.features.length === 0
+            )
+              // Clear existing editable layers
+            editableLayers.clearLayers();
+            var feature = featureData.features[0];
+            uniqueIds.push(feature.id);
+
+                if (feature.geometry.type == 'Polygon') {
+              // Handle single Polygon
+              coordinatesData.push(
+                  L.polygon(feature.geometry.coordinates[0].map((coord) => [coord[1], coord[0]]))
+              );
+          } else if (feature.geometry.type === 'MultiPolygon') {
+              // Handle MultiPolygon
+              feature.geometry.coordinates.forEach((polygonCoords) => {
+                  coordinatesData.push(L.polygon(polygonCoords[0].map((coord) => [coord[1], coord[0]])));
+              });
+          } else if (feature.geometry.type === 'LineString') {
+              // Handle single LineString
+              let coordinates = feature.geometry.coordinates.map((coord) => [coord[1], coord[0]]);
+              coordinatesData.push(L.polyline(coordinates, { color: 'red' }));
+          } else if (feature.geometry.type === 'MultiLineString') {
+              // Handle MultiLineString
+              feature.geometry.coordinates.forEach((lineCoords) => {
+                  let coordinates = lineCoords.map((coord) => [coord[1], coord[0]]);
+                  coordinatesData.push(L.polyline(coordinates, { color: 'red' }));
+              });
+          }
+
+
+
+
+                
+
+
+
+              coordinatesData.forEach((layer) => {
+                // Set the style to red
+                layer.setStyle({ color: 'red',weight: 3, opacity: 1, fillOpacity: 0.5, });
+                editableLayers.addLayer(layer);
+            });
+
+            if (editableLayers.getLayers().length > 0) {
+              map.fitBounds(editableLayers.getBounds());
+            }
+          }
+          editableLayers.on("contextmenu", function (e) {
+            // Check if there is a selected feature
+
+            toggleSelectLayerButton(true);
+
+            if (editableLayers.getLayers().length > 0) {
+              selectedFeature = editableLayers.getLayers()[0];
+  
+              // Get the coordinates of the right-clicked point
+              var latlng = e.latlng;
+              var popupContent = "<h5>Selected Feature</h5>";
+
+              if (localStorage.getItem("conceptual_form_data_temp")) {
+                const formDataFromStorage = JSON.parse(
+                  localStorage.getItem("conceptual_form_data_temp")
+                );
+
+                $("#table-container").show();
+                let contentData = "<tr>";
+                for (const property in formDataFromStorage) {
+                  contentData += `<tr><th>${property}</th><td>${formDataFromStorage[property]}</td></tr>`;
+                }
+                contentData += "</tr>";
+                $("#workTableData").html(contentData);
+              }
+              document
+                .getElementById("saveDataButton")
+                .addEventListener("click", function () {
+                  var featureData = selectedFeature.toGeoJSON();
+                //  var featureId = featureData.features[0].id;
+                  let formDataFromStorage;
+                  let formDataTemp = localStorage.getItem("conceptual_form_data_temp");
+                  if (formDataTemp) {
+                    localStorage.setItem("conceptual_form_data", formDataTemp);
+                    formDataFromStorage = JSON.parse(formDataTemp);
+                  }
+
+                  var roadLength = formDataFromStorage && formDataFromStorage.hasOwnProperty("Length")? formDataFromStorage.Length: 10;
+                  var bufferWidth = formDataFromStorage &&  formDataFromStorage.hasOwnProperty("Width") ? formDataFromStorage.Width : 20;
+                  let selectCoordinatesData = editableLayers.getLayers().map((layer) => layer.toGeoJSON());
+                  localStorage.setItem("selectCoordinatesData",JSON.stringify(selectCoordinatesData));
+
+                  selectCoordinatesData.map((selectCoordinatesDataSingle) => {
+                    let area = turf.area(selectCoordinatesDataSingle);
+                    var payload = JSON.stringify({
+                      geoJSON: JSON.stringify(selectCoordinatesDataSingle),
+                      roadLength: roadLength,
+                      bufferWidth: bufferWidth,
+                      gis_id: lastInsertedId,
+                      department: department,
+                      selectCoordinatesData: selectCoordinatesDataSingle,
+                      area: area,
+                      geometryType:selectCoordinatesDataSingle.geometry.type,
+                    });
+
+                    if (editMode) {
+                          let editIdTemp = editId.split(".")[ 1 ];
+                          let geometryTypeTemp = editId.split(".")[ 0 ];
+                          $.ajax({
+                            url: 'APIS/Update_Geometry.php', // Path to your PHP save script
+                            type: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                              selectCoordinatesData: selectCoordinatesDataSingle,
+                              fid: editIdTemp,
+                              geometryType:selectCoordinatesDataSingle.geometry.type,
+                            }),
+                            success: function (response) {
+                              alert('Data saved successfully!');
+                            },
+                            error: function (error) {
+                              console.error('Save request failed:', error);
+                            }
+                          });
+                          }
+                    else {
+
+                    $.ajax({
+                      type: "POST",
+                      url: "APIS/gis_update.php",
+                      data: payload,
+                      contentType: "application/json",
+                      success: function (response) {
+                        Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "Success",
+                          text: "Saved Successfully",
+                          showConfirmButton: false,
+                          showCloseButton: true,
+                          customClass: {
+                            popup: "custom-modal-class",
+                            icon: "custom-icon-class",
+                            title: "custom-title-class",
+                            content: "custom-text-class",
+                            closeButton: "custom-close-button-class",
+                          },
+                          showClass: {
+                            popup: "swal2-show",
+                            backdrop: "swal2-backdrop-show",
+                            icon: "swal2-icon-show",
+                          },
+                          hideClass: {
+                            popup: "swal2-hide",
+                            backdrop: "swal2-backdrop-hide",
+                            icon: "swal2-icon-hide",
+                          },
+                          didOpen: () => {
+                            // Apply custom styles directly to the modal elements
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.width = "400px"; // Set your desired width
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.height = "250px"; // Set your desired height
+                            document.querySelector(
+                              ".custom-modal-class"
+                            ).style.transition = "all 0.5s ease";
+                            document.querySelector(
+                              ".custom-icon-class"
+                            ).style.fontSize = "10px"; // Set your desired icon size
+                            document.querySelector(
+                              ".custom-icon-class"
+                            ).style.transition = "all o.5s ease";
+                            document.querySelector(
+                              ".custom-title-class"
+                            ).style.fontSize = "1.5em"; // Set your desired title size
+                            document.querySelector(
+                              ".custom-text-class"
+                            ).style.fontSize = "1em"; // Set your desired text size
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.backgroundColor = "#f44336"; // Red background color
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.color = "white"; // White text color
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.borderRadius = "0"; // Rounded corners
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.padding = "5px"; // Padding around the close button
+                            document.querySelector(
+                              ".custom-close-button-class"
+                            ).style.fontSize = "20px"; // Font size of the close button
+                          },
+                        });
+
+                        setTimeout(() => {
+                          //	window.location.href = `geometry_page.html?id=`+response.lastInsertIdIWMS+`&department=Building`+`&lastInsertedId=`+lastInsertedId;
+                        }, 2100);
+                      },
+                      error: function (xhr, status, error) {
+                        console.error("Save failed:", error);
+                      },
+                    });
+                  }
+
+         
+
+                    let centroid = turf.centroid(selectCoordinatesDataSingle);
+                    var formData = new FormData();
+                    formData.append("proj_id", worksAaApprovalId);
+                   if (selectCoordinatesDataSingle.geometry.type === 'Point') {
+                    formData.append('latitude', selectCoordinatesDataSingle.geometry.coordinates[1]);
+                    formData.append('longitude', selectCoordinatesDataSingle.geometry.coordinates[0]);
+                  } else if (selectCoordinatesDataSingle.geometry.type === 'MultiLineString' || selectCoordinatesDataSingle.geometry.type === 'LineString') {
+                    formData.append('latitude', selectCoordinatesDataSingle.geometry.coordinates[0][1]);
+                    formData.append('longitude', selectCoordinatesDataSingle.geometry.coordinates[0][0]);
+                    var lenghtSelect = turf.length( selectCoordinatesDataSingle.geometry, { units: "meters" } );
+                    formData.append("length", lenghtSelect);
+                  }
+                  else if (selectCoordinatesDataSingle.geometry.type === 'Polygon' || selectCoordinatesDataSingle.geometry.type === 'MultiPolygon'){
+                    formData.append("latitude",selectCoordinatesDataSingle.geometry.coordinates[0][0][0]);
+                    formData.append("longitude",selectCoordinatesDataSingle.geometry.coordinates[0][0][1]);               
+                    formData.append("polygon_area", area);
+                    formData.append("polygon_centroid",JSON.stringify(centroid.geometry.coordinates));
+                  }
+
+                    formData.append(  "geometry",JSON.stringify(selectCoordinatesDataSingle.geometry.coordinates?.map((coordinates) => coordinates.slice().reverse())));
+                    formData.append("road_no", struct_no);
+                    formData.append("user_id", user_id);
+                    $.ajax({
+                      type: "POST",
+                      url: "https://iwms.punecorporation.org/api/gis-data",
+                      data: formData,
+                      processData: false, 
+                      contentType: false,
+                      success: function (response) {
+                        window.location.href = response.data.redirect_Url;
+                      },
+                      error: function (xhr, status, error) {
+                        console.error("Save failed:", error);
+                      },
+                    });
+                  });
+                });
+            }
+          });
+
+          // Change the button text to "Finish"
+          var button = document.querySelector(".custom-button");
+          button.innerHTML = "Finish";
+
+          // Change the button's onclick function to stop the task
+          button.onclick = function () {
+            button.innerHTML =
+              '<img src="png/003-selection.png" alt="" style="width:20px; height:20px;" title="SELECT-FEATURE">';
+            // Remove the click event listener from the map
+            var drawFeatureButton = document.querySelector(".draw_feature");
+            if (drawFeatureButton) {
+              drawFeatureButton.removeAttribute("disabled");
+            }
+
+            map.off("click");
+            toggleSelectLayerButton(false);
+            // Reset any ongoing operation here
+          };
+      }
+
+      function updatePopup(layer) {
+        let content;
+        console.log(layer);
+        var coordinates = layer._latlngs[0];
+        console.log(coordinates);
+        var turfCoords = coordinates.map(function (coord) {
+          return [coord.lng, coord.lat];
+        });
+
+        if (layer instanceof L.Polyline) {
+          var line = turf.lineString(turfCoords);
+          var length = turf.length(line, { units: "meters" });
+          content = length.toFixed(2) + " M"; // Fixed length to 2 decimal places
+        } else if (layer instanceof L.Polygon) {
+          var polygon = turf.polygon([turfCoords]);
+          var area = turf.area(polygon);
+          content = area.toFixed(2) + " SQM"; // Fixed area to 2 decimal places
+        }
+
+        if (!layer._popup) {
+          layer.bindPopup(content);
+        } else {
+          layer.setPopupContent(content);
+        }
+        layer.openPopup();
+      }
+
+      document.getElementById("editFeatureButton").addEventListener("click", function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          coordinatesData.forEach((layer) => {
+            if (layer.editing) {
+                    layer.editing.enable();
+                    updatePopupEdit(layer);
+                    layer.on('edit', function () {
+                      updatePopupEdit(layer);
+                    });
+                }
+            });
+        });
+
+      document
+        .getElementById("deleteFeatureButton")
+        .addEventListener("click", function () {
+          if (!selectedFeature) {
+            alert("No feature selected!");
+            return;
+          }
+
+          editableLayers.removeLayer(selectedFeature);
+          selectedFeature = null;
+        });
+
+      // ----------------------
+
+      editControl.onAdd = function (map) {
+        var button = L.DomUtil.create("button", "custom-button");
+        button.innerHTML =
+          '<img src="png/003-selection.png" alt="" style="width:20px; height:20px;" title="SELECT FEATURE">';
+        button.onclick = function () {
+          var drawFeatureButton = document.querySelector(".draw_feature");
+          if (
+            button.innerHTML ===
+            '<img src="png/003-selection.png" alt="" style="width:20px; height:20px; " title="SELECT FEATURE">'
+          ) {
+            button.innerHTML = "Finish";
+            performTask();
+
+       
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", true);
+            } else {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+          } else {
+            button.innerHTML =
+              '<img src="png/003-selection.png" alt="" style="width:20px; height:20px; " title="SELECT FEATURE">';
+            // Finish or reset any ongoing operation here
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+
+          
+
+            // Show the custom draw controls button
+            if (drawFeatureButton) {
+              drawFeatureButton.setAttribute("disabled", false);
+            }
+          }
+        };
+        return button;
+      };
+
+      // Add the control to the map
+
+      editControl.addTo(map);
+
+      // /////////////////////////////////////////// 14-03-2024 for adding the selection on the map ////////////////////////////////////////
+
+      // added for on click of button only saleection edit vertices will work
+
+      // Add click event listeners to the buttons
+      document
+        .getElementById("drawButton")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "#ccc"; // Change background color when clicked
+        });
+
+      document
+        .getElementById("editButton")
+        .addEventListener("click", function () {
+          this.style.backgroundColor = "#ccc"; // Change background color when clicked
+        });
+
+      //
+      // Customize the zoom control position
+      map.zoomControl.setPosition("bottomright");
+  
+  // script.js
+document.getElementById('helpButton').addEventListener('click', function() {
+    const baseVideoFolder = 'http://localhost/iwms/video/Road/'; 
+    const videos = [
+        'video_1.mp4', 
+        'Gis mapping.mp4'
+        
+    ];
+
+    let currentVideoIndex = 0;
+    
+    function openVideoWindow() {
+        // Check if all videos have been played
+        if (currentVideoIndex >= videos.length) {
+            currentVideoIndex = 0; // Reset index if all videos have been played
+        }
+        
+        const videoUrl = baseVideoFolder + videos[currentVideoIndex];
+        
+        // Open video in a new window or tab
+        window.open(videoUrl, '_blank');
+        
+        // Move to the next video
+        currentVideoIndex++;
+    }
+    
+    // Call the function to open video on button click
+    openVideoWindow();
+});
+
+
+  // script.js
+
+// Define the base URL of your video folder
+const baseVideoFolder = 'http://localhost/iwms/video/road/';
+
+// Define the array of video filenames
+const videos = [
+    'video_1.mp4',
+    'Gis mapping.mp4',
+    '3 Editing.mp4',
+    '4.Delete.mp4',
+    '5 selection of whole Ward.mp4',
+    '6 Repair road.mp4',
+    '7 length restriction.mp4'
+    // Add more video filenames as needed
+];
+
+let currentVideoIndex = 0;
+let videoWindow = null;
+
+// Function to play the current video
+function playVideo(videoIndex) {
+    const videoUrl = baseVideoFolder + videos[videoIndex];
+    
+    // Open the video in a new window/tab
+    if (videoWindow && !videoWindow.closed) {
+        videoWindow.location.href = videoUrl;
+    } else {
+        videoWindow = window.open(videoUrl, '_blank');
+    }
+    currentVideoIndex = videoIndex; // Update the current video index
+}
+
+// Function to play the next video
+function playNextVideo() {
+    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+    playVideo(currentVideoIndex);
+}
+
+// Function to play the previous video
+function playPreviousVideo() {
+    currentVideoIndex = (currentVideoIndex - 1 + videos.length) % videos.length;
+    playVideo(currentVideoIndex);
+}
+
+// Event listener for clicking the help button
+document.getElementById('helpButton').addEventListener('click', function() {
+    playVideo(currentVideoIndex);
+});
+
+// Event listener for playing the next video
+document.getElementById('nextButton').addEventListener('click', playNextVideo);
+
+// Event listener for playing the previous video
+document.getElementById('prevButton').addEventListener('click', playPreviousVideo);
+
+
+ 
+      document
+        .getElementById("feedbackButton")
+        .addEventListener("click", function () {
+          document.getElementById("sidebar").classList.toggle("open");
+        });
+    
+    </script>
+
+    <script>
+      function openHelpPage() {
+        window.open("help.html", "_blank");
+      }
+    </script>
+
+
+    <script> 
+      
+      $(document).ready(function() {
+      // Function to toggle between minimized and maximized states
+      $("#toggle-btn").click(function() {
+        $("#table-container").toggleClass("minimized");
+        if ($("#table-container").hasClass("minimized")) {
+          $("#toggle-btn").html('<i class="fas fa-plus"></i>'); // Use plus icon when minimized
+        } else {
+          $("#toggle-btn").html('<i class="fas fa-minus"></i>'); // Use minus icon when maximized
+        }
+      });
+
+      // Function to show the table container with the toggle button and scrollbar
+      function showTableContainer() {
+        $("#table-container").show().addClass("show");
+        $("#toggle-btn").html('<i class="fas fa-minus"></i>').show(); // Set to minus icon initially
+      }
+
+      // Simulate dynamic data loading and show the table container
+      setTimeout(function() {
+        let formDataFromStorage = {
+          
+        };
+        let contentData = "";
+        for (const property in formDataFromStorage) {
+          contentData += `<tr><th>${property}</th><td>${formDataFromStorage[property]}</td></tr>`;
+        }
+        $("#workTableData").html(contentData);
+        showTableContainer();
+      }, 1000);
+    });
+ </script>
+  </body>
+</html>

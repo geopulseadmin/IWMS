@@ -1,0 +1,236 @@
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+element.style {
+    font-size: 22px;
+    margin-top: 7px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    /* padding: 20px; */
+}
+.leaflet-retina .leaflet-control-layers-toggle {
+    background-image: url(images/layers-2x.png);
+    background-size: 21px 21px !important;
+}
+.leaflet-touch .leaflet-control-layers-toggle {
+    width: 32px !important ;
+    height: 32px !important;
+}
+
+form {
+    max-width: 1325px;
+    margin: auto;
+    padding: 12px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    /* display: flex;
+    flex-wrap: wrap; */
+}
+
+/* Logo Styles */
+.logopng1 {
+    height: 32px;
+    width: 32px;
+    /* border: 2px solid #bbb; */
+    border-radius: 10px;
+    /* background-color: white; */
+    padding: 5px;
+    position: absolute;
+    z-index: 9999;
+    top: 3.5%;
+    left: 7.5%;
+}
+/* Map Section Styles */
+#map-section {
+    margin-top: 20px;
+    position: relative;
+}
+
+#map {
+    top: 0px;
+    /* left: -16%; */
+    height: 56vh;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+#table-container {
+    flex: 1;
+    margin-left:0px;
+    height: 34vh;
+    overflow-x: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.table {
+    width: 10%;
+}
+
+/* Popup Styles */
+.popup-table-container {
+    max-width: 300px;
+}
+
+.popup-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.popup-table-container th,
+.popup-table-container td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+/* Print Button Styles */
+#generatePdfBtn {
+    cursor: pointer;
+}
+
+/* Geopulse Analytics Link Styles */
+.geopulseaname {
+    color: darkblue;
+    position: absolute;
+    z-index: 99999;
+    bottom: -0%;
+    right: 0%;
+    font-weight: bold;
+    font-size: 10px;
+}
+.text-secondary {
+    color: #6c757d !important;
+    margin-left: 41px;
+    font-size: 15px;
+}
+.pagination button {
+    display: inline-block;
+    width: 13px;
+    height: 25px;
+    padding: 0;
+    margin: 0 5px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.leaflet-control-attribution a {
+    text-decoration: none;
+    display: none;
+}
+
+.pagination {
+    margin-top: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.pagination button {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 0 5px;
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination button:hover {
+    background-color: #007bff;
+    /* border: 1px solid black; */
+}
+
+.pagination button.active {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    background-color: #007bff;
+    color: white;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+}
+
+.pagination .arrow {
+    background-color: transparent;
+    border: none;
+}
+
+.pagination .arrow:hover {
+    background-color: transparent !important;
+    color: inherit;
+}
+
+.pagination .arrow:focus {
+    outline: none;
+}
+
+@media print {
+    body {
+        size: tabloid landscape;
+        margin: 10mm 10mm 10mm 10mm;
+    }
+
+    .pagination,
+    .geopulseaname,
+    #generatePdfBtn {
+        display: none;
+    }
+
+    table {
+        width: 100%;
+        font-size: 10pt;
+    }
+}
+
+.edit-button {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px;
+    margin-left: 88%;
+
+    font-family: sans-serif !important;
+    transition: background-color 0.3s ease;
+}
+
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.edit i {
+    margin-right: 10px;
+}
+
+.leaflet-interactive {
+    transform: scale(1.2);
+}
+#formButton{
+   
+        position: absolute;
+        right: 52px;
+
+}

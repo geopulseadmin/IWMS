@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar Example</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light grey background */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .input-group {
+            max-width: 600px; /* Maximum width for the entire input group */
+            margin: 0 auto; /* Center align the input group */
+        }
+
+        .input-group .btn {
+            width: 40px; /* Fixed width for buttons */
+        }
+
+        .input-group .form-control {
+            border-radius: 0; /* Remove border-radius from input */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+            </div>
+            <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
+                <input type="text" class="form-control" placeholder="Search.." name="search2">
+                <button type="submit" class="btn btn-outline-secondary"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

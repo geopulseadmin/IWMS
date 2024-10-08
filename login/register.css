@@ -1,0 +1,164 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body and container styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 4px 12px rgb(10 75 90);
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: -6px;
+    font-size: 24px;
+    color: black;
+    margin-top: 10px;
+}
+
+.form-control {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.form-control i.icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    color: grey;
+    font-size: 18px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 12px 55px;
+    border: 1px solid #d0d7de;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f0f4f8;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus {
+    outline: none;
+    border-color: #0077DA;
+}
+
+#emailError {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Button styles */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: green;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: green;
+}
+
+/* Already a member link styling */
+.endline {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.endline a {
+    text-decoration: none;
+    color: #0077DA;
+    font-size: 14px;
+}
+
+.endline a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+        padding: 12px 35px;
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .form-control i.icon {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 18px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"] {
+        padding: 10px 55px;
+        font-size: 13px;
+    }
+}

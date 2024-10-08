@@ -1,0 +1,146 @@
+.leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polyline {
+    background-position: 2px 2px !important;
+  }
+  .save-button .leaflet-control{
+    display: none !important;
+  }
+  .save-button{
+    display: none;
+  }
+  #saveDataButton {
+    border: 2px solid #2b13bb;
+    border-bottom: 2px solid #2b13bb;
+    border-top: 2px solid #2b13bb;
+    border-radius: 5px 5px 5px 5px;
+    background-color: white;
+    position: fixed;
+    color: black;
+    padding: 0px 5px;
+    /* display: none; */
+    top: 576px;
+    font-size: 19px;
+    height: 37px;
+    width: 37px;
+    left: 750px;
+  }
+  .custom-button {
+    width: auto;
+    padding: 1px 2px;
+    background-color: #fff;
+    /* color: darkblue; */
+    font-weight: bold;
+    font-size: 10px !important;
+    border: 2px solid #2b13bb;
+    border-radius: 5px !important;
+    cursor: pointer;
+    /* position: absolute; */
+    top: 567px !important;
+    left: 780px !important;
+    height: 36px !important;
+    width: 36px !important;
+    position: fixed !important;
+    transition: background-color 0.1s;
+  }
+  #deleteFeatureButton{
+    border: 2px solid #2b13bb;
+    border-top: 2px solid #2b13bb;
+    border-radius: 5px 5px 5px 5px;
+    background-color: white;
+    color: black;
+    padding: 3px 7px;
+    /* display: none; */
+    position: fixed;
+    top: 575px !important;
+    font-size: 15px !important;
+    height: 37px !important;
+    width: 37px !important;
+    left: 671px !important;
+  }
+  .delete-button {
+    display: none;
+  }
+  #editFeatureButton {
+    border: 2px solid #2b13bb;
+    border-radius: 5px 5px 5px 5px;
+    height: 37px !important;
+    width: 37px !important;
+    /* display: none; */
+    position: fixed;
+    top:576px;
+    left: 711px;
+    padding: 5px;
+    background: white;
+    border-bottom: 2px solid #2b13bb;
+  }
+  @media (min-width: 1440px) and (max-width: 1600px) {
+    .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polyline {
+        background-position: 2px 2px !important;
+      }
+      .save-button .leaflet-control{
+        display: none !important;
+      }
+      #saveDataButton {
+        border: 2px solid #2b13bb;
+        border-bottom: 2px solid #2b13bb;
+        border-top: 2px solid #2b13bb;
+        border-radius: 5px 5px 5px 5px;
+        background-color: white;
+        position: fixed;
+        color: black;
+        padding: 0px 5px;
+        /* display: none; */
+        top: 676px;
+        font-size: 19px;
+        height: 37px;
+        width: 37px;
+        left: 750px;
+      }
+      .custom-button {
+        width: auto;
+        padding: 1px 2px;
+        background-color: #fff;
+        /* color: darkblue; */
+        font-weight: bold;
+        font-size: 10px !important;
+        border: 2px solid #2b13bb;
+        border-radius: 5px !important;
+        cursor: pointer;
+        /* position: absolute; */
+        top: 666px !important;
+        left: 780px !important;
+        height: 37px !important;
+        width: 37px !important;
+        position: fixed !important;
+        transition: background-color 0.1s;
+      }
+      #deleteFeatureButton{
+        border: 2px solid #2b13bb;
+        border-top: 2px solid #2b13bb;
+        border-radius: 5px 5px 5px 5px;
+        background-color: white;
+        color: black;
+        padding: 3px 7px;
+        /* display: none; */
+        position: fixed;
+        top: 675px !important;
+        font-size: 15px;
+        height: 37px;
+        width: 37px;
+        left: 671px;
+      }
+      #editFeatureButton {
+        border: 2px solid #2b13bb;
+        border-radius: 5px 5px 5px 5px;
+        height: 37px !important;
+        width: 37px !important;
+        /* display: none; */
+        position: fixed;
+        top: 676px;
+        left: 711px;
+        padding: 5px;
+        background: white;
+        border-bottom: 2px solid #2b13bb;
+      }
+
+  }
+ 

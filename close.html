@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+#table-container {
+  display: none; 
+  position: absolute;
+  width: 30%;
+  height: 40%;
+  top: 55%;
+  right: 1%;
+  overflow: hidden; 
+  scrollbar-width: thin;
+  z-index: 9999;
+  transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+#toggle-btn {
+  display: none;
+  position: absolute;
+  top: 0; 
+  right: 10px;
+  background-color: white;
+  border: 2px solid blue;
+  color: blue;
+  border-radius: 10%;
+  width: 31px;
+  height: 31px;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  z-index: 10000;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#table-container.show {
+  display: block;
+  overflow: auto; 
+}
+
+#table-container.minimized {
+  height: 40px;
+  overflow: hidden;
+}
+
+#table-container.minimized table {
+  display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div id="table-container">
+        <button id="toggle-btn"><i class="fas fa-minus"></i></button>
+        <table id="workTable" class="table table-bordered table-hover" style="width: 100% !important; font-size: 10px">
+            <thead></thead>
+            <tbody id="workTableData"></tbody>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+    // Function to toggle between minimized and maximized states
+    $("#toggle-btn").click(function() {
+        $("#table-container").toggleClass("minimized");
+        if ($("#table-container").hasClass("minimized")) {
+            $("#toggle-btn").html('<i class="fas fa-plus"></i>'); // Use plus icon when minimized
+        } else {
+            $("#toggle-btn").html('<i class="fas fa-minus"></i>'); // Use minus icon when maximized
+        }
+    });
+
+    // Function to show the table container with the toggle button and scrollbar
+    function showTableContainer() {
+        $("#table-container").show().addClass("show");
+        $("#toggle-btn").html('<i class="fas fa-minus"></i>'); // Set to minus icon initially
+        $("#toggle-btn").css('display', 'block'); // Show the toggle button
+    }
+
+    // Simulate dynamic data loading and show the table container
+    setTimeout(function() {
+        let formDataFromStorage = {}; // Your dynamic data here
+        let contentData = "";
+        for (const property in formDataFromStorage) {
+            contentData += `<tr><th>${property}</th><td>${formDataFromStorage[property]}</td></tr>`;
+        }
+        $("#workTableData").html(contentData);
+        showTableContainer();
+    }, 1000);
+});
+
+    </script>
+</body>
+</html>

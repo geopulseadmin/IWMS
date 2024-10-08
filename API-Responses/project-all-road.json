@@ -1,0 +1,806 @@
+{
+  "status": 200,
+  "message": "success",
+  "data": {
+    "attrMasterData": [
+      {
+        "attr_id": "1",
+        "attr_name": "Right Footpath",
+        "measure_in": "start_end",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "2",
+        "attr_name": "Left Footpath",
+        "measure_in": "start_end",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "3",
+        "attr_name": "Intersector",
+        "measure_in": "polygon",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "4",
+        "attr_name": "Circle",
+        "measure_in": "polygon",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "5",
+        "attr_name": "Storm Water",
+        "measure_in": "start_end",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "6",
+        "attr_name": "Water Supply",
+        "measure_in": "start_end",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "7",
+        "attr_name": "UnderPass",
+        "measure_in": "polygon",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "8",
+        "attr_name": "RUB",
+        "measure_in": "start_end",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "9",
+        "attr_name": "Bridge",
+        "measure_in": "polygon",
+        "dep_id": "1"
+      },
+      {
+        "attr_id": "10",
+        "attr_name": "4 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "11",
+        "attr_name": "5 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "12",
+        "attr_name": "6 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "13",
+        "attr_name": "7 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "14",
+        "attr_name": "8 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "15",
+        "attr_name": "9 Meter Left Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "16",
+        "attr_name": "4 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "17",
+        "attr_name": "5 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "18",
+        "attr_name": "6 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "19",
+        "attr_name": "7 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "20",
+        "attr_name": "8 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "21",
+        "attr_name": "9 Meter Right Side Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "22",
+        "attr_name": "12.50 Meter Pole",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "23",
+        "attr_name": "Fidder Cable",
+        "measure_in": "line",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "24",
+        "attr_name": "Fidder Piller",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "25",
+        "attr_name": "CCTV",
+        "measure_in": "point",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "26",
+        "attr_name": "Transformer",
+        "measure_in": "polygon",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "27",
+        "attr_name": "Cable Laying",
+        "measure_in": "line",
+        "dep_id": "6"
+      },
+      {
+        "attr_id": "28",
+        "attr_name": "Bituminous Road",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "29",
+        "attr_name": "Concrete Road",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "30",
+        "attr_name": "New Foothpath",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "31",
+        "attr_name": "Repair Foothpath",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "32",
+        "attr_name": "Repair Bituminous Road",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "33",
+        "attr_name": "Repair Concrete Road",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "34",
+        "attr_name": "Reinstatement Works",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "35",
+        "attr_name": "Maintanance Works",
+        "measure_in": "line",
+        "dep_id": "3"
+      },
+      {
+        "attr_id": "36",
+        "attr_name": "Valve",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "37",
+        "attr_name": "Air Valve",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "38",
+        "attr_name": "Pressure Releasing Valve",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "39",
+        "attr_name": "Vaccum Breaker",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "40",
+        "attr_name": "Chambers",
+        "measure_in": "polygon",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "41",
+        "attr_name": "EMF Meter",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "42",
+        "attr_name": "Water Meter",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "43",
+        "attr_name": "Fire Hydrant",
+        "measure_in": "point",
+        "dep_id": "4"
+      },
+      {
+        "attr_id": "44",
+        "attr_name": "Green Gym",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "45",
+        "attr_name": "Play Equipment",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "46",
+        "attr_name": "Play Equipment",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "47",
+        "attr_name": "Aquarium",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "48",
+        "attr_name": "Toilets",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "49",
+        "attr_name": "Drinking Water",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "50",
+        "attr_name": "Pagoda",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "51",
+        "attr_name": "Land Scapping-Lawn",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "52",
+        "attr_name": "Land Scapping-Sprinklers",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "53",
+        "attr_name": "Land Scapping-Fountain/Musical Fountain",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "54",
+        "attr_name": "Land Scapping-Tree",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "55",
+        "attr_name": "Benches",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "56",
+        "attr_name": "Wooden Finish",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "57",
+        "attr_name": "Murals",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "58",
+        "attr_name": "Yoga Hall",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "59",
+        "attr_name": "Play Equipment",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "60",
+        "attr_name": "Parking",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "61",
+        "attr_name": "Amphitheatre",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "62",
+        "attr_name": "Phulrani Train",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "63",
+        "attr_name": "Compost Pits",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "64",
+        "attr_name": "Children Play Area",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "65",
+        "attr_name": "Water Body",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "66",
+        "attr_name": "Ramp",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "67",
+        "attr_name": "Cabin/Chowky",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "68",
+        "attr_name": "Entrance Plaza",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "69",
+        "attr_name": "Play Equipment",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "70",
+        "attr_name": "Entrance gate",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "71",
+        "attr_name": "Entrance kaman",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "72",
+        "attr_name": "Name board of Garden",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "73",
+        "attr_name": "Other Civil Miscellaneous Item",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "74",
+        "attr_name": "Cage",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "75",
+        "attr_name": "Structure(खंडक)",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "76",
+        "attr_name": "Walking Track",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "77",
+        "attr_name": "Aquarium",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "78",
+        "attr_name": "Toilets",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "79",
+        "attr_name": "Drinking Water",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "80",
+        "attr_name": "Land Scapping-Lawn",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "81",
+        "attr_name": "Land Scapping-Lawn",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "82",
+        "attr_name": "Land Scapping-Fountain/Musical Fountain",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "83",
+        "attr_name": "Land Scapping-Sprinklers",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "84",
+        "attr_name": "Land Scapping-Fountain/Musical Fountain",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "85",
+        "attr_name": "Land Scapping-Tree",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "86",
+        "attr_name": "Benches",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "87",
+        "attr_name": "Wooden Finish",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "88",
+        "attr_name": "Murals",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "89",
+        "attr_name": "Yoga Hall",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "90",
+        "attr_name": "Parking",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "91",
+        "attr_name": "Amphitheatre",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "92",
+        "attr_name": "Phulrani Train",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "98",
+        "attr_name": "Entrance Plaza",
+        "measure_in": "polygon",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "99",
+        "attr_name": "Entrance gate",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "100",
+        "attr_name": "Entrance kaman",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "101",
+        "attr_name": "Name board of Garden",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "102",
+        "attr_name": "Other Civil Miscellaneous Item",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "103",
+        "attr_name": "Name board of Zoo",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "104",
+        "attr_name": "Other Civil Miscellaneous Item",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "107",
+        "attr_name": "Poles",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "108",
+        "attr_name": "Lightings",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "109",
+        "attr_name": "CCTV",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "110",
+        "attr_name": "Name board  ( LED/Steel letters)",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "111",
+        "attr_name": "Other Electrical Items",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "112",
+        "attr_name": "Pipe Line",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "113",
+        "attr_name": "Sprinkler",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "114",
+        "attr_name": "Drip",
+        "measure_in": "line",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "115",
+        "attr_name": "Lawn ",
+        "measure_in": "polygon",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "116",
+        "attr_name": "Edges",
+        "measure_in": "line",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "117",
+        "attr_name": "Shrubs",
+        "measure_in": "Point",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "118",
+        "attr_name": "Clipped hedges",
+        "measure_in": "line",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "119",
+        "attr_name": "Flower bed",
+        "measure_in": "polygon",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "120",
+        "attr_name": "Large flowering/shady trees",
+        "measure_in": "point",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "121",
+        "attr_name": "Ground cover",
+        "measure_in": "line",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "122",
+        "attr_name": "Climbers",
+        "measure_in": "line",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "123",
+        "attr_name": "Verticle garden",
+        "measure_in": "line",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "124",
+        "attr_name": "Pots",
+        "measure_in": "point",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "125",
+        "attr_name": "Seasonals Plants",
+        "measure_in": "polygon",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "126",
+        "attr_name": "Topiary",
+        "measure_in": "point",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "127",
+        "attr_name": "Bonsai",
+        "measure_in": "point",
+        "dep_id": "13"
+      },
+      {
+        "attr_id": "128",
+        "attr_name": "Valve",
+        "measure_in": "point",
+        "dep_id": "9"
+      },
+      {
+        "attr_id": "129",
+        "attr_name": "Chambers",
+        "measure_in": "point",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "130",
+        "attr_name": "manhole",
+        "measure_in": "point",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "131",
+        "attr_name": "Existing Drainage Line",
+        "measure_in": "line",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "132",
+        "attr_name": "Cable Ducting",
+        "measure_in": "point",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "133",
+        "attr_name": "Pavsali Chambers",
+        "measure_in": "point",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "134",
+        "attr_name": "Water Line",
+        "measure_in": "line",
+        "dep_id": "5"
+      },
+      {
+        "attr_id": "135",
+        "attr_name": "शौचालय दुरुस्ती\r\n",
+        "measure_in": "polygon",
+        "dep_id": "11"
+      },
+      {
+        "attr_id": "136",
+        "attr_name": "ड्रेनेज लाईन  दुरुस्ती / चेंबर् दुरुस्ती /  ड्रेनेज लाईन साफ करणे",
+        "measure_in": "point",
+        "dep_id": "11"
+      },
+      {
+        "attr_id": "137",
+        "attr_name": "गल्ली बोळ काँक्रिट / ब्लॉक / डांबरीकरण",
+        "measure_in": "line",
+        "dep_id": "11"
+      },
+      {
+        "attr_id": "138",
+        "attr_name": "पावसाळी लाईन/ चेंबर दुरुस्ती",
+        "measure_in": "point",
+        "dep_id": "11"
+      },
+      {
+        "attr_id": "139",
+        "attr_name": "शाळा दुरुस्ती (भवन) वाचनालय , पाण्याच्या टाक्या साफ करणे",
+        "measure_in": "polygon",
+        "dep_id": "11"
+      },
+      {
+        "attr_id": "140",
+        "attr_name": "शौचालय बांधणे व दुरुस्ती करणे",
+        "measure_in": "polygon",
+        "dep_id": "2"
+      }
+    ]
+  }
+}

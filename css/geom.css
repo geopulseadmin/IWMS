@@ -1,0 +1,115 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: transparent;
+}
+
+#content{
+  margin-left:9.5%;
+}
+h2 {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: #007bff;
+}
+*/
+
+/*  */
+
+/* C_form.css */
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    max-width: 1325px;
+    margin: auto;
+    padding: 30px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Logo Styles */
+.logopng1{
+    height: 50px;
+    width:50px;
+    border: 2px solid #bbb;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+   position: absolute;
+   z-index: 9999;
+   top: 2%;
+   left: 0.5%;
+  }
+
+/* Map Section Styles */
+#map-section {
+    margin-top: 20px;
+    position: relative;
+}
+
+#map {
+    top: 0px;
+    /* left: -16%; */
+    height: 70vh;
+    width: 50vw;
+    z-index: 0;
+} 
+
+#table-container {
+    flex: 1;
+    margin-left:0px;
+    height: 70vh;
+    overflow-x: auto;
+}
+
+.table {
+    width: 10%;
+}
+
+/* Popup Styles */
+.popup-table-container {
+    max-width: 300px;
+}
+
+.popup-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.popup-table-container th,
+.popup-table-container td {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+/* Print Button Styles */
+#generatePdfBtn {
+    cursor: pointer;
+}
+
+/* Geopulse Analytics Link Styles */
+.geopulseaname {
+    color: darkblue;
+    position: absolute;
+    z-index: 99999;
+    bottom: -0%;
+    right: 0%;
+    font-weight: bold;
+    font-size: 10px;
+}

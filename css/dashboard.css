@@ -1,0 +1,698 @@
+.leaflet-control-zoom {
+  position: absolute;
+  left: 96vw;
+  top: 85vh;
+  border: 2px solid darkblue;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  display: none;
+}
+
+.leaflet-control-layers-toggle {
+  top: 0;
+}
+
+.leaflet-control-layers-list {
+  width: 150px;
+  height: 200px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  font-size: 9px;
+  padding: 0px;
+  /* color: darkblue; */
+}
+
+.leaflet-control-layers-overlays {
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh !important;
+  overflow: hidden;
+  /* padding: 10px; */
+  background-color: #e8f5e9;
+}
+
+.main-content {
+  display: flex;
+  width: 100vw;
+  max-width: 98vw;
+  transition: all 0.3s ease;
+}
+
+.map-container {
+  width: 100vw;
+  position: relative;
+}
+
+#map {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+.tablestats {
+  /* color: #04c; */
+  color: darkblue;
+  font-size: 53%;
+  font-weight: bold;
+  padding: 3px;
+  text-shadow: black;
+  text-transform: uppercase;
+}
+.filters {
+  width: 20vw;
+  margin-left: -5vw;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: margin-left 0.3s ease, opacity 0.3s ease;
+}
+
+.filters h3 {
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.showCount {
+  margin-top: 2%;
+  background-color: #9393d633;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.accordion {
+  width: 100%;
+}
+
+.accordion-item {
+  border-top: 1px solid #ccc;
+}
+
+.accordion-item:first-child {
+  border-top: none;
+}
+
+.accordion-header {
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.accordion-content {
+  display: none;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ccc;
+}
+
+.toggle-button {
+  position: absolute;
+  top: 15vh;
+  right: 10px;
+  z-index: 1000;
+  background-color: white;
+  color: darkblue;
+  border: 2px solid darkblue;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* leaflet zoom */
+
+.leaflet-control-zoom {
+  position: absolute;
+  border: 2px solid darkblue;
+  color: darkblue;
+}
+
+/* table */
+
+#openTableBtn {
+  position: absolute;
+  z-index: 999;
+  top: 22vh;
+  width: auto;
+  padding: 6px;
+  right: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border: 2px solid #383899;
+}
+
+.tablebtn {
+  width: 20px;
+  height: 20px;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+  padding: 30px 10px;
+}
+
+/*search bar  */
+
+.SearchBar {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.SearchBar .form-select,
+.SearchBar .form-control,
+.SearchBar .btn {
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  height: 4.5%;
+  position: absolute;
+  top: 2%;
+  left: 12.8%;
+  border:  none;
+  z-index: 9999999;
+  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+/* html */
+
+.filters {
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  /* margin-bottom: 20px; */
+  padding: 10px;
+  border: 1px solid gray;
+  font-size: 10px;
+}
+.filter-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.filter-group input[type="text"] {
+  width: 80%;
+  padding: 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  display: none;
+  border-radius: 8px;
+  border: 2px solid #bbb;
+}
+.filter-group ul {
+  list-style-type: none;
+  padding: 0;
+  display: none;
+}
+.filter-group ul.active,
+.filter-group input[type="text"].active {
+  display: block;
+  forced-color-adjust: blue;
+}
+.filter-group li {
+  margin-bottom: 5px;
+}
+
+.icon-container {
+  position: absolute;
+  right: 1%;
+  top: 0%;
+  font-size: 15px;
+}
+
+/* Style the icon */
+.icon-container i {
+  color: black; /* Default color */
+}
+
+.abcscroll {
+  height: auto;
+  max-height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* For Firefox */
+}
+
+/* WebKit (Safari, older Chrome) */
+.abcscroll::-webkit-scrollbar {
+  width: 10px; /* Makes scrollbars thinner */
+}
+
+.abcscroll::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of scrollbar track */
+  border-radius: 10px; /* Rounded corners for scrollbar track */
+}
+
+.abcscroll::-webkit-scrollbar-thumb {
+  background: #888; /* Color of scrollbar handle */
+  border-radius: 10px; /* Rounded corners for scrollbar handle */
+}
+
+.abcscroll::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover state for visibility */
+}
+
+#daterange {
+  z-index: 9999;
+  position: fixed !important;
+  padding: 16px;
+  font-size: 13px !important;
+  left: 62%;
+  top: 2.3%;
+  width: 15% !important;
+  border: 2px solid darkblue;
+  border-radius: 10px;
+  height: 3%;
+}
+
+.daterange-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.daterange-container .fa-solid {
+  position: fixed !important;
+  top: 4.2%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  left: 75% !important;
+  z-index: 9999 !important;
+}
+thead th {
+  position: sticky !important;
+  padding: 0%;
+  top: 10%;
+  background-color: #506be7;
+  z-index: 2;
+}
+
+#tablecontainer {
+  z-index: 9999;
+  position: absolute;
+  width: 31%;
+  bottom: 13%;
+  right: 1%;
+  /* background-color: white; */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  font-size: 10px;
+  transition: all 0.3s ease;
+}
+
+
+.minimize-button {
+  background-color: darkblue;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  /* border-radius: 50%; */
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  z-index: 1000;
+  width: 27px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.data-table th {
+  /* background-color: #f2f2f2; */
+  background-color: #9393d633;
+  color: darkblue;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dataTables_wrapper .dataTables_scrollHead {
+  overflow: visible;
+}
+
+.dataTables_wrapper .dataTables_scrollBody {
+  overflow: auto;
+  scrollbar-width: thin;
+  text-align: center;
+  /* height: 248px; */
+ 
+}
+.dataTables_scrollBody{
+  max-height: 196px !important;
+}
+
+.dataTables_wrapper .dataTables_scrollFoot {
+  overflow: visible;
+}
+
+/* table------------------------------------------- */
+.leaflet-popup-content-wrapper {
+  padding: 1px;
+  text-align: left;
+  height: auto;
+  max-height: 400px;
+  border-radius: 12px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  width: auto;
+  max-width: 400px;
+  font-size: 10px;
+}
+
+.leaflet-popup-content-wrapper tr,
+td {
+  border-bottom: 1px solid;
+  padding: 5px;
+  margin-left: 2px;
+}
+
+.leaflet-popup-content-wrapper tr td:not(:last-child) {
+  border-right: 1px solid;
+}
+
+.geopulseaname {
+  color: darkblue;
+  position: fixed;
+  z-index: 99999;
+  bottom: 0px;
+  right: 15px;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.logopng {
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  z-index: 9999;
+  top: 0%;
+  left: 2%;
+}
+
+/* table css */
+.dataTables_info {
+  font-weight: bold !important;
+}
+#data-table_filter {
+  font-weight: bold !important;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  font: 16px / 24px Tahoma, Verdana, sans-serif;
+  color: red !important;
+  text-decoration: none;
+  background: transparent;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid darkblue;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  top: 2%;
+  /* border-radius: 10px 10px 10px 10px; */
+  height: 4%;
+  background-color: white;
+  position: absolute;
+  left: 10%;
+  width: 17%; /* Adjust the width as needed */
+}
+
+.dropdown-icon,
+.search-icon {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  border-right: 1px solid #ccc;
+}
+
+.search-input {
+  border: none;
+  border-right: 2px solid darkblue;
+  border-left: 2px solid darkblue;
+  padding: 10px;
+  outline: none;
+  flex-grow: 1;
+  width: 100%; /* Take up remaining space */
+}
+
+.SearchBar #searchInputDashboard {
+  margin-left: 5px;
+  height: 4.5%;
+  border-radius: 10px;
+
+  /* border-radius: 10px; */
+  width: 16%;
+  position: absolute;
+  z-index: 9999;
+  top: 2%;
+  text-align: left; /* Center align text */
+  padding-left: 15px; /* Add padding to move text slightly left */
+  left: 14%;
+  border: 2px solid darkblue;
+}
+
+/* Placeholder styling */
+#searchInputDashboard::placeholder {
+  text-align: center;
+}
+
+input::-webkit-input-placeholder {
+  color: #aaa;
+  text-align: center;
+}
+input::-moz-placeholder {
+  color: #aaa;
+  text-align: center;
+}
+input:-ms-input-placeholder {
+  color: #aaa;
+  text-align: center;
+}
+input:-moz-placeholder {
+  color: #aaa;
+  text-align: center;
+}
+/* table css */
+.dataTables_info {
+  font-weight: bold !important;
+}
+#data-table_filter {
+  font-weight: bold !important;
+}
+.tableDetail {
+  max-height: 550px;
+  overflow-y: auto;
+  opacity: 0.88;
+  /* margin-top: 10px; */
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+.leaflet-container a.leaflet-popup-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+  font: 16px / 24px Tahoma, Verdana, sans-serif;
+  color: red !important;
+  text-decoration: none;
+  background: transparent;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid darkblue;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1000;
+  top: 2%;
+  /* border-radius: 10px 10px 10px 10px; */
+  height: 4%;
+  background-color: white;
+  position: absolute;
+  left: 10%;
+  width: 17%; /* Adjust the width as needed */
+}
+
+.dropdown-icon,
+.search-icon {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  border-right: 1px solid #ccc;
+}
+
+.search-input {
+  border: none;
+  border-right: 2px solid darkblue;
+  border-left: 2px solid darkblue;
+  padding: 10px;
+  outline: none;
+  flex-grow: 1;
+  width: 100%; /* Take up remaining space */
+}
+
+.SearchBar #searchInputDashboard {
+  margin-left: 5px;
+  height: 4.5%;
+  border-radius: 10px;
+
+  /* border-radius: 10px; */
+  width: 16%;
+  position: absolute;
+  z-index: 9999;
+  top: 2%;
+  text-align: center; /* Center align text */
+  padding-left: 10px; /* Add padding to move text slightly left */
+  left: 15%;
+  border: 2px solid darkblue;
+}
+/* Add this to your CSS file */
+.autocomplete-items li {
+  cursor: pointer;
+  text-decoration: none;
+  list-style-type: circle;
+}
+
+.autocomplete-items li:hover {
+  background-color: #9393d633;
+}
+#autocomplete-list {
+  position: absolute;
+  z-index: 9999;
+  margin-left: 5px;
+  height: auto;
+  border-radius: 10px;
+  width: auto;
+  top: 6.5%;
+  left: 15.2%;
+  background-color: #fff;
+  width: 250px;
+  max-width: 250px;
+  max-height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: #9393d633 #f1f1f1; /* For Firefox */
+  line-height: 2.5;
+}
+
+/* Scrollbar styles for WebKit browsers */
+#autocomplete-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+#autocomplete-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+#autocomplete-list::-webkit-scrollbar-thumb {
+  background-color: #9393d633;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+#data-table tbody tr:hover {
+  background-color: #9393d633;
+  cursor: pointer;
+}
+
+/* #data-table th,
+#data-table td {
+  padding: 0px 2px;
+  border: 1px solid #ddd;
+} */
+
+
+#data-table thead tr {
+  background-color: #9393d633;
+}
+
+/* Style for checkboxes */
+.leaflet-control-layers input[type="checkbox"] {
+  accent-color: blue; 
+}
+
+#search_type {
+  appearance: none; /* Remove default browser styles */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  padding-right: 60px; /* Adjust padding to make space for the icon */
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="black"/></svg>') no-repeat; /* Custom SVG arrow */
+  background-position: right 6px center; /* Default position */
+  background-size: 13px; /* Size of the icon */
+  border: none; /* Remove the default border */
+  border-right: 2px solid darkblue; /* Add a border only to the right side */
+  /* padding: 8px; */
+  width: 23px;
+  border-radius: 0px; /* No rounded corners */
+  outline: none; /* Remove the outline (focus border) when clicked */
+  background-position: right 5px 45%; /* Move icon slightly upward */
+}
+
+
+/* Prevent background change on click */
+#search_type:focus,
+#search_type:active {
+  background-color: transparent; /* Keeps background transparent when focused or clicked */
+  box-shadow: none; /* Removes any outline or shadow */
+  outline: none; /* Ensures no focus outline appears */
+}

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>PMC</title>
+		<link rel="icon" href="png/pmcjpeg.png" type="image/x-icon" />
+		<link rel="stylesheet" href="css/C_form.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+
+		<!-- ============================ -->
+		<!-- bootstrap -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+
+		<!-- fontawsome -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+			integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<!-- leaflet -->
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+			integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+			crossorigin
+		/>
+
+		<!-- leaflet -->
+
+		<!-- fontawsome -->
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+			integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		/>
+
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	</head>
+	<body class="bg-light">
+		<img src="png/pmcjpeg.png" alt="" class="logopng1" >
+		
+		<div id="content">
+			
+			<!-- Form section -->
+			<section id="form-section" class="ms-5">
+				<!-- <h2>Create Work</h2> -->
+				<form id="projectForm" method="post">
+					
+
+					<label for="projectNo">Project No:</label>
+					<input type="text" id="projectNo" name="projectNo" required />
+					<label for="aaWork">Name of AA work:</label>
+					<textarea type="text" id="aaWork" name="aaWork" rows="4" required></textarea>
+
+					<label for="workType">Work Type:</label>
+					<select id="workType" name="workType" required>
+						<option value="Select Work Type">Select Work Type</option>
+						<option value="Emergency And Special Work">Emergency And Special Work</option>
+						<option value="Maintenance Work">Maintenance Work</option>
+						<option value="New">New</option>
+						<option value="Repair Work">Repair Work</option>
+						<option value="Spill Work">Spill Work</option>
+					</select>
+
+					<label for="scopeOfWork">Scope of Work:</label>
+					<input id="scopeOfWork" name="scopeOfWork" rows="4" required />
+
+					<label for="projectFinancialYear">Project Financial Year:</label>
+					<select input id="projectFinancialYear" name="projectFinancialYear" required>
+						<option value="Select projectFinancialYear">Select Project Financial Year</option>
+						<option value="2022-2023">2022-2023</option>
+						<option value="2023-2024">2023-2024</option>
+						<option value="2024-2025">2024-2025</option>
+					</select>
+
+					<label for="department">Department:</label>
+					<select id="department" name="department" required>
+						<option value="">Select Department</option>
+						<option value="Road">Road</option>
+						<option value="Building">Building</option>
+						<option value="Project Work">Project Work</option>
+						<option value="Water Supply">Water Supply</option>
+						<option value="Drainage">Drainage</option>
+						<option value="Electrical">Electrical</option>
+						<option value="Solid Waste Management">Solid Waste Management</option>
+						<option value="PMAY">PMAY</option>
+						<option value="Garden">Garden</option>
+						<option value="Education Department (Primary)">Education Department (Primary)</option>
+						<option value="Slum">Slum</option>
+						<option value="Encroachment">Encroachment</option>
+						<option value="Garden Horticulture">Garden Horticulture</option>
+						<option value="Market">Market</option>
+						<option value="Sport">Sport</option>
+						<option value="City Engineer Office">City Engineer Office</option>
+						<option value="Environment">Environment</option>
+					</select>
+
+					<label for="projectOffice">Project Office:</label>
+					<input type="text" id="projectOffice" name="projectOffice" required />
+
+					<label for="juniorName">Junior Engineer Name:</label>
+					<input type="text" id="juniorName" name="juniorName" required />
+
+					<label for="contactNo">Contact No:</label>
+					<input type="tel" id="contactNo" name="contactNo" required />
+
+					<label for="dateIn">Date-In:</label>
+					<input type="date" id="dateIn" name="dateIn" required />
+
+					<label for="zone">Zone:</label>
+					<select id="zone" name="zone" required>
+						<option value=" ">Select Zone</option>
+						<option value="D.M.C. Zone 1">D.M.C. Zone 1</option>
+						<option value="D.M.C. Zone 2">D.M.C. Zone 2</option>
+						<option value="D.M.C. Zone 3">D.M.C. Zone 3</option>
+						<option value="D.M.C. Zone 4">D.M.C. Zone 4</option>
+						<option value="D.M.C. Zone 5">D.M.C. Zone 5</option>
+					</select>
+
+					<!-- <label for="ward">Ward:</label> -->
+					<!-- // thi line is added\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+					<label for="ward">Ward:</label>
+					<select id="ward" name="ward" required>
+						<option value="Select Ward">Select Ward</option>
+						<option value="Yeravada Kalas Dhanori">Yeravada Kalas Dhanori</option>
+						<option value="Dhole Patil Ward">Dhole Patil Ward</option>
+						<option value="Nagar Road - Vadgaonsheri">Nagar Road - Vadgaonsheri</option>
+						<option value="Shivajinagar - Ghole Road">Shivajinagar - Ghole Road</option>
+						<option value="Aundh - Baner">Aundh - Baner</option>
+						<option value="Kothrud - Bawdhan">Kothrud - Bawdhan</option>
+						<option value="Warje - Karvenagar">Warje - Karvenagar</option>
+						<option value="Sinhgad Road Ward">Sinhgad Road Ward</option>
+						<option value="Dhankawadi - Sahakar Nagar">Dhankawadi - Sahakar Nagar</option>
+						<option value="Wanawadi - Ramtekadi">Wanawadi - Ramtekadi</option>
+						<option value="Hadapsar - Mundhwa">Hadapsar - Mundhwa</option>
+						<option value="Kondhwa - Yewalewadi">Kondhwa - Yewalewadi</option>
+						<option value="Bhavani Peth">Bhavani Peth</option>
+						<option value="Bibwewadi">Bibwewadi</option>
+						<option value="Kasaba VishramBagwada">Kasaba VishramBagwada</option>
+					</select>
+
+					<label for="ward">Budget Code:</label>
+					<input type="text" id="budgetCodes" name="budgetCodes" placeholder="budget code" required />
+
+					<div class="road-container">
+						<label for="Width">Width</label>
+						<input type="text" id="Width" name="Width" placeholder="Width in m" required />
+					</div>
+					<div class="road-container">
+						<label for="Length">Length</label>
+						<input type="text" id="Length" name="Length" placeholder="Length in km" required />
+					</div>
+					<a class="submitbtn">
+						<button type="button" class="btn btn-outline-success" onclick="submitForm()">Next</button>
+					</a>
+				</form>
+			</section>
+			<!-- form section end -->
+		</div>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+			integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+			integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script
+			src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+			crossorigin
+		></script>
+
+		<!-- leaflet-ajax -->
+		<script src="https://unpkg.com/leaflet-ajax/dist/leaflet.ajax.min.js"></script>
+
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- <script src="C_form.js"></script> -->
+
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+		<!-- Leaflet.draw JavaScript -->
+		<script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+
+		<!-- Include jQuery -->
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+		<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+
+		<!-- html2pdfcdn -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+			integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.0/jspdf.umd.min.js"></script> -->
+
+		<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"
+			integrity="sha512-NQfB/bDaB8kaSXF8E77JjhHG5PM6XVRxvHzkZiwl3ddWCEPBa23T76MuWSwAJdMGJnmQqM0VeY9kFszsrBEFrQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+
+		<script>
+			// let depData =[];
+
+			// let zoneData= [];
+
+			// let wardData = [];
+
+			let depData = [
+				{
+					department_id: '1',
+					department_name: 'Road',
+					department_marathi_name: 'पथ',
+					department_code: '21',
+				},
+				{
+					department_id: '2',
+					department_name: 'Building',
+					department_marathi_name: 'भवन',
+					department_code: '78',
+				},
+				{
+					department_id: '3',
+					department_name: 'Project Work',
+					department_marathi_name: 'प्रकल्प',
+					department_code: '',
+				},
+				{
+					department_id: '4',
+					department_name: 'Water Supply',
+					department_marathi_name: 'पाणीपुरवठा',
+					department_code: '',
+				},
+				{
+					department_id: '5',
+					department_name: 'Drainage',
+					department_marathi_name: 'मलनिःसारण देखभाल व दुरुस्ती',
+					department_code: '',
+				},
+				{
+					department_id: '6',
+					department_name: 'Electrical',
+					department_marathi_name: 'विद्युत',
+					department_code: '',
+				},
+				{
+					department_id: '7',
+					department_name: 'Solid waste Management',
+					department_marathi_name: 'घनकचरा',
+					department_code: '',
+				},
+				{
+					department_id: '8',
+					department_name: 'PMAY',
+					department_marathi_name: 'प्रधानमंत्री आवास योजना',
+					department_code: '',
+				},
+				{
+					department_id: '9',
+					department_name: 'Garden',
+					department_marathi_name: 'उद्यान ',
+					department_code: '',
+				},
+				{
+					department_id: '14',
+					department_name: 'Education Department (Primary)',
+					department_marathi_name: 'शिक्षण विभाग (प्राथमिक)',
+					department_code: 'EDU',
+				},
+				{
+					department_id: '11',
+					department_name: 'Slum',
+					department_marathi_name: 'झोनिपु',
+					department_code: '',
+				},
+				{
+					department_id: '12',
+					department_name: 'Encroachment ',
+					department_marathi_name: 'अतिक्रमण',
+					department_code: '',
+				},
+				{
+					department_id: '13',
+					department_name: 'Garden Horticulture',
+					department_marathi_name: 'उद्यान',
+					department_code: 'GRHOR',
+				},
+				{
+					department_id: '10',
+					department_name: 'Market',
+					department_marathi_name: 'मंडई',
+					department_code: '',
+				},
+				{
+					department_id: '16',
+					department_name: 'Sport',
+					department_marathi_name: 'क्रीडा',
+					department_code: '',
+				},
+				{
+					department_id: '17',
+					department_name: 'City Engineer Office',
+					department_marathi_name: 'शहर अभियंता कार्यालय',
+					department_code: 'CTEO',
+				},
+				{
+					department_id: '18',
+					department_name: 'Environment',
+					department_marathi_name: 'पर्यावरण',
+					department_code: 'EVMT',
+				},
+			];
+
+			let zoneData = [
+				{
+					zone_id: '1',
+					zone_name: 'D.M.C. Zone 1',
+					zone_marathi_name: 'विकेंद्रित कामे परिमंडळ क्र.१ ',
+				},
+				{
+					zone_id: '2',
+					zone_name: 'D.M.C. Zone 2',
+					zone_marathi_name: 'विकेंद्रित कामे परिमंडळ क्र.२',
+				},
+				{
+					zone_id: '3',
+					zone_name: 'D.M.C. Zone 3',
+					zone_marathi_name: 'विकेंद्रित कामे परिमंडळ क्र.३',
+				},
+				{
+					zone_id: '4',
+					zone_name: 'D.M.C. Zone 4',
+					zone_marathi_name: 'विकेंद्रित कामे परिमंडळ क्र.४ ',
+				},
+				{
+					zone_id: '5',
+					zone_name: 'D.M.C. Zone 5',
+					zone_marathi_name: 'विकेंद्रित कामे परिमंडळ क्र.५',
+				},
+			];
+
+			let wardData = [
+				{
+					ward_id: '1',
+					ward_name: 'Yeravada Kalas Dhanori',
+					ward_marathi_name: 'येरवडा कळस धानोरी',
+					zone_id: '1',
+					ward_no: '2',
+				},
+				{
+					ward_id: '2',
+					ward_name: 'Dhole Patil  Ward',
+					ward_marathi_name: 'ढोले पाटील',
+					zone_id: '1',
+					ward_no: '3',
+				},
+				{
+					ward_id: '3',
+					ward_name: 'Nagar Road - Vadgaonsheri ',
+					ward_marathi_name: 'नगररोड - वडगावशेरी',
+					zone_id: '1',
+					ward_no: '1',
+				},
+				{
+					ward_id: '4',
+					ward_name: 'Shivajinagar - Ghole Road',
+					ward_marathi_name: 'शिवाजीनगर - घोलेरोड',
+					zone_id: '2',
+					ward_no: '5',
+				},
+				{
+					ward_id: '5',
+					ward_name: 'Aundh - Baner',
+					ward_marathi_name: 'औंध - बाणेर',
+					zone_id: '2',
+					ward_no: '4',
+				},
+				{
+					ward_id: '6',
+					ward_name: 'Kothrud - Bawdhan',
+					ward_marathi_name: 'कोथरूड - बावधन',
+					zone_id: '2',
+					ward_no: '6',
+				},
+				{
+					ward_id: '7',
+					ward_name: 'Warje - Karvenagar',
+					ward_marathi_name: 'वारजे - कर्वेनगर',
+					zone_id: '3',
+					ward_no: '9',
+				},
+				{
+					ward_id: '9',
+					ward_name: 'Dhankawadi - Sahakar Nagar ',
+					ward_marathi_name: 'धनकवडी - सहकारनगर',
+					zone_id: '3',
+					ward_no: '7',
+				},
+				{
+					ward_id: '8',
+					ward_name: 'Sinhgad Road Ward',
+					ward_marathi_name: 'सिंहगड रोड',
+					zone_id: '3',
+					ward_no: '8',
+				},
+				{
+					ward_id: '10',
+					ward_name: 'Wanawadi - Ramtekadi',
+					ward_marathi_name: 'वानवडी - रामटेकडी',
+					zone_id: '4',
+					ward_no: '11',
+				},
+				{
+					ward_id: '11',
+					ward_name: 'Hadapsar - Mundhwa',
+					ward_marathi_name: 'हडपसर - मुंढवा',
+					zone_id: '4',
+					ward_no: '10',
+				},
+				{
+					ward_id: '12',
+					ward_name: 'Kondhwa - Yewalewadi',
+					ward_marathi_name: 'कोंढवा - येवलेवाडी',
+					zone_id: '4',
+					ward_no: '12',
+				},
+				{
+					ward_id: '13',
+					ward_name: 'Bhavani Peth',
+					ward_marathi_name: 'भवानी पेठ ',
+					zone_id: '5',
+					ward_no: '14',
+				},
+				{
+					ward_id: '14',
+					ward_name: 'Bibwewadi',
+					ward_marathi_name: 'बिबवेवाडी ',
+					zone_id: '5',
+					ward_no: '15',
+				},
+				{
+					ward_id: '15',
+					ward_name: 'Kasaba VishramBagwada',
+					ward_marathi_name: 'कसबा विश्रामबागवाडा',
+					zone_id: '5',
+					ward_no: '13',
+				},
+			];
+			const roadContainers = document.querySelectorAll('.road-container');
+			document.addEventListener('DOMContentLoaded', function () {
+				// const fetchDataButton = document.getElementById('fetchDataButton');
+
+				// // Event listener for the Fetch Data button
+				// fetchDataButton.addEventListener('click', function () {
+				// 	const worksAaApprovalId = document.getElementById('Id').value;
+				// 	if (worksAaApprovalId) {
+				// 		fetchAndFillFormData(worksAaApprovalId);
+				// 	} else {
+				// 		alert('No ID provided .');
+				// 	}
+				// });
+
+				function getQueryParam(param) {
+					const urlParams = new URLSearchParams(window.location.search);
+					return urlParams.get(param);
+				}
+
+				const worksAaApprovalId = getQueryParam('proj_id');
+				if(worksAaApprovalId != null){
+					fetchAndFillFormData(worksAaApprovalId)
+				}
+
+				function fetchAndFillFormData(id) {
+					fetch('api-responses/all-project-data.json')
+						.then((response) => response.json())
+						.then((data) => {
+							const project = data.data.projectData.find(
+								(project) => project.project.works_aa_approval_id === id
+							);
+
+							if (!project) {
+								alert('project with this works_aa_approval_id is not found');
+								return;
+							}
+
+							let department = depData.find((dep) => dep.department_id == project.project.d_id);
+							let zone = zoneData.find((dep) => dep.zone_id == project.project.constituency_zone_id);
+							let ward = wardData.find((ward) => ward.ward_id == project.project.constituency_ward_id);
+
+							if (project) {
+								let budgetCodes = project?.budget_data
+									?.map((budget) => budget.budget_code.trim())
+									.join(', ');
+
+								if (budgetCodes) {
+									document.getElementById('budgetCodes').value = budgetCodes;
+								}
+
+								document.getElementById('projectNo').value = project.project.sys_proj_id || '';
+								document.getElementById('aaWork').value = project.project.name_of_work || '';
+								document.getElementById('scopeOfWork').value = project.project.scope_of_work || '';
+								document.getElementById('projectFinancialYear').value =
+									project.project.project_financial_year || '';
+
+								document.getElementById('juniorName').value = project.project.je_name || '';
+								document.getElementById('contactNo').value = project.project.contact || '';
+								document.getElementById('dateIn').value = project.project.con_appr_date || '';
+
+								if (project.project.project_from) {
+									let projectOfficeValue = '';
+
+									switch (project.project.project_from) {
+										case '1':
+											projectOfficeValue = 'Main Office';
+											break;
+										case '2':
+											projectOfficeValue = 'Zone Office';
+											break;
+										case '3':
+											projectOfficeValue = 'Ward Office';
+											break;
+										default:
+											projectOfficeValue = 'Unknown';
+									}
+
+									document.getElementById('projectOffice').value = projectOfficeValue;
+								}
+
+								if (department) {
+									document.getElementById('department').value = department.department_name;
+									if (department.department_name == 'Road' && project.project.work_type == 'New') {
+										roadContainers.forEach((container) => {
+											container.style.display = '';
+										});
+									} else {
+										roadContainers.forEach((container) => {
+											container.style.display = 'none';
+										});
+									}
+								}
+
+								if (zone) {
+									document.getElementById('zone').value = zone.zone_name;
+								}
+
+								if (ward) {
+									document.getElementById('ward').value = ward.ward_name;
+								}
+
+								let workTypeSelect = document.getElementById('workType');
+								for (let i = 0; i < workTypeSelect.options.length; i++) {
+									if (workTypeSelect.options[i].text === project.project.work_type) {
+										workTypeSelect.selectedIndex = i;
+										break;
+									}
+								}
+							} else {
+								console.error('Project not found');
+							}
+						})
+						.catch((error) => console.error('Error fetching project data:', error));
+				}
+			});
+
+			function goToNextPage() {
+				window.location.href = 'index.html';
+
+				// Show popup after a slight delay to ensure the page has fully loaded
+				setTimeout(() => {
+					Swal.fire({
+						position: 'center',
+						title: 'draw tool show after 200m',
+						showConfirmButton: false,
+						customClass: {
+							popup: 'custom-modal-class',
+							icon: 'custom-icon-class',
+							title: 'custom-title-class',
+							content: 'custom-text-class',
+							closeButton: 'custom-close-button-class',
+						},
+						showClass: {
+							popup: 'swal2-show',
+							backdrop: 'swal2-backdrop-show',
+							icon: 'swal2-icon-show',
+						},
+						hideClass: {
+							popup: 'swal2-hide',
+							backdrop: 'swal2-backdrop-hide',
+							icon: 'swal2-icon-hide',
+						},
+					});
+				}, 500); // Adjust the delay as needed
+			}
+
+			function submitForm() {
+				// Prevent the form from submitting the traditional way
+				event.preventDefault();
+
+				// Check if department is 'Road' and work type is 'New'
+				const department = document.getElementById('department').value;
+				const workType = document.getElementById('workType').value;
+
+				// Reference to length and width inputs
+				const lengthInput = document.getElementById('Length');
+				const widthInput = document.getElementById('Width');
+
+				// Reset potentially set 'required' attributes from previous submissions
+				lengthInput.removeAttribute('required');
+				widthInput.removeAttribute('required');
+
+				// Check conditions and make fields mandatory as necessary
+				if (department === 'Road' && workType === 'New') {
+					lengthInput.setAttribute('required', '');
+					widthInput.setAttribute('required', '');
+
+						if (!lengthInput.value || !widthInput.value) {
+						alert('Length and Width fields are required for New Road projects.');
+						return; // Stop the form submission
+					}
+				}
+				// Gather form data
+				const formData = new FormData(document.getElementById('projectForm'));
+
+				// Convert FormData to an object for Axios
+				let formObject = {};
+				formData.forEach((value, key) => {
+					formObject[key] = value;
+				});
+
+				// Use Axios to submit form data
+				axios
+					.post('Apis/Conceptual_Form.php', formObject)
+					.then(function (response) {
+						localStorage.setItem('lastInsertedId', response.data.data.id);
+						localStorage.setItem('bufferWidth', response.data.data.width);
+						localStorage.setItem('roadLenght', response.data.data.lenght);
+						localStorage.setItem('wardname', response.data.data.wardname);
+						localStorage.setItem('department', response.data.data.department);
+						localStorage.setItem('conceptual_form_data_temp', JSON.stringify(formObject));
+						localStorage.removeItem('conceptual_form_data');
+						localStorage.removeItem('selectCoordinatesData');
+						setTimeout(function () {
+							window.location.href = 'index.html';
+						}, 2000); // 1000 milliseconds = 1 second
+					})
+					.catch(function (error) {
+						console.log(error);
+
+						Swal.fire({
+							position: 'center',
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Please Fill the form.',
+							showConfirmButton: false,
+
+							showCloseButton: true,
+							customClass: {
+								popup: 'custom-modal-class',
+								icon: 'custom-icon-class',
+								title: 'custom-title-class',
+								content: 'custom-text-class',
+								closeButton: 'custom-close-button-class',
+							},
+							showClass: {
+								popup: 'swal2-show',
+								backdrop: 'swal2-backdrop-show',
+								icon: 'swal2-icon-show',
+							},
+							hideClass: {
+								popup: 'swal2-hide',
+								backdrop: 'swal2-backdrop-hide',
+								icon: 'swal2-icon-hide',
+							},
+						});
+					});
+			}
+		</script>
+	</body>
+</html>

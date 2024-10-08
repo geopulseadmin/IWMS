@@ -1,0 +1,1075 @@
+@media only screen and (max-width: 767px) {
+
+  /* Add padding to the main-content div */
+  .main-content {
+    padding: 14px;
+    /* Adjust the value as needed */
+    /* box-sizing: border-box;  */
+  }
+
+
+  #customZoomControl {
+    position: absolute;
+    bottom: 70px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid darkblue;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    /* Ensure it appears above the map */
+  }
+
+  .zoom-button {
+    width: 27px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    color: darkblue;
+    user-select: none;
+  }
+
+  .zoom-button:hover {
+    background-color: lightblue;
+  }
+
+  .zoom-button:first-child {
+    border-bottom: 2px solid darkblue;
+  }
+
+
+  .dataTables_scrollBody {
+    max-height: 100px !important;
+    /* Adjust the height as needed */
+  }
+
+  .dataTables_scrollHeadInner {
+    width: 80px !important;
+  }
+
+  table.dataTable thead th,
+  table.dataTable thead td {
+    padding: 9px 4px !important;
+    border-bottom: 1px solid #111;
+    font-size: 7px !important;
+  }
+
+  .dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    padding: 3px !important;
+    background-color: transparent;
+    margin-left: 4px;
+  }
+
+  .dataTables_scrollBody {}
+
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: left !important;
+    font-size: 9px;
+  }
+
+  /* Ensure the element is positioned fixed at the top 10% of the viewport */
+  .leaflet-control-layers-expanded {
+    position: fixed;
+    top: 60% !important;
+    right: 0;
+    transform: translateY(10%);
+    transition: all 0.3s ease;
+  }
+
+  /* Optional: Adjust the width and height */
+  .leaflet-control-layers-expanded {
+    width: 160px;
+    height: auto;
+    background: white;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .leaflet-touch .leaflet-control-layers-toggle {
+    width: 30px !important;
+    height: 30px !important;
+    border: none;
+    border: 2px solid darkblue;
+    border-radius: 4px;
+  }
+
+  .leaflet-retina .leaflet-control-layers-toggle {
+    background-image: url(images/layers-2x.png);
+    background-size: 23px 23px !important;
+  }
+
+  .leaflet-control-zoom {
+    position: absolute;
+    left: 96vw;
+    top: 85vh;
+    border: 2px solid darkblue;
+  }
+
+  .info.legend {
+    width: 40% !important;
+    right: 15% !important;
+    margin-top: -10% !important;
+  }
+
+  .leaflet-top {
+    top: 0px !important;
+  }
+
+  .leaflet-container .leaflet-control-attribution {
+    display: none;
+  }
+
+  .leaflet-control-layers-toggle {
+    top: 0;
+  }
+
+  .leaflet-control-layers-list {
+    width: 150px;
+    height: 200px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    font-size: 9px;
+    padding: 0px;
+    /* color: darkblue; */
+  }
+
+  .leaflet-control-layers-overlays {
+    width: 100%;
+  }
+
+  /* Define the class for the north arrow image */
+  .north-arrow-img {
+    width: 20px !important;
+    /* Adjust the width as needed */
+    height: 30px !important;
+    /* Adjust the height as needed */
+    background-color: white !important;
+    /* Ensure background color */
+    border: 2px solid darkblue !important;
+    /* Border styling */
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh !important;
+    overflow: hidden;
+    /* padding: 10px; */
+    background-color: #e8f5e9;
+  }
+
+  .main-content {
+    display: flex;
+    width: 90vw;
+    max-width: 98vw;
+    transition: all 0.3s ease;
+  }
+
+  .map-container {
+    width: 90vw;
+    position: relative;
+  }
+
+  #map {
+    position: relative;
+    width: 90vw;
+    height: 92vh;
+    /* border: 1px solid #ccc; */
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+
+  .tablestats {
+    /* color: #04c; */
+    color: darkblue;
+    font-size: 53%;
+    font-weight: bold;
+    padding: 3px;
+    text-shadow: black;
+    text-transform: uppercase;
+    font-size: 10px !important;
+
+    /* position: fixed; color: darkblue; font-size: 12px;font-weight: bold;  z-index: 9999; margin-top: 45px; margin-left:0px; */
+  }
+
+  .heading {
+    font-size: 14px !important;
+  }
+
+  .toggle-button {
+    position: absolute;
+    top: 12vh;
+    right: 12px;
+    z-index: 1000;
+    background-color: white;
+    color: darkblue;
+    border: 2px solid darkblue;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 31px;
+    height: 31px;
+  }
+
+  /* leaflet zoom */
+  .leaflet-control-zoom {
+    position: absolute;
+    border: 2px solid darkblue;
+    color: darkblue;
+  }
+
+  .collapse-button.leaflet-control {
+    background-color: white;
+    border: 2px solid darkblue;
+    width: 31px !important;
+    height: 34px !important;
+    border-radius: 5px;
+    color: black;
+    display: flex; /* Use Flexbox */
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    margin: 10px;
+    padding: 1px !important;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    padding: 0; /* Remove padding */
+}
+
+.collapse-button.leaflet-control .fa-solid.fa-list {
+    font-size: 16px; /* Adjust the font size if necessary */
+    color: black; /* Ensure the icon color is correct */
+}
+.dataTables_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+  flex: 1; /* Makes both elements flexible within the row */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns the content to the start of the element */
+  margin: 0; /* Ensures there is no extra margin causing alignment issues */
+}
+
+.dataTables_wrapper .dataTables_filter {
+  justify-content: flex-end; /* Aligns the filter to the right */
+}
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  margin-left: 5px;
+  width: 51%;
+}
+
+  /* table */
+
+  #openTableBtn {
+    position: absolute;
+    z-index: 999;
+    position: absolute;
+    z-index: 999;
+    top: 18vh;
+    width: auto;
+    padding: 4px;
+    right: 12px;
+    background-color: white;
+    border-radius: 3px;
+    border: 2px solid #383899;
+  }
+
+  .tablebtn {
+    width: 20px;
+    height: 20px;
+  }
+
+  table.dataTable tbody th,
+  table.dataTable tbody td {
+    padding: 30px 10px;
+    font-weight: bolder;
+  }
+
+  .SearchBar .form-select,
+  .SearchBar .form-control,
+  .SearchBar .btn {
+    margin-right: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    width: 1% !important;
+    height: 4.5%;
+    position: absolute;
+    top: 1%;
+    left: 19.8%;
+    border-left: 2px solid darkblue !important;
+    border-right: 2px solid darkblue !important;
+    border-top: 2px solid darkblue !important;
+    border-bottom: 2px solid darkblue !important;
+    z-index: 9999999;
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  /* html */
+  .filters {
+    position: fixed;
+    bottom: 304px;
+    left: 67px;
+    width: 61%;
+    height: 42vh;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(100%);
+    opacity: 0;
+    overflow-y: auto;
+  }
+
+  /* Enable vertical scrolling if content exceeds height */
+
+
+  .filters.active {
+    transform: translateY(0);
+    /* Slide up into view */
+    opacity: 1;
+    /* Show the panel */
+  }
+
+  .filter-group {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+    font-size: 10px;
+  }
+
+  .filter-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 9px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .filter-group input[type="text"] {
+    width: 80%;
+    padding: 5px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    display: none;
+    border-radius: 8px;
+    border: 2px solid #bbb;
+  }
+
+  .filter-group ul {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+  }
+
+  .filter-group ul.active,
+  .filter-group input[type="text"].active {
+    display: block;
+  }
+
+  .icon-container {
+    position: absolute;
+    right: 1%;
+    top: 0%;
+    font-size: 15px;
+  }
+
+  .abcscroll {
+    height: auto;
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  .abcscroll::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .abcscroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  .abcscroll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+
+  .abcscroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  #daterange {
+    z-index: 9999;
+    position: fixed !important;
+    padding: 16px;
+    font-size: 13px !important;
+    left: 62%;
+    top: 2.3%;
+    width: 15% !important;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    height: 3%;
+    display: none;
+  }
+
+  .daterange-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .daterangepicker {
+    position: absolute;
+    color: inherit;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 140px !important;
+    max-width: none;
+    padding: 0;
+    margin-top: 70px !important;
+    top: 110px;
+    left: 30px !important;
+    z-index: 3001;
+    display: none;
+    font-family: arial;
+    font-size: 15px;
+    line-height: 1em;
+  }
+
+  .showCount {
+    position: relative;
+    /* To position the button absolutely within this container */
+  }
+
+  .close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .close-button:hover {
+    color: #fa4d56;
+    /* Optional: Color on hover */
+  }
+
+  .daterange-container .fa-solid {
+    position: fixed !important;
+    top: 12.2%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    left: 8% !important;
+    z-index: 9999 !important;
+    background-color: white;
+    padding: 6px;
+    border-radius: 4px;
+    border: 2px solid darkblue;
+  }
+
+  .daterangepicker.opensleft:after {
+    right: 116px !important;
+}
+.daterangepicker.opensleft:after {
+    right: 116px !important;
+}
+
+
+  thead th {
+    position: sticky !important;
+    padding: 0%;
+    top: 10%;
+    background-color: #08c;
+    z-index: 2;
+  }
+
+
+  #tablecontainer {
+    z-index: 9999;
+    position: absolute;
+    width: 53%;
+    bottom: 20%;
+    right: 1%;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    font-size: 10px;
+    transition: all 0.3s ease;
+
+  }
+
+
+  .tableDetail {
+    max-height: 550px;
+    overflow-y: auto;
+    /* margin-top: 10px;  */
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+
+  }
+
+  .minimize-button {
+    background-color: darkblue;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    /* border-radius: 50%; */
+    position: absolute;
+    right: 0%;
+    top: -185%;
+    z-index: 1000;
+    width: 18px;
+    height: 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .data-table th,
+  .data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .data-table th {
+    /* background-color: #f2f2f2; */
+    background-color: #9393d633;
+    color: darkblue;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 9px;
+  }
+
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>th,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>td,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>th,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
+    vertical-align: middle;
+    font-size: 7px !important;
+  }
+
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate {
+    float: none;
+    text-align: center;
+    font-size: 6px !;
+  }
+
+  .dataTables_wrapper .dataTables_scrollHead {
+    overflow: visible;
+  }
+
+  .dataTables_wrapper .dataTables_scrollBody {
+    overflow: auto;
+    scrollbar-width: thin;
+    text-align: center;
+    height: 248px;
+    max-height: 248px;
+    /* Match this with the tableDetail max-height */
+  }
+
+  .dataTables_wrapper .dataTables_scrollFoot {
+    overflow: visible;
+  }
+
+
+
+  /* table------------------------------------------- */
+  .leaflet-popup-content-wrapper {
+
+    border-radius: 12px;
+
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+
+  .leaflet-popup-content-wrapper tr,
+  td {
+    border-bottom: 1px solid;
+    padding: 5px;
+    margin-left: 2px;
+  }
+
+  .leaflet-popup-content-wrapper tr td:not(:last-child) {
+    border-right: 1px solid;
+  }
+
+  /* geotag popup */
+
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 12px;
+    border: 2px solid #6c757d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    background-color: white;
+    display: flex;
+    height: auto;
+    max-height: 300px;
+    /* Adjusted height */
+    width: 197px !important;
+    /* Adjusted width */
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+    padding: 8px;
+    /* Added padding to keep content inside the popup */
+    overflow-y: auto;
+    overflow-x: auto;
+  }
+
+
+  .leaflet-popup-content-wrapper::-webkit-scrollbar {
+    height: 4px;
+    /* Thin scrollbar height */
+  }
+
+  .leaflet-popup-content-wrapper::-webkit-scrollbar-thumb {
+    background-color: #6c757d;
+    /* Scrollbar color */
+    border-radius: 4px;
+  }
+
+  /* For WebKit browsers (Chrome, Safari) */
+  .leaflet-popup-content-wrapper::-webkit-scrollbar {
+    width: 0px;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+  }
+
+  .leaflet-popup-content-wrapper:hover::-webkit-scrollbar {
+    width: 5px;
+    /* Show scrollbar when hovered */
+  }
+
+  .leaflet-popup-content-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.25);
+    /* Custom scrollbar color */
+    border-radius: 12px;
+  }
+
+  .pagination-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: none;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  #prevIcon {
+    left: 10px;
+  }
+
+  #nextIcon {
+    right: 10px;
+  }
+
+  .pagination-icon:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  #popupImage {
+    max-height: 200px;
+    max-width: 180px;
+    display: flex;
+    border-radius: 12px;
+  }
+
+  #nextIcon {
+    right: 125px !important;
+    top: 49%;
+  }
+
+  .popuptable {
+    margin-top: 5px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 6px;
+  }
+
+  .popuptable td {
+    border: 1px solid #ddd;
+    font-weight: bold;
+    padding: 5px 0.5px;
+
+  }
+
+
+  #featureTitle {
+    text-align: left;
+    /* padding: 10px; */
+    font-weight: bold;
+    color: #262626;
+    font-size: 9px;
+  }
+
+  .leaflet-container a.leaflet-popup-close-button {
+    position: absolute;
+    top: 2px !important;
+    right: 5px !important;
+    width: 18px;
+    height: 7px;
+
+    border: none;
+    text-align: center;
+    font: 16px / 24px Tahoma, Verdana, sans-serif;
+    color: red;
+    text-decoration: none;
+    background: transparent;
+    font-size: 25px !important;
+    font-weight: bold !important;
+  }
+
+  /* geotag */
+
+
+  .geopulseaname {
+    color: darkblue;
+    position: fixed;
+    z-index: 9999;
+    bottom: 16px;
+    right: 17px;
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  .logopng {
+    height: 46px;
+    width: 46px;
+    border-radius: 10px;
+    padding: 5px;
+    position: absolute;
+    z-index: 9999;
+    top: 0%;
+    left: 1%;
+  }
+
+  #autocomplete-list {
+    position: absolute;
+    z-index: 9999;
+    margin-left: 5px;
+    height: auto;
+    border-radius: 10px;
+    width: auto;
+    font-size: 10px;
+    font-weight: bold;
+    z-index: 9999;
+    top: 6.5%;
+    left: 15.700%;
+    text-align: left;
+    background-color: #fff;
+    width: 250px;
+    max-width: 230px;
+    max-height: 400px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* scrollbar-color: #8ac0ee #f1f1f1;  */
+    /* scrollbar-width: thin; */
+    line-height: 2.5;
+  }
+
+  #autocomplete-list:hover {
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8ac0ee #f1f1f1;
+
+  }
+
+  .autocomplete-items li {
+    cursor: pointer;
+    list-style: circle;
+  }
+
+  /* Scrollbar styles for WebKit browsers */
+  #autocomplete-list::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  #autocomplete-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  #autocomplete-list::-webkit-scrollbar-thumb {
+    background-color: #8ac0ee;
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+  }
+
+  /* table css */
+  .dataTables_info {
+    font-weight: bold !important;
+  }
+
+  #data-table_filter {
+    font-weight: bold !important;
+
+  }
+
+  #tablecontainer {
+    z-index: 9999;
+    position: absolute;
+    width: 70%;
+    bottom: 5%;
+    font-weight: bold;
+    right: 6%;
+    opacity: 0.88;
+    /* background-color: white !important; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-height: 200px;
+    font-size: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .tableDetail {
+    max-height: 400px;
+    margin-top: -57%;
+    overflow-y: auto;
+    opacity: 0.88;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    border: 2px solid darkblue;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1000;
+    top: 2%;
+    /* border-radius: 10px 10px 10px 10px; */
+    height: 4%;
+    background-color: white;
+    position: absolute;
+    left: 10%;
+    width: 17%;
+    /* Adjust the width as needed */
+  }
+
+  .dropdown-icon,
+  .search-icon {
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  .dropdown-icon {
+    border-right: 1px solid #ccc;
+  }
+
+  .search-input {
+    border: none;
+    border-right: 2px solid darkblue;
+    border-left: 2px solid darkblue;
+    padding: 10px;
+    outline: none;
+    flex-grow: 1;
+    width: 100%;
+    /* Take up remaining space */
+  }
+
+  .legend-leaflet-control {
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    right: 39%;
+    height: 40vh;
+    width: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    background-color: white;
+    border: 2px solid darkblue;
+    border-radius: 10px;
+    padding: 10px;
+    top: 12%;
+    scrollbar-color: rgb(22, 49, 64) white;
+    box-shadow: rgba(0, 0, 0, 0.7) 5px 5px 5px;
+  }
+
+  .SearchBar #searchInputDashboard {
+    margin-left: 5px;
+    height: 4.5%;
+    border-radius: 9px;
+    /* border-radius: 10px; */
+    width: 40%;
+    position: absolute;
+    z-index: 9999;
+    top: 1%;
+    text-align: left;
+    padding-left: 18px;
+    left: 29.5%;
+    border: 2px solid darkblue;
+    font-size: 10px;
+  }
+
+  /* Placeholder styling */
+  #searchInputDashboard::placeholder {
+    text-align: center;
+  }
+
+
+  input::-webkit-input-placeholder {
+    color: #aaa;
+    text-align: center;
+  }
+
+  input::-moz-placeholder {
+    color: #aaa;
+    text-align: center;
+  }
+
+  input:-ms-input-placeholder {
+    color: #aaa;
+    text-align: center;
+  }
+
+  input:-moz-placeholder {
+    color: #aaa;
+    text-align: center;
+  }
+
+
+  .leaflet-popup-pane,
+  .leaflet-control {
+    cursor: pointer;
+  }
+
+  .leaflet-popup-content {
+    /* width: 181px; */
+  }
+
+  .popup-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .popup-table td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+  }
+
+  .popup-table img {
+    max-height: 200px;
+    max-width: 180px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+
+  .popup-table tr:first-child td {
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .popup-table tr:last-child td {
+    padding-top: 12px;
+  }
+
+  .popup-table tr:nth-child(2) td {
+    background-color: #f8f9fa;
+  }
+
+  .popup-table tr:nth-child(odd) td {
+    background-color: #f8f9fa;
+  }
+
+  .leaflet-popup-tip {
+    width: 17px;
+    height: 17px;
+    padding: 1px;
+    margin: -10px 0 0 -10px;
+    pointer-events: auto;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    /* Moves the tip above the popup */
+    margin-left: -8px;
+    /* Centers the tip horizontally */
+    margin-bottom: -8px;
+    /* Adjusts the tip's vertical position */
+  }
+
+  .leaflet-popup-content-wrapper tr,
+  td {
+    border-bottom: 1px solid !important;
+    padding: 5px;
+    margin-left: 2px;
+  }
+
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
+    background: white;
+    color: #333;
+    border: none;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+  }
+
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>th,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>thead>tr>td,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>th,
+  .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody>table>tbody>tr>td {
+    vertical-align: middle;
+    height: 15px;
+    /* Adjust the value to your desired height */
+    padding: 5px;
+    /* Optionally adjust the padding to reduce the height further */
+  }
+
+  .leaflet-control-scale-line {
+    width: 43px !important;
+  }
+}

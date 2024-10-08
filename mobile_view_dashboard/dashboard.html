@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PMC</title>
+  <link rel="stylesheet" href="dashboard_mobileview.css">
+  <!-- <link rel="stylesheet" href="css/dashboard.css"> -->
+  <link rel="icon" href="png/pmcjpeg.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="libs/Leaflet.MousePosition-master/src/L.Control.MousePosition.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css" />
+  <!-- Include daterangepicker CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"   />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<style>
+  
+</style>
+<body>
+  <div>
+
+    <div class="main-content">
+      <div class="map-container">
+        <img src="img/pmcjpeg.png" alt="" class="logopng">
+        <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
+
+        <button class="toggle-button" id="toggleFilters" title="">
+          <i class="fa-solid fa-filter"></i> 
+      </button>
+  
+        
+        <div id="map"></div>
+
+        <div id="customZoomControl">
+          <div class="zoom-button" id="zoomInButton">+</div>
+          <div class="zoom-button" id="zoomOutButton">−</div>
+        </div>
+        
+        <div class="daterange-container">
+          <input type="text" name="daterange" id="daterange" class="form-control">
+          <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
+      </div>
+    
+        <button id="openTableBtn"><img src="img/dtabasetable.png" alt="" class="tablebtn"></button>
+     
+        <button class="SearchBar">
+
+          <select class="form-select ms-auto" aria-label="Select search category" id="search_type">
+            <option value=""> search type</option>
+          </select>
+
+          <input class="form-contro ms-2" type="" placeholder="Search Work ID" aria-label="Search"
+            id="searchInputDashboard" style=" border: 2px solid darkblue;" />
+          <div id="autocompleteSuggestions" class="autocomplete-suggestions"></div>
+
+        </button>
+    
+      </div>
+          <!-- search bar -->
+
+
+      <!-- filter start -->
+      <div class="filters" id="filters">
+        <!-- table stats -->
+        <div class="showCount">
+          <h5 class="tablestats" id="tablestats" style="font-size: large;"> </h5>
+          <button class="close-button" id="closeFilters" aria-label="Close">&times;</button>
+        </div>
+        <!-- table stats -->
+
+        <h3 class="heading">Filters</h3>
+        <div style="height: 40vh; overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin;">
+
+          <div class="filter-group">
+            <label for="Project_Office" onclick="toggleFilter(this)">Select Office <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2" multiple="multiple" id="Project_Office"></ul>
+          </div>
+
+          <div class="filter-group">
+            <label for="project_fi" onclick="toggleFilter(this)">Select Year <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2" multiple="multiple" id="project_fi"></ul>
+          </div>
+          <div class="filter-group">
+            <label for="zone" onclick="toggleFilter(this)">Zone Selection <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2" multiple="multiple" id="zone"></ul>
+          </div>
+          <div class="filter-group">
+            <label for="ward" onclick="toggleFilter(this)">Ward Selection <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2 abcscroll" multiple="multiple" id="ward"></ul>
+          </div>
+          
+          <div class="filter-group">
+            <label for="Department" onclick="toggleFilter(this)">Select Department <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2 abcscroll" multiple="multiple" id="Department"></ul>
+          </div>
+      
+          <div class="filter-group">
+            <label for="Work_Type" onclick="toggleFilter(this)">Select Work Type <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
+            <input type="text" placeholder="Search" class="filter-input">
+            <ul class="select2 abcscroll" multiple="multiple" id="Work_Type"></ul>
+          </div>
+        </div>
+        
+      </div>
+
+      <div id="tablecontainer"></div>
+      <div id="pagination"></div>
+
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- for date picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    <!-- Include daterangepicker JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+      integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script src="mapLayer.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="legend.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+      // Function to adjust the position of the layer control when it is expanded
+function adjustLayerControlPosition() {
+  var layersControlExpanded = document.querySelector(".leaflet-control-layers-expanded");
+  if (layersControlExpanded) {
+    layersControlExpanded.style.top = "10%"; // Set position to top 10% of the viewport
+  }
+}
+
+// Add event listener for when the layers control is expanded
+map.on('overlayadd', adjustLayerControlPosition);
+map.on('overlayremove', adjustLayerControlPosition);
+
+// Ensure the position is adjusted on initial load
+adjustLayerControlPosition();
+
+    </script>
+</body>
+
+</html>

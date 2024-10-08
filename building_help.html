@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bhavan_Help page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin: 20px 0;
+            color: blue;
+        }
+        #video-select {
+            margin: 20px 0;
+            
+        }
+        #video-container {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        #videos {
+             width: 200px; 
+             height: 40px;
+            border: 2px solid blue; 
+            border-radius: 5px; 
+            }
+            
+        #controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        #controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: 2px solid blue;
+            border-radius: 15px;
+            background-color: white;
+            color: blue;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: blue;
+            color: white;
+        }
+        button i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>BHAVAN</h1>
+
+    <div id="video-select">
+        <label for="videos">Select a video:</label>
+        <select id="videos" onchange="loadVideo()">
+            <option value="video/Bhavan/1.  Recording cordinates.mp4">Recording cordinates</option>
+            <option value="video/Bhavan/2 Selection of whole Ward.mp4">Selection of whole Ward</option>
+            <option value="video/Bhavan/3 GIS mapping.mp4"> GIS mapping</option>
+            <option value="video/Bhavan/4 Delete.mp4">Delete</option>
+            <option value="video/Bhavan/5 BLDG repair.mp4">BLDG repair</option>
+            <option value="video/Bhavan/BLDG_work.mp4">BLDG_work</option>
+        </select>
+    </div>
+    <!-- C:\xampp\htdocs\iwms\video\Road\1 Recording coordinates.mp4 -->
+    <div id="video-container">
+        <video id="videoPlayer" controls>
+            <source src="./video/Bhavan/1.  Recording cordinates.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div id="controls">
+        <button onclick="previousVideo()">Previous</button>
+        <button onclick="nextVideo()">Next</button>
+    </div>
+
+    <script>
+               const videos = ["video/Bhavan/1.  Recording cordinates.mp4", "video/Bhavan/2 Selection of whole Ward.mp4", "video/Bhavan/3 GIS mapping.mp4","video/Bhavan/4 Delete.mp4","video/Bhavan/5 BLDG repair.mp4","video/Bhavan/BLDG_work.mp4"];
+
+        let currentVideoIndex = 0;
+
+        function loadVideo() {
+            const videoSelect = document.getElementById('videos');
+            currentVideoIndex = videoSelect.selectedIndex;
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = videos[currentVideoIndex];
+            videoPlayer.play();
+        }
+
+        function previousVideo() {
+            if (currentVideoIndex > 0) {
+                currentVideoIndex--;
+                document.getElementById('videos').selectedIndex = currentVideoIndex;
+                loadVideo();
+            }
+        }
+
+        function nextVideo() {
+            if (currentVideoIndex < videos.length - 1) {
+                currentVideoIndex++;
+                document.getElementById('videos').selectedIndex = currentVideoIndex;
+                loadVideo();
+            }
+        }
+    </script>
+
+</body>
+</html>
