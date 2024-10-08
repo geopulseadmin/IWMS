@@ -7,6 +7,7 @@ function toggleFilter(label) {
   // Toggle 'active' class for the clicked filter input and its associated ul
   input.classList.toggle('active');
   ul.classList.toggle('active');
+  
 }
 
 // Function to close filter groups when clicking outside
