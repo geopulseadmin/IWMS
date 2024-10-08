@@ -1158,7 +1158,6 @@ qrData = qrURL;
 // -------------------------------------------
 // // geotag
 
-
 map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
@@ -1166,7 +1165,7 @@ map.on("click", async (e) => {
   // Define the workspaces and their respective layer details
   const workspaceLayers = {
     'PMC_test': {
-      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath','distance_calc'],
+      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
     },
     'pmc': {
       "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
@@ -1185,54 +1184,56 @@ map.on("click", async (e) => {
         let html = await response.json();
         let features = html.features;
 
-        features.forEach((feature, index) => {
+        for (let feature of features) {
           let htmldata = feature.properties;
           let txtk1 = "";
           let imageUrl = "";
           let pdfUrl = "";
-          console.log(imageUrl,"imgurl")
-          let Is_Panoromic = true;  // Flag to track panoramic images
-          let category = htmldata['category'] || 'N/A'; // Get the category
+          let Is_Panoromic = false;  // Flag to track panoramic images
+          let category = htmldata['category'] || 'N/A';  // Get the category
 
           for (let key of selectedKeys) {
             if (htmldata.hasOwnProperty(key)) {
               let value = htmldata[key];
+
               if (key === "imagepath") {
                 let imagename = htmldata["photo"];
                 imageUrl = `${value}${imagename}`;
-
-                // Check if the image is panoramic based on its name or other conditions
-                if (imagename.toLowerCase().includes("panorama") || imagename.toLowerCase().includes("360")) {
-                  Is_Panoromic = false;  // Set the flag if it's a panoramic image
-                }
               } else if (key === "image_url") {
                 if (value.toLowerCase().endsWith(".png") || value.toLowerCase().endsWith(".jpeg") || value.toLowerCase().endsWith(".jpg")) {
                   imageUrl = value;
-                  if (value.toLowerCase().includes("panorama") || value.toLowerCase().includes("360")) {
-                    Is_Panoromic = true;  // Set the flag if it's a panoramic image
-                  }
                 } else if (value.toLowerCase().endsWith(".pdf")) {
                   pdfUrl = value;
                 }
-              } else if (key === "longitude" || key === "latitude") {
-                value = parseFloat(value).toFixed(4);
               }
-              
-              var imgggurl1 = getImageDimensions(imageUrl);
-              console.log(imageUrl,imgggurl1,"imgggurl")
+
+              // Add the data to the HTML
               txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${key}</td><td>${value}</td></tr>`;
             }
           }
 
+          // Get the image dimensions to determine if it's panoramic
+          if (imageUrl) {
+            try {
+              let dimensions = await getImageDimensions(imageUrl);
+              if (dimensions.ratio > 2) {
+                Is_Panoromic = true;  // Set the flag if the ratio is greater than 2
+              }
+            } catch (err) {
+              console.error("Error fetching image dimensions:", err);
+            }
+          }
+
+          // Add to details array
           detailsArray.push({
-            index: index + 1,
+            index: detailsArray.length + 1,
             category: category,
             txtk1: txtk1,
             imageUrl: imageUrl,
             pdfUrl: pdfUrl,
-            Is_Panoromic: Is_Panoromic // Track if the image is panoramic
+            Is_Panoromic: Is_Panoromic
           });
-        });
+        }
       } catch (error) {
         console.error(`Error fetching data for layer ${layer} in workspace ${workspace}:`, error);
       }
@@ -1245,7 +1246,7 @@ map.on("click", async (e) => {
     function updatePopup() {
       let imageElement = document.getElementById('popupImage');
       let pdfElement = document.getElementById('popupPdf');
-      let panoElement = document.getElementById('panoramaViewer'); // Panoramic viewer container
+      let panoElement = document.getElementById('panoramaViewer');  // Panoramic viewer container
       let tableBodyElement = document.getElementById('popupTableBody');
       let featureTitleElement = document.getElementById('featureTitle');
       let prevIcon = document.getElementById('prevIcon');
@@ -1268,8 +1269,7 @@ map.on("click", async (e) => {
           panorama: detailsArray[currentIndex].imageUrl,
           autoLoad: true,
           autoRotate: 0,
-          showFullscreenCtrl: false,
-          // Add more Pannellum configurations as needed
+          showFullscreenCtrl: false
         });
       } else if (detailsArray[currentIndex].imageUrl) {
         imageElement.src = detailsArray[currentIndex].imageUrl;
@@ -1340,24 +1340,20 @@ map.on("click", async (e) => {
   }
 });
 
-
-
-// ----------------
+// Helper function to get image dimensions
 function getImageDimensions(url) {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.src = url;
 
-    img.onload = function() {
+    img.onload = function () {
       const width = img.width;
       const height = img.height;
       const ratio = width / height;
-      console.log(`Image URL: ${url}, Width: ${width}, Height: ${height}, Ratio: ${ratio}`);
-      
       resolve({ width, height, ratio });
     };
 
-    img.onerror = function() {
+    img.onerror = function () {
       reject(`Error loading image at ${url}`);
     };
   });

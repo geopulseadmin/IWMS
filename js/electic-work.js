@@ -723,7 +723,8 @@ var drawControlElectrical = new L.Control.Draw({
 });
 
 
-
+// draw botton disable for maintance
+if(workType=="New"){
 
 
 var customDrawControls = L.control({ position: 'topleft' });
@@ -738,6 +739,8 @@ customDrawControls.onAdd = function (map) {
 
 // Add the control to the map
 customDrawControls.addTo(map);
+
+}
 
 //var customToolSelector = L.control({ position: 'topleft' });
 
