@@ -1077,7 +1077,7 @@ map.on("contextmenu", async (e) => {
       // Generate the URL with Work_ID for both localhost and production
       // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login.php?work_id=${workID}`;
 
-      let qrURL = `http://localhost/PMC/IWMS/IWMS_test/login/login.php?work_id=${workID}`;
+      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login.php?work_id=${workID}`;
       
     // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
 qrData = qrURL;

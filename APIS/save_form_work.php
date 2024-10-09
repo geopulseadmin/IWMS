@@ -1,6 +1,5 @@
 <?php
 include 'config.php'; // Include your database connection
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve form data
     $fid = $_POST['fid'];
@@ -12,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rating = $_POST['rating'];
     $live_location = $_POST['live_location'];
     $ip_address = $_POST['ip_address'];
-    $category = $_POST['category']; // Add this field
-    $subcategory = $_POST['subcategory']; // Add this field
+    $category = $_POST['category'];
+    $subcategory = $_POST['subcategory'];
 
     // Handle the 'otherText' field if 'subcategory' is 'other'
     $otherText = isset($_POST['otherText']) ? $_POST['otherText'] : null;
