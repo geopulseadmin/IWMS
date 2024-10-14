@@ -180,6 +180,16 @@ if (!$userData) {
 
         #successModal .modal-content {
             margin: auto;
+            position: fixed;
+            /* Keeps the modal in place during scroll */
+            top: 20px;
+            /* 10px from the top */
+            left: 50%;
+            /* Moves it to the horizontal center */
+            transform: translateX(-50%);
+            /* Centers the modal horizontally */
+            width: fit-content;
+            /* Optional: Adjust width if needed */
         }
     </style>
 
@@ -295,9 +305,9 @@ if (!$userData) {
                         </div> -->
 
                         <div id="categoryWrapper" style="display:none;">
-                    <label for="category" class="form-label">Category</label>
-                    <select id="category" class="form-select form-select1" name="category" required></select>
-                    </div>
+                            <label for="category" class="form-label">Category</label>
+                            <select id="category" class="form-select form-select1" name="category" required></select>
+                        </div>
 
                         <div class="form-row mb-2" id="subcategory-wrapper" style="display:none;">
                             <label for="subcategory" class="form-label">Subcategory</label>
@@ -611,7 +621,7 @@ if (!$userData) {
             // Function to update subcategory options based on department
             function updateSubcategoryOptions(department) {
                 const categoryWrapper = document.getElementById('categoryWrapper');
-const category = document.getElementById('category');
+                const category = document.getElementById('category');
                 const subcategoryWrapper = document.getElementById('subcategory-wrapper');
                 const subcategory = document.getElementById('subcategory');
                 const otherTextWrapper = document.getElementById('otherTextWrapper');
@@ -624,39 +634,15 @@ const category = document.getElementById('category');
                 if (department) {
                     subcategoryWrapper.style.display = 'block';
                     switch (department) {
-                        //     case "Road":
-                        //         subcategory.innerHTML = `
-                        //     <option value="">-- Select Subcategory --</option>
-                        //     <option value="1">नव्याने केलेल्या रस्त्यावर पाणी साठत आहे.</option>
-                        //     <option value="2">रस्त्याच्या बाजूला पावसाळी लाईन नाही. </option>
-                        //     <option value="3">स्त्याचा उतार पावसाळी लाईन कडे ठेवला नाही.  </option>
-                        //     <option value="4">नव्याने केलेल्या रस्त्यावर खड्डे झाले आहेत. </option>
-                        //     <option value="5">नव्याने केलेला रस्ता धसला आहे. </option>
-                        //     <option value="6">नवीन केलेल्या रस्त्यावर भुंगिर दिसत आहे. </option>
-                        //     <option value="7">चेंबर / म्यानहोल कवर रस्त्याच्या समपातळीत उचलले नाही.</option>
-                        //     <option value="8">चेंबर / म्यानहोल कवर तुटले आहे.</option>
-                        //     <option value="9">नव्याने केलेल्या रस्त्यावर क्रॉस-कट केले आहेत. </option>
-                        //     <option value="10">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याला तडे पडले आहेत. </option>
-                        //     <option value="11">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याला ग्रूव कटिंग केले नाही. </option>
-                        //     <option value="12">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याच्या ग्रूव कटिंग मध्ये सिलंट भरले नाही.</option>
-                        //     <option value="13">नव्याने केलेला रस्ता खोदला आहे, परंतु तो सुस्थितीत पुन्हा दुरूस्त केला नाही. </option>
-                        //     <option value="14">नवीन रास्ता ओबड-धोबड केला आहे. </option>
-                        //     <option value="15">नवीन रस्त्यावर तुरंत वाहतूक सुरू केली आहे. </option>
-                        //     <option value="16">रस्त्याच्या बाजूला पार्क केलेल्या वाहनांच्यामुळे नवीन रस्ता त्या जागी केला जात नाही. </option>
-                        //     <option value="17">स्पीडब्रेकर वरील पेंट केला नाही.</option>
-                        //     <option value="18">नवीन रस्त्याच्या बाजूला खोदाईतील राडारोडा पडले आहे. </option>
-                        //     <option value="19">रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत. </option>
-                        //     <option value="20">Other</option>
-                        // `;
-                        //         break;
+                       
                         case "Road":
                             // Display category selection for Road department
                             categoryWrapper.style.display = 'block';
                             category.innerHTML = `
-            <option value="">-- Select Category --</option>
-            <option value="1">रस्ते</option>
-            <option value="2">फूटपाथ</option>
-        `;
+                             <option value="">-- Select Category --</option>
+                             <option value="1">रस्ते</option>
+                             <option value="2">फूटपाथ</option>
+                                `;
 
                             category.addEventListener('change', function() {
                                 const selectedCategory = this.value;
@@ -711,7 +697,7 @@ const category = document.getElementById('category');
                             });
                             break;
 
-                        case "Water":
+                        case "Water Supply":
                             subcategory.innerHTML = `
                         <option value="">-- Select Subcategory --</option>
                         <option value="1">पिण्याच्या पाण्याच्या लाइन मधून लिकेज होत आहे.</option>
@@ -726,27 +712,27 @@ const category = document.getElementById('category');
                         case "Building":
                             subcategory.innerHTML = `
                         <option value="">-- Select Subcategory --</option>
-                         <option value="1">इमारतीच्या सीमेंट कौंक्रीटला पाण्याने पुरेसे क्युरिंग केले जात नाही.</option>
-                    <option value="2">इमारतीच्या सीमेंट कौंक्रीटला तडे गेले आहेत./option>
-                <option value="3">इमारतीच्या केलेल्या प्लास्टरला पाण्याने क्युरिंग केले जात नाही. </option>
-                <option value="4">इमारतीच्या केलेल्या प्लास्टरला तडे गेले आहेत.</option>
-                <option value="5">इमारतीच्या काम सुरू असताना सेफ्टीनेट लावले नाहीत.</option>
-                <option value="6">साईटवर काम करणार्‍या मजूराला सेफ्टी साठीचे पीपीईस (PPE’S) दिले नाहीत.</option>
-            <option value="20">Other</option>
+                        <option value="1">इमारतीच्या सीमेंट कौंक्रीटला पाण्याने पुरेसे क्युरिंग केले जात नाही.</option>
+                        <option value="2">इमारतीच्या सीमेंट कौंक्रीटला तडे गेले आहेत./option>
+                        <option value="3">इमारतीच्या केलेल्या प्लास्टरला पाण्याने क्युरिंग केले जात नाही. </option>
+                        <option value="4">इमारतीच्या केलेल्या प्लास्टरला तडे गेले आहेत.</option>
+                        <option value="5">इमारतीच्या काम सुरू असताना सेफ्टीनेट लावले नाहीत.</option>
+                        <option value="6">साईटवर काम करणार्‍या मजूराला सेफ्टी साठीचे पीपीईस (PPE’S) दिले नाहीत.</option>
+                        <option value="20">Other</option>
                     `;
 
                             break;
                         case "Drainage":
                             subcategory.innerHTML = `
                          <option value="">-- Select Subcategory --</option>
-                 <option value="1">ड्रेनेज लाइन मधून लिकेज होत आहे.</option>
-            <option value="2">डॅमेज झालेल्या आरसीसी पाईप वापरल्या जात आहेत.</option>
-            <option value="3">ड्रेनेज लाइन टाकताना रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत.</option>
-            <option value="4">खोदाई केलेला राडारोडा उचलला नाही.</option>
-            <option value="5">ड्रेनेज लाइनचे चेंबर ब्लॉक झाले आहे.</option>
-            <option value="6">ड्रेनेज लाइनचे चेंबर कवर तुटले आहे. </option>
-            <option value="20">other</option>
-                    `;
+                         <option value="1">ड्रेनेज लाइन मधून लिकेज होत आहे.</option>
+                         <option value="2">डॅमेज झालेल्या आरसीसी पाईप वापरल्या जात आहेत.</option>
+                         <option value="3">ड्रेनेज लाइन टाकताना रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत.</option>
+                         <option value="4">खोदाई केलेला राडारोडा उचलला नाही.</option>
+                         <option value="5">ड्रेनेज लाइनचे चेंबर ब्लॉक झाले आहे.</option>
+                         <option value="6">ड्रेनेज लाइनचे चेंबर कवर तुटले आहे. </option>
+                         <option value="20">other</option>
+                        `;
                             break;
                         case "Gardern":
                             subcategory.innerHTML = `
@@ -824,7 +810,7 @@ const category = document.getElementById('category');
                         <option value="20">Other</option>
                     `;
 
-                    break;
+                            break;
                         case "Garden Horticulture":
                             subcategory.innerHTML = `
                         <option value="">-- Select Subcategory --</option>

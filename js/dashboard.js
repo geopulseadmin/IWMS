@@ -179,6 +179,7 @@ $(document).ready(function () {
   }
 
   function loadinitialData(cql_filter) {
+    // this function helps to populate data in filter from geoserver according to provided filtername
     FilterAndZoom(cql_filter)
     const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "Work_Type"]; //accordn column names , if want add one more filter criteria add here
 
@@ -219,6 +220,8 @@ $(document).ready(function () {
     }
   }
 
+
+  
   function initialize() {
 
     $('#daterange').on('apply.daterangepicker', function (ev, picker) {
@@ -248,21 +251,6 @@ $(document).ready(function () {
   initialize();
 });
 
-// -------------------------------------------
-// function DataTableFilter(cql_filter1) {
-//   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
-//   var typeName = layers.join(',');
-//   var cqlFilter = cql_filter1;
-//   var geoServerURL =
-//     `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
-//   // var headers = ['Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Created_At'];
-//   var headers = ['PID', 'Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Project_Time', 'Status'];
-// console.log(geoServerURL,"geoserver_url")
-//   showtable(typeName, geoServerURL, cqlFilter, headers);
-
-// }
-
-
 
 
 async function DataTableFilter(cql_filter1) {
@@ -276,26 +264,7 @@ async function DataTableFilter(cql_filter1) {
   console.log(geoServerURL, "geoserver_url")
   await showtable(typeName, geoServerURL, cqlFilter, headers);
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function populateDropdown(dropdownId, data) {
@@ -311,6 +280,7 @@ function populateDropdown(dropdownId, data) {
 
 
 function getCheckedValues(callback) {
+  // this function helps to get checked values from loadintialdata and return for createting cqlfilter
   var selectedValues = {};
   const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "village", "Work_Type"];
 
@@ -434,43 +404,6 @@ function fitbous(filter) {
   });
 }
 
-
-
-
-// function fitbous(filter) {
-//   // Start the timer
-//   console.time("fitbous execution time");
-
-//   // var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
-//   var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"]
-//   var bounds = null;
-
-//   // Array to hold promises
-//   var promises = layers.map(function (layerName) {
-//     const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layerName}&CQL_FILTER=${filter}&outputFormat=application/json`;
-
-//     // Return a promise for each layer
-//     return $.getJSON(urlm).then(function (data) {
-//       var geojson = L.geoJson(data);
-//       var layerBounds = geojson.getBounds();
-//       if (bounds) {
-//         bounds.extend(layerBounds);
-//       } else {
-//         bounds = layerBounds;
-//       }
-//     });
-//   });
-
-//   // Execute all promises in parallel
-//   Promise.all(promises).then(function () {
-//     if (bounds) {
-//       // Apply the combined bounds to the map after all layers are processed
-//       map.fitBounds(bounds);
-//     }
-//     // Stop the timer and log the time
-//     console.timeEnd("fitbous execution time");
-//   });
-// }
 
 
 // for dashboard table dynamic
@@ -1158,6 +1091,9 @@ qrData = qrURL;
 // -------------------------------------------
 // // geotag
 
+
+let activePopup = null;
+
 map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
@@ -1165,10 +1101,10 @@ map.on("click", async (e) => {
   // Define the workspaces and their respective layer details
   const workspaceLayers = {
     'PMC_test': {
-      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
+      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc',''],
     },
     'pmc': {
-      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
+      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work',''],
     }
   };
 
@@ -1316,10 +1252,17 @@ map.on("click", async (e) => {
     </div>`;
 
     // Set the popup content and open it
-    L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
+    // L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
 
-    // After the popup is added to the DOM, initialize the popup content
-    updatePopup();
+    // // After the popup is added to the DOM, initialize the popup content
+    // updatePopup();
+
+    activePopup = L.popup({ closeOnClick: false, autoClose: false })
+    .setLatLng(e.latlng)
+    .setContent(detaildata)
+    .openOn(map);
+
+  updatePopup();
 
     // Event listeners for navigation buttons
     document.getElementById('prevIcon').addEventListener('click', () => {
@@ -1335,10 +1278,22 @@ map.on("click", async (e) => {
         updatePopup();
       }
     });
+
+    
   } else {
     console.log("No features found");
   }
 });
+
+// Close the popup when clicking outside of it
+map.on("click", function(e) {
+  if (activePopup && !activePopup.getElement().contains(e.originalEvent.target)) {
+    map.closePopup(activePopup);
+    activePopup = null; // Reset the activePopup variable
+  }
+});
+
+
 
 // Helper function to get image dimensions
 function getImageDimensions(url) {

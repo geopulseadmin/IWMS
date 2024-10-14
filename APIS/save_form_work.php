@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rating = $_POST['rating'];
     $live_location = $_POST['live_location'];
     $ip_address = $_POST['ip_address'];
-    $category = $_POST['category'];
+    $category = $_POST['category']?? null;
     $subcategory = $_POST['subcategory'];
 
     // Handle the 'otherText' field if 'subcategory' is 'other'
