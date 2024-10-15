@@ -7,7 +7,6 @@ function toggleFilter(label) {
   // Toggle 'active' class for the clicked filter input and its associated ul
   input.classList.toggle('active');
   ul.classList.toggle('active');
-
 }
 
 // Function to close filter groups when clicking outside
@@ -249,6 +248,21 @@ $(document).ready(function () {
 });
 
 // -------------------------------------------
+// function DataTableFilter(cql_filter1) {
+//   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
+//   var typeName = layers.join(',');
+//   var cqlFilter = cql_filter1;
+//   var geoServerURL =
+//     `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+//   // var headers = ['Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Created_At'];
+//   var headers = ['PID', 'Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Project_Time', 'Status'];
+// console.log(geoServerURL,"geoserver_url")
+//   showtable(typeName, geoServerURL, cqlFilter, headers);
+
+// }
+
+
+
 
 async function DataTableFilter(cql_filter1) {
   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
@@ -256,11 +270,32 @@ async function DataTableFilter(cql_filter1) {
   var cqlFilter = cql_filter1;
   var geoServerURL =
     `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+  // var headers = ['Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Created_At'];
   var headers = ['PID', 'Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Project_Time', 'Status'];
   console.log(geoServerURL, "geoserver_url")
   await showtable(typeName, geoServerURL, cqlFilter, headers);
 
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function populateDropdown(dropdownId, data) {
   var ul = $("#" + dropdownId);
@@ -307,6 +342,8 @@ function getCheckedValues(callback) {
 
       // Join all filter strings with "AND"
       var filterString = filters.join(" AND ");
+
+
 
       // Update the selected count in the label
       var label = $('label[for="' + filtername + '"]');
@@ -395,6 +432,45 @@ function fitbous(filter) {
     console.timeEnd("fitbous execution time");
   });
 }
+
+
+
+
+// function fitbous(filter) {
+//   // Start the timer
+//   console.time("fitbous execution time");
+
+//   // var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
+//   var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"]
+//   var bounds = null;
+
+//   // Array to hold promises
+//   var promises = layers.map(function (layerName) {
+//     const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layerName}&CQL_FILTER=${filter}&outputFormat=application/json`;
+
+//     // Return a promise for each layer
+//     return $.getJSON(urlm).then(function (data) {
+//       var geojson = L.geoJson(data);
+//       var layerBounds = geojson.getBounds();
+//       if (bounds) {
+//         bounds.extend(layerBounds);
+//       } else {
+//         bounds = layerBounds;
+//       }
+//     });
+//   });
+
+//   // Execute all promises in parallel
+//   Promise.all(promises).then(function () {
+//     if (bounds) {
+//       // Apply the combined bounds to the map after all layers are processed
+//       map.fitBounds(bounds);
+//     }
+//     // Stop the timer and log the time
+//     console.timeEnd("fitbous execution time");
+//   });
+// }
+
 
 // for dashboard table dynamic
 
@@ -667,6 +743,8 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       createTable(exampleData, headers);
     });
   }
+
+
 };
 
 $(document).ready(function () {
@@ -677,7 +755,10 @@ $(document).ready(function () {
   });
 });
 
+
 // for search button
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   // var columns = {"Work_ID":"Work ID", "Budget_Code":"Budget Code", "Name_of_Work":"Name of Work", "Scope_of_Work":"Scope of Work", "Name_of_JE":"Name of JE", "Agency":"Agency"};
@@ -691,6 +772,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var option = document.createElement("option");
       option.text = columns[key];
       option.value = key;
+
+
+
       select.appendChild(option);
 
     }
@@ -706,6 +790,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var selectedValue = select.value;
     input.placeholder = "Search " + selectedText;
     input.value = "";
+
+
     // Call autocomplete with empty array and selected column
     autocomplete(input, [], selectedValue);
 
@@ -780,6 +866,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             let cqlFilter;
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
+
+            // console.log(cqlFilter, "cqlFilter")
+
+
+
+
             IWMS_point.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
@@ -811,6 +903,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             fitbous(cqlFilter);
 
             DataTableFilter(cqlFilter)
+
+
+
             input.value = selectedValue;
             closeAllLists();
           });
@@ -868,6 +963,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   }
 });
+
 
 const layerDetails = {
   "pmc:IWMS_point": ["PID", "Work_ID", "Name_of_Work", "project_fi", "Department ", "Work_Type", "Project_Office", "zone", "ward", "Tender_Amount", "Name_of_JE", "Contact_Number", "GIS_Created_At"],
@@ -978,9 +1074,13 @@ map.on("contextmenu", async (e) => {
       }
 
       // Generate the URL with Work_ID for both localhost and production
-      // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login.php?work_id=${workID}`;
+      let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
 
-      let qrURL = `http://localhost/PMC_new/IWMS/IWMS/login/login.php?work_id=${workID}`;
+      // let qrURL = `http://localhost/PMC/IWMS/IWMS_test/login/login.php?work_id=${workID}`;
+      
+    // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
+qrData = qrURL;
+
       qrData = qrURL;
 
       let detaildata1 = `
@@ -1057,244 +1157,10 @@ map.on("contextmenu", async (e) => {
 // -------------------------------------------
 // // geotag
 
-// map.on("click", async (e) => {
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
 
-//   // Define the workspaces and their respective layer details
-//   const workspaceLayers = {
-//     'PMC_test': {
-//       "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
-//     },
-//     'pmc': {
-//       "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
-//     }
-//   };
-
-//   let detailsArray = [];
-
-//   for (let workspace in workspaceLayers) {
-//     for (let layer in workspaceLayers[workspace]) {
-//       let selectedKeys = workspaceLayers[workspace][layer];
-//       let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
-
-//       try {
-//         let response = await fetch(urrr);
-//         let html = await response.json();
-//         let features = html.features;
-
-//         for (let feature of features) {
-//           let htmldata = feature.properties;
-//           let txtk1 = "";
-//           let imageUrl = "";
-//           let pdfUrl = "";
-//           let Is_Panoromic = false;  // Flag to track panoramic images
-//           let category = htmldata['category'] || 'N/A';  // Get the category
-
-//           for (let key of selectedKeys) {
-//             if (htmldata.hasOwnProperty(key)) {
-//               let value = htmldata[key];
-
-//               if (key === "imagepath") {
-//                 let imagename = htmldata["photo"];
-//                 imageUrl = `${value}${imagename}`;
-//               } else if (key === "image_url") {
-//                 if (value.toLowerCase().endsWith(".png") || value.toLowerCase().endsWith(".jpeg") || value.toLowerCase().endsWith(".jpg")) {
-//                   imageUrl = value;
-//                 } else if (value.toLowerCase().endsWith(".pdf")) {
-//                   pdfUrl = value;
-//                 }
-//               }
-
-//               // Add the data to the HTML
-//               txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${key}</td><td>${value}</td></tr>`;
-//             }
-//           }
-
-//           // Get the image dimensions to determine if it's panoramic
-//           if (imageUrl) {
-//             try {
-//               let dimensions = await getImageDimensions(imageUrl);
-//               if (dimensions.ratio > 2) {
-//                 Is_Panoromic = true;  // Set the flag if the ratio is greater than 2
-//               }
-//             } catch (err) {
-//               console.error("Error fetching image dimensions:", err);
-//             }
-//           }
-
-//           // Add to details array
-//           detailsArray.push({
-//             index: detailsArray.length + 1,
-//             category: category,
-//             txtk1: txtk1,
-//             imageUrl: imageUrl,
-//             pdfUrl: pdfUrl,
-//             Is_Panoromic: Is_Panoromic
-//           });
-//         }
-//       } catch (error) {
-//         console.error(`Error fetching data for layer ${layer} in workspace ${workspace}:`, error);
-//       }
-//     }
-//   }
-
-//   if (detailsArray.length > 0) {
-//     let currentIndex = 0;
-
-//     function updatePopup() {
-//       let imageElement = document.getElementById('popupImage');
-//       let pdfElement = document.getElementById('popupPdf');
-//       let panoElement = document.getElementById('panoramaViewer');  // Panoramic viewer container
-//       let tableBodyElement = document.getElementById('popupTableBody');
-//       let featureTitleElement = document.getElementById('featureTitle');
-//       let prevIcon = document.getElementById('prevIcon');
-//       let nextIcon = document.getElementById('nextIcon');
-
-//       // Clear existing Pannellum viewer to prevent multiple instances
-//       if (window.panoViewer) {
-//         window.panoViewer.destroy();
-//         window.panoViewer = null;
-//       }
-
-//       if (detailsArray[currentIndex].Is_Panoromic) {
-//         panoElement.style.display = 'block';
-//         imageElement.style.display = 'none';
-//         pdfElement.style.display = 'none';
-
-//         // Initialize Pannellum viewer
-//         window.panoViewer = pannellum.viewer('panoramaViewer', {
-//           type: 'equirectangular',
-//           panorama: detailsArray[currentIndex].imageUrl,
-//           autoLoad: true,
-//           autoRotate: 0,
-//           showFullscreenCtrl: false
-//         });
-//       } else if (detailsArray[currentIndex].imageUrl) {
-//         imageElement.src = detailsArray[currentIndex].imageUrl;
-//         imageElement.style.display = 'block';
-//         panoElement.style.display = 'none';
-//         pdfElement.style.display = 'none';
-//       } else if (detailsArray[currentIndex].pdfUrl) {
-//         pdfElement.src = detailsArray[currentIndex].pdfUrl;
-//         pdfElement.style.display = 'block';
-//         panoElement.style.display = 'none';
-//         imageElement.style.display = 'none';
-//       }
-
-//       tableBodyElement.innerHTML = detailsArray[currentIndex].txtk1;
-//       featureTitleElement.textContent = `Feature ${detailsArray[currentIndex].index} - ${detailsArray[currentIndex].category}`;
-
-//       prevIcon.disabled = currentIndex === 0;
-//       nextIcon.disabled = currentIndex === detailsArray.length - 1;
-//     }
-
-//     let detaildata = `<div id="popup-content" style='max-height: 350px; max-width: 270px; position: relative;'>
-//       <button id='prevIcon' class='pagination-icon' style='left: 10px;' disabled>
-//         <i class='fas fa-chevron-left'></i>
-//       </button>
-//       <h6 id="featureTitle">Feature 1 - ${detailsArray[0].category}</h6>
-      
-//       <!-- Container for Panoramic Viewer -->
-//       <div id="panoramaViewer" style="width: 100%; height: 200px; display: ${detailsArray[0].Is_Panoromic ? 'block' : 'none'};"></div>
-      
-//       <!-- Image Element for Normal Images -->
-//       <img id="popupImage" src="${detailsArray[0].imageUrl}" alt="Image" style="width: 100%; height: auto; display: ${detailsArray[0].imageUrl && !detailsArray[0].Is_Panoromic ? 'block' : 'none'};">
-      
-//       <!-- Iframe for PDF Display -->
-//       <iframe id="popupPdf" src="${detailsArray[0].pdfUrl}" style="width: 100%; height: 200px; display: ${detailsArray[0].pdfUrl ? 'block' : 'none'};"></iframe>
-      
-//       <button id='nextIcon' class='pagination-icon' style='right: 10px;' ${detailsArray.length > 1 ? '' : 'disabled'}>
-//         <i class='fas fa-chevron-right'></i>
-//       </button>
-//       <table class='popuptable'>
-//         <tbody id="popupTableBody">
-//           ${detailsArray[0].txtk1}
-//         </tbody>
-//       </table>
-//     </div>`;
-
-//     // Set the popup content and open it
-//     L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
-
-//     // After the popup is added to the DOM, initialize the popup content
-//     updatePopup();
-
-//     // Event listeners for navigation buttons
-//     document.getElementById('prevIcon').addEventListener('click', () => {
-//       if (currentIndex > 0) {
-//         currentIndex--;
-//         updatePopup();
-//       }
-//     });
-
-//     document.getElementById('nextIcon').addEventListener('click', () => {
-//       if (currentIndex < detailsArray.length - 1) {
-//         currentIndex++;
-//         updatePopup();
-//       }
-//     });
-//   } else {
-//     console.log("No features found");
-//   }
-// });
-
-// // Helper function to get image dimensions
-// function getImageDimensions(url) {
-//   return new Promise((resolve, reject) => {
-//     const img = new Image();
-//     img.src = url;
-
-//     img.onload = function () {
-//       const width = img.width;
-//       const height = img.height;
-//       const ratio = width / height;
-//       resolve({ width, height, ratio });
-//     };
-
-//     img.onerror = function () {
-//       reject(`Error loading image at ${url}`);
-//     };
-//   });
-// }
-
-// update code filter with geotag
-
-
-// geotag
-// Ensure you have the getCheckedValuesforpopuups and combineFilters functions defined as in your original code.
-
-// Modified map.on("click") handler to include filters
 map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
-
-  // Retrieve the current filter string based on selected checkboxes
-  let filterString = await getCheckedValuesforpopuups();
-
-  // Additionally, retrieve date range filters if applicable
-  let daterangeValue = $('#daterange').val();
-  let dates = daterangeValue.split(' - ');
-  let startDate = moment(dates[0], 'MMMM D, YYYY').format('YYYY-MM-DD');
-  let endDate = moment(dates[1], 'MMMM D, YYYY').format('YYYY-MM-DD');
-
-  // Retrieve any search filters if applicable
-  var searchtypefield = $("#search_type").val();
-  var searchtypefield1 = $("#searchInputDashboard").val();
-
-  let cqlFilter = "";
-
-  if (searchtypefield1) {
-    cqlFilter = `${searchtypefield} IN ('${searchtypefield1}')`;
-  } else {
-    cqlFilter = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-
-    if (filterString.trim() !== "") {
-      cqlFilter = combineFilters(cqlFilter, filterString);
-    }
-  }
-
-  console.log("Combined CQL Filter:", cqlFilter);
 
   // Define the workspaces and their respective layer details
   const workspaceLayers = {
@@ -1302,7 +1168,7 @@ map.on("click", async (e) => {
       "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
     },
     'pmc': {
-      "pmc:output_data": ['proj_id', 'category','Department', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
+      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
     }
   };
 
@@ -1311,9 +1177,7 @@ map.on("click", async (e) => {
   for (let workspace in workspaceLayers) {
     for (let layer in workspaceLayers[workspace]) {
       let selectedKeys = workspaceLayers[workspace][layer];
-      
-      // Incorporate the CQL_FILTER into the WMS request URL
-      let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+      let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
 
       try {
         let response = await fetch(urrr);
@@ -1344,7 +1208,7 @@ map.on("click", async (e) => {
               }
 
               // Add the data to the HTML
-              txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${labelMapping[key] || key}</td><td>${value}</td></tr>`;
+              txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${key}</td><td>${value}</td></tr>`;
             }
           }
 
@@ -1472,34 +1336,25 @@ map.on("click", async (e) => {
       }
     });
   } else {
-    console.log("No geotag photos found matching the current filters.");
-    // Optionally, display a popup informing the user that no features were found
-    L.popup()
-      .setLatLng(e.latlng)
-      .setContent("<p>No geotag photos found matching the current filters.</p>")
-      .openOn(map);
+    console.log("No features found");
   }
 });
 
-// Ensure that your main_url variable is correctly defined and accessible within this scope.
-// Also, ensure that your CQL_FILTER syntax matches the requirements of your WMS service.
+// Helper function to get image dimensions
+function getImageDimensions(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = url;
 
-// Optional: Debounce the getCheckedValuesforpopuups if the filters are updated frequently to optimize performance.
-
-// Example of debouncing (optional)
-function debounce(func, wait) {
-  let timeout;
-  return function(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func.apply(this, args);
+    img.onload = function () {
+      const width = img.width;
+      const height = img.height;
+      const ratio = width / height;
+      resolve({ width, height, ratio });
     };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
+
+    img.onerror = function () {
+      reject(`Error loading image at ${url}`);
+    };
+  });
 }
-
-// If you need to debounce filter updates, you can wrap getCheckedValuesforpopuups
-const debouncedGetCheckedValuesforpopuups = debounce(getCheckedValuesforpopuups, 300);
-
-// Then use debouncedGetCheckedValuesforpopuups instead of getCheckedValuesforpopuups if necessary
