@@ -1,7 +1,7 @@
 <?php
 session_start();
 // if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-//     header("Location: login/login.php");
+//     header("Location: login/login_otp.php");
 //     exit;
 // }
 
@@ -199,7 +199,7 @@ if (!$userData) {
         <div class="user-info dropdown">
 
             <button class="btn btn-border-none dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="user-name"><?php echo htmlspecialchars(strtoupper($userData['username'])); ?></span>
+                <!-- <span class="user-name"><?php echo htmlspecialchars(strtoupper($userData['username'])); ?></span> -->
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item border-none" href="./login/logout.php">Logout <i class="fa fa-sign-out" style="color: red;"></i></a></li>
@@ -263,8 +263,8 @@ if (!$userData) {
 
                 <div class="modal-body">
                     <form id="workDetailsForm" method="POST" action="APIS/save_form_work.php">
-<!-- 
 
+<!-- 
                         <div class="form-row mb-2">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars(strtoupper($userData['username'])); ?>" readonly>
