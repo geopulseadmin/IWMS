@@ -68,7 +68,7 @@ if (!$userData) {
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
 
     <style>
-        .modal-dialog {
+              .modal-dialog {
             max-width: 500px;
             margin: 1rem auto;
         }
@@ -319,6 +319,7 @@ if (!$userData) {
                             <label for="otherText" class="form-label">Please specify</label>
                             <input type="text" class="form-control" id="otherText" name="otherText" placeholder="Enter details" />
                         </div>
+
 
 
                         <!-- Rate Us -->
@@ -618,8 +619,8 @@ if (!$userData) {
             // Initialize stars
             updateStars(0);
 
-            // Function to update subcategory options based on department
-            function updateSubcategoryOptions(department) {
+   // Function to update subcategory options based on department
+   function updateSubcategoryOptions(department) {
                 const categoryWrapper = document.getElementById('categoryWrapper');
                 const category = document.getElementById('category');
                 const subcategoryWrapper = document.getElementById('subcategory-wrapper');
