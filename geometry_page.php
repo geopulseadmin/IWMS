@@ -1,15 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-    header("Location: login/login.php");
-    exit;
-}
+// if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+//     header("Location: login/login.php");
+//     exit;
+// }
 
 // Database connection
 require_once 'APIS/db.php';
 
 // Fetch user details from the database
-$username = $_SESSION['username']; // Assuming this is set during login
+// $username = $_SESSION['username']; // Assuming this is set during login
 $userData = null;
 
 try {
@@ -274,8 +274,8 @@ if (!$userData) {
 
                 <div class="modal-body">
                     <form id="workDetailsForm" method="POST" action="APIS/save_form_work.php">
+<!-- 
 
-                        <!-- Row 1: Username and Contact Number -->
                         <div class="form-row mb-2">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars(strtoupper($userData['username'])); ?>" readonly>
@@ -284,7 +284,7 @@ if (!$userData) {
                         <div class="form-row mb-2">
                             <label for="contact" class="form-label">Contact</label>
                             <input type="tel" class="form-control" id="contact" name="contact" value="<?php echo htmlspecialchars($userData['contact_no']); ?>" readonly>
-                        </div>
+                        </div> -->
 
                         <!-- Row 2: FID, Work ID, Department -->
                         <div class="form-row mb-2">

@@ -7,7 +7,6 @@ function toggleFilter(label) {
   // Toggle 'active' class for the clicked filter input and its associated ul
   input.classList.toggle('active');
   ul.classList.toggle('active');
-  
 }
 
 // Function to close filter groups when clicking outside
@@ -1008,9 +1007,9 @@ map.on("contextmenu", async (e) => {
       }
 
       // Generate the URL with Work_ID for both localhost and production
-      // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login.php?work_id=${workID}`;
+      let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
 
-      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login.php?work_id=${workID}`;
+      // let qrURL = `http://localhost/PMC/IWMS/IWMS_test/login/login.php?work_id=${workID}`;
       
     // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
 qrData = qrURL;
@@ -1313,18 +1312,3 @@ function getImageDimensions(url) {
     };
   });
 }
-
-// function getImageDimensions(url) {
-//   const img = new Image();
-//   img.src = url;
-
-//   img.onload = function() {
-//     const width = img.width;
-//     const height = img.height;
-//     console.log(`Image URL: ${url}, Width: ${width}, Height: ${height}`);
-//   };
-
-//   img.onerror = function() {
-//     console.error(`Error loading image at ${url}.`);
-//   };
-// }
