@@ -309,11 +309,10 @@ function getCheckedValues(callback) {
           filters.push(`${key} IN ('${selectedValues[key].join("','")}')`);
         }
       }
-
+ 
       // Join all filter strings with "AND"
       var filterString = filters.join(" AND ");
-
-
+      callback(filterString, selectedValues["PID"]);
 
       // Update the selected count in the label
       var label = $('label[for="' + filtername + '"]');
@@ -331,6 +330,9 @@ function getCheckedValues(callback) {
     });
   });
 }
+
+
+
 function FilterAndZoom(filter) {
 
   IWMS_point.setParams({
@@ -1009,7 +1011,7 @@ map.on("contextmenu", async (e) => {
       // Generate the URL with Work_ID for both localhost and production
       // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
 
-      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login_otp.php?work_id=${workID}`;
+      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login.php?work_id=${workID}`;
       
     // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
 qrData = qrURL;
