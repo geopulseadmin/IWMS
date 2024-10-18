@@ -24,9 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Execute the query
         if ($stmt->execute()) {
-            echo "<script>alert('Registration successful!'); window.location.href = 'login.php';</script>";
+            $workID = htmlspecialchars($_SESSION['Work_ID'] ?? ''); // Get Work_ID safely for the URL
+            echo "<script>
+                alert('Registration successful!');
+                window.location.href = 'login_otp.php?work_id=" . $workID . "';
+            </script>";
         } else {
-            echo "<script>alert('Registration failed. Please try again.'); window.location.href = 'register.php';</script>";
+            $workID = htmlspecialchars($_SESSION['Work_ID'] ?? ''); // Handle the Work_ID for failed cases too
+            echo "<script>
+                alert('Registration failed. Please try again.');
+                window.location.href = 'register.php?work_id=" . $workID . "';
+            </script>";
         }
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();

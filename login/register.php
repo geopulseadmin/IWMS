@@ -62,7 +62,7 @@ $workID = $_SESSION['Work_ID'] ?? $_GET['work_id'] ?? '';
                     </div>
                     <button type="submit" value="Register">Register</button>
                     <p class="endline">
-                        <a href="login_otp.php?work_id=<?php echo htmlspecialchars($workID); ?>" class="btn">I am already a member</a>
+                        <a href="login_otp.php?work_id=<?php echo htmlspecialchars($_SESSION['Work_ID'] ?? ''); ?>" class="btn">I am already a member</a>
                     </p>
                 </form>
 
