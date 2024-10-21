@@ -167,7 +167,7 @@ color: darkblue;
 #openTableBtn {
 position: absolute;
 z-index: 999;
-top: 39vh;
+top: 22vh;
 width: auto;
 padding: 6px;
 right: 10px;
@@ -350,12 +350,7 @@ color: black; /* Default color */
 .abcscroll::-webkit-scrollbar-thumb:hover {
   background: #e9e9f7; /* Darker scrollbar on hover */
 }
-.chartStats{
 
-  height: 30vh;
-  overflow: auto;
-  border:2px solid #bbb;
-}
 
 
 
@@ -989,4 +984,27 @@ text-align: center;
   background-color: white;
   border-radius: 5px;
   border: 2px solid #383899;
+}
+
+.chartStats {
+  height: 30vh;
+  overflow: auto;
+  border: 2px solid #bbb;
+  padding: 10px; /* Optional padding */
+}
+#chartContainer {
+  display: flex;
+  justify-content: center; /* Centers the chart horizontally */
+  align-items: center; /* Centers the chart vertically */
+  padding: 10px; /* Reduce padding */
+  margin: 20px auto; /* Centers the container */
+  border-radius: 10px; /* Adds rounded corners */
+  background-color: #f8f9fa; /* Light background */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  overflow-y: auto; /* Enables vertical scroll if the content exceeds height */
+}
+
+canvas {
+  max-width: 100%;
+  max-height: 100%;
 }
