@@ -450,11 +450,6 @@ function fitbous(filter) {
   });
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5646ae8d55413b4d4edeaf250c63c1ee0eda697d
 // for dashboard table dynamic
 
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
