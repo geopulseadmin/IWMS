@@ -1358,3 +1358,5 @@ function getImageDimensions(url) {
     };
   });
 }
+
+// calender click on show the calender div 

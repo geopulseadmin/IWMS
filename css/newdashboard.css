@@ -154,6 +154,18 @@ border-radius: 5px;
 cursor: pointer;
 }
 
+.toggle-button1{
+  position: absolute;
+  top: 23vh;
+  right: 10px;
+  z-index: 1000;
+  background-color: white;
+  color: darkblue;
+  border: 2px solid darkblue;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  }
 /* leaflet zoom */
 
 .leaflet-control-zoom {
@@ -167,7 +179,7 @@ color: darkblue;
 #openTableBtn {
 position: absolute;
 z-index: 999;
-top: 22vh;
+top: 35vh;
 width: auto;
 padding: 6px;
 right: 10px;
@@ -319,12 +331,14 @@ color: black; /* Default color */
   border: 2px solid darkblue;
   border-radius: 10px;
   height: 3%;
+  display: none ;
   }
   
   .daterange-container {
     display: flex;
     align-items: center;
-    position: relative; 
+    position: relative;
+    display: none ;
   }
   
   
