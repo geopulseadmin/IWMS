@@ -680,7 +680,8 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
 
       const pid = [];
 
-      const departmentData = {}; // To store tender amounts by department
+      const departmentData = {}; // To store by department
+      const departmentTenderAmounts = {}; 
 
       // Filter out features where PID is null
       var exampleData = filteredData.features
@@ -703,6 +704,12 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
             }
             departmentData[department] += 1; // Sum the tender amounts by department
 
+             // Aggregate Tender_Amount by department for the bar chart
+        const tenderAmount = parseFloat(feature.properties.Tender_Amount) || 0; // Replace with actual Tender_Amount property
+        if (!departmentTenderAmounts[department]) {
+          departmentTenderAmounts[department] = 0;
+        }
+        departmentTenderAmounts[department] += tenderAmount;
 
           // Ensure geometry is included
           return mappedData;
@@ -732,6 +739,8 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       createTable(exampleData, headers);
 
       createDonutChart(departmentData); // Call to show chart alongside table
+      createBarChart(departmentTenderAmounts); // Call to show bar chart
+    
     });
   }
 
@@ -739,7 +748,7 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
 };
 
 // // chart --------------------
-
+// pie chart
 function createDonutChart(departmentData) {
 
   const departmentColors = {
@@ -796,9 +805,10 @@ function createDonutChart(departmentData) {
       plugins: {
         legend: {
        
-          position: 'right',
+          position: 'bottom',
           labels: {
             font: {
+              align:'left',
               size: 10, // Set the font size of the legend
               weight: 'bold', // Bold font style
             },
@@ -835,6 +845,74 @@ function createDonutChart(departmentData) {
     }
   });
 }
+
+// bargraph
+
+function createBarChart(departmentTenderAmounts) {
+  // const departmentColors = {
+  //   "Road": "#FF004F",
+  //   "Building": "#99EDC3",
+  //   "Electric": "#FFE5B4",
+  //   "Drainage": "#218be6",
+  //   "Water Supply": "#5155d4",
+  //   "Garden": "#7e0488",
+  //   "Garden Horticulture": "#7e0488",
+  //   "Slum": "#bbb",
+  //   "City Engineer Office": "#262626",
+  //   "Education Department": "darkblue",
+  //   "Environment": "#000000",
+  //   "Project Work": "#5639b3",
+  //   "Solid waste Management": "#49a44c",
+  //   "Market":"yellow",
+  //   "Encrochment": "#198754",
+  //   "Sport":"#d63384",
+  // };
+
+  const departmentNames = Object.keys(departmentTenderAmounts);
+  const tenderAmounts = Object.values(departmentTenderAmounts);
+
+  // Get the canvas element
+  var ctx = document.getElementById('barGraphChart').getContext('2d');
+
+  // Create a new bar chart
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: departmentNames,
+      datasets: [{
+        label: 'Total Tender Amount',
+        data: tenderAmounts,
+        backgroundColor: departmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+      }],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true, // Ensure y-axis starts at 0
+          title: {
+            display: true,
+            text: 'Tender Amount (in currency)', // Customize based on the currency unit
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Departments',
+          },
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+        },
+      },
+      maintainAspectRatio: false,
+    }
+  });
+}
+
 
 // --------------------------
 
@@ -1155,6 +1233,8 @@ map.on("contextmenu", async (e) => {
       let txtk1 = "";
       let qrData = "";
       let workID = htmldata["Work_ID"]; // Extract Work_ID
+      let PID_ID = htmldata["PID"]
+      console.log(PID_ID,"dvvnjvnjvdfijvfndv")
 
       for (let key of selectedKeys) {
         if (htmldata.hasOwnProperty(key)) {
