@@ -2,8 +2,6 @@
 <?php
 session_start();
 require_once '../APIS/db.php'; // Database connection
-
-// Retrieve Work_ID from the session or query string
 $workID = $_SESSION['Work_ID'] ?? $_GET['work_id'] ?? '';
 ?><!DOCTYPE html>
 <html lang="en">
@@ -20,25 +18,19 @@ $workID = $_SESSION['Work_ID'] ?? $_GET['work_id'] ?? '';
         function validateEmail() {
             const email = document.querySelector('input[name="email"]').value;
             const messageElement = document.getElementById('emailError');
-
             if (!email.endsWith('.com')) {
                 messageElement.textContent = 'Email must end with .com';
                 return false;
             }
-
             messageElement.textContent = '';
             return true;
         }
     </script>
 </head>
-
 <body>
     <div class="container">
         <div class="right-section">
             <div class="login-container">
-                <!-- <a href="index.html">
-                    <i class="fa-solid fa-house icon-top-10"></i>
-                </a> -->
                 <h2>Register</h2>
                 <form class="login-form" action="register_process.php" method="post" onsubmit="return validateEmail()">
                     <h2 class="login-title"><img src="" class="logo" alt="" style=""></h2>
@@ -55,7 +47,6 @@ $workID = $_SESSION['Work_ID'] ?? $_GET['work_id'] ?? '';
                         <i class="fas fa-lock icon"></i>
                         <input type="password" name="password" placeholder="Password" id="password" required>
                     </div>
-                    <!-- Occupation field is commented out -->
                     <div class="form-control">
                         <i class="fa-solid fa-phone icon"></i>
                         <input type="tel" name="contact_no" placeholder="Contact Number" required>
@@ -65,7 +56,6 @@ $workID = $_SESSION['Work_ID'] ?? $_GET['work_id'] ?? '';
                         <a href="login_otp.php?work_id=<?php echo htmlspecialchars($_SESSION['Work_ID'] ?? ''); ?>" class="btn">I am already a member</a>
                     </p>
                 </form>
-
             </div>
         </div>
     </div>

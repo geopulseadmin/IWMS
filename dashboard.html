@@ -102,7 +102,12 @@ color: #fff;
   font-size: 14px; /* Default font size */
   
 }
-  
+canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+}
+
 </style>
 <body>
   <div>
@@ -151,7 +156,7 @@ color: #fff;
         <!-- table stats -->
 
         <h3>Filters</h3>
-        <div style="height: 80vh; overflow-y: scroll; overflow-x: hidden; scrollbar-width: thin;">
+        <div class="scroll-box" >
 
           <div class="filter-group">
             <label for="Project_Office" onclick="toggleFilter(this)">Select Office <span class="icon-container"><i class="fa-solid fa-angle-down"></i></span><span class="selected-count"></span></label>
@@ -187,6 +192,13 @@ color: #fff;
             <ul class="select2 abcscroll" multiple="multiple" id="Work_Type"></ul>
           </div>
         </div>
+
+        <h3>Statics</h3>
+
+        <div class="chartStats" id="chartContainer">
+          <canvas id="pieChart" width="400" height="400"></canvas>
+          
+        </div>
         
       </div>
 
@@ -218,13 +230,17 @@ color: #fff;
 
     <!-- <script src="https://unpkg.com/pannellum@2.5.6/build/pannellum.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pannellum/2.4.0/pannellum.js"></script>
-
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="js/mainmodal/mapLayer.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://unpkg.com/@turf/turf"></script>
+
     <script src="js/dashboard.js"></script>
     <script src="js/mainmodal/legend.js"></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
