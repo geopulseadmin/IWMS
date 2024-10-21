@@ -352,12 +352,29 @@ color: black; /* Default color */
 }
 .chartStats{
 
-  height: 30vh;
-  overflow: auto;
+  height: 45vh;
+  overflow-x:scroll;
+  overflow-y: scroll;
   border:2px solid #bbb;
+  background-color: white;
 }
+.chartStats1{
 
-
+  height: 45vh;
+  overflow-x:scroll;
+  overflow-y: scroll;
+  border:2px solid #bbb;
+  background-color: white;
+}
+#graph{
+  width: 15vw;
+  height: 70vh;
+  position: absolute;
+ 
+  z-index: 9999;
+  top: 9vh;
+  left: 0.055vw;
+}
 
 #daterange {
   z-index: 9999;
