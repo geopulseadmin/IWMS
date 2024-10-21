@@ -1,6 +1,6 @@
 * {
     margin: 0;
-    padding: 3px;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -21,7 +21,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     /* text-align: center; */
-    height: 60vh;
+    height: 100vh;
 }
 
 .form-container h2 {
@@ -29,7 +29,7 @@ body {
     font-weight: bold;
     color: #333;
     margin-bottom: 36px;
-    /* margin-top: 10vh; */
+    margin-top: 10vh;
 }
 
 .form-container p {
@@ -56,11 +56,8 @@ body {
     padding: 0 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
-   
-    margin-right: 3px;
-    font-size: 10px;
+    margin-right: 10px;
 }
-
 
 .input-group input#contact_no {
     width: 82%;

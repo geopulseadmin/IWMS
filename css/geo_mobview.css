@@ -117,13 +117,13 @@ textarea {
     font-weight: bold;
 }
 
-#successModal {
+/* #successModal {
     display: block;
     position: absolute;
     width: 285px;
     left: 19px;
     top: 30vh;
-}
+} */
 
 #workIDInfo {
     display: none;

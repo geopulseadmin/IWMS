@@ -143,27 +143,47 @@ $(document).ready(function () {
 
     loadinitialData(cql_filter1);
 
+    const dataofPID = await GetfilteredPID(cql_filter1)
+
+
+    // const joinedStringPID = dataofPID.join(",");
+    // const joinedStringPIDfilter = `proj_id IN (${joinedStringPID})`
+
+
+    // Geotagged.setParams({
+    //   CQL_FILTER: joinedStringPIDfilter,
+    //   maxZoom: 19.5,
+    // }).addTo(map);
+
+    console.log(dataofPID, "dataofPIDdataofPIDdataofPID")
+
 
     console.log(cql_filter1, "cql_filter1")
-    getCheckedValues(function (filterString) {
+
+    await getCheckedValues(async function (filterString) {
       const mainfilter = combineFilters(cql_filter1, filterString);
       console.log("Main Filterfor checking:", mainfilter);
       FilterAndZoom(mainfilter);
       fitbous(mainfilter)
+
+      const dataofPID =  await GetfilteredPID(mainfilter)
+      console.log(dataofPID, "dataofPIDdataofPIDdataofPID")
+
+
       DataTableFilter(mainfilter)
     });
   }
   $('#calendarIcon').on('click', function () {
     $('#daterange').click();
   });
-  $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+  $('#daterange').on('apply.daterangepicker', async function (ev, picker) {
     var startDate = picker.startDate.format('YYYY-MM-DD');
     var endDate = picker.endDate.format('YYYY-MM-DD');
     console.log('Selected date range:', startDate, 'to', endDate);
     cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
     loadinitialData(cql_filter1);
     const cql_filter = getCqlFilter();
-    getCheckedValues(function (filterString) {
+    await getCheckedValues(function (filterString) {
       const mainfilter = combineFilters(cql_filter1, filterString);
       console.log("Main Filterfor checking:", mainfilter);
       FilterAndZoom(mainfilter);
@@ -178,6 +198,7 @@ $(document).ready(function () {
   }
 
   function loadinitialData(cql_filter) {
+    // this function helps to populate data in filter from geoserver according to provided filtername
     FilterAndZoom(cql_filter)
     const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "Work_Type"]; //accordn column names , if want add one more filter criteria add here
 
@@ -218,6 +239,8 @@ $(document).ready(function () {
     }
   }
 
+
+
   function initialize() {
 
     $('#daterange').on('apply.daterangepicker', function (ev, picker) {
@@ -247,21 +270,6 @@ $(document).ready(function () {
   initialize();
 });
 
-// -------------------------------------------
-// function DataTableFilter(cql_filter1) {
-//   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
-//   var typeName = layers.join(',');
-//   var cqlFilter = cql_filter1;
-//   var geoServerURL =
-//     `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
-//   // var headers = ['Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Created_At'];
-//   var headers = ['PID', 'Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Project_Time', 'Status'];
-// console.log(geoServerURL,"geoserver_url")
-//   showtable(typeName, geoServerURL, cqlFilter, headers);
-
-// }
-
-
 
 
 async function DataTableFilter(cql_filter1) {
@@ -275,26 +283,7 @@ async function DataTableFilter(cql_filter1) {
   console.log(geoServerURL, "geoserver_url")
   await showtable(typeName, geoServerURL, cqlFilter, headers);
 
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function populateDropdown(dropdownId, data) {
@@ -309,7 +298,8 @@ function populateDropdown(dropdownId, data) {
 }
 
 
-function getCheckedValues(callback) {
+async function getCheckedValues(callback) {
+  // this function helps to get checked values from loadintialdata and return for createting cqlfilter
   var selectedValues = {};
   const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "village", "Work_Type"];
 
@@ -329,10 +319,8 @@ function getCheckedValues(callback) {
         }
       });
 
-      // Update selectedValues for the current filtername
       selectedValues[filtername] = values;
 
-      // Construct filter strings for all filter names
       var filters = [];
       for (var key in selectedValues) {
         if (selectedValues[key].length > 0) {
@@ -340,12 +328,9 @@ function getCheckedValues(callback) {
         }
       }
 
-      // Join all filter strings with "AND"
       var filterString = filters.join(" AND ");
+      callback(filterString, selectedValues["PID"]);
 
-
-
-      // Update the selected count in the label
       var label = $('label[for="' + filtername + '"]');
       if (label.length > 0) {
         var selectedCount = values.length;
@@ -353,14 +338,13 @@ function getCheckedValues(callback) {
         label.find('.selected-count').text(countText);
       }
 
-
-      // Call the callback function with filterString
       if (typeof callback === 'function') {
         callback(filterString);
       }
     });
   });
 }
+
 function FilterAndZoom(filter) {
 
   IWMS_point.setParams({
@@ -382,6 +366,39 @@ function FilterAndZoom(filter) {
 
 
 };
+
+
+// function FilterAndZoom(filter, selectedPID) {
+//   console.log("Applying filter:", filter);
+
+//   // Apply the filter to existing layers
+//   IWMS_point.setParams({ CQL_FILTER: filter }).addTo(map);
+//   IWMS_polygon.setParams({ CQL_FILTER: filter }).addTo(map);
+//   IWMS_line.setParams({ CQL_FILTER: filter }).addTo(map);
+//   GIS_Ward_Layer.setParams({ CQL_FILTER: filter }).addTo(map);
+
+//   // Filter for the output_data layer based on selected PID
+//   if (selectedPID) {
+//     Geotagged.setParams({
+//       CQL_FILTER: `PID = '${selectedPID}'`
+//     }).addTo(map);
+
+//     // Filter for geotagphoto layer based on PID
+//     Geotaggedlive.setParams({
+//       CQL_FILTER: `PID = '${selectedPID}'`
+//     }).addTo(map);
+//   }
+// }
+
+$(document).ready(async function () {
+  await getCheckedValues(function (filterString, selectedPID) {
+    console.log("Selected filter:", filterString, "Selected PID:", selectedPID);
+
+    // Apply the filter to all layers, including output_data
+    FilterAndZoom(filterString, selectedPID[0]);
+  });
+});
+
 
 
 function fitbous(filter) {
@@ -433,45 +450,11 @@ function fitbous(filter) {
   });
 }
 
+<<<<<<< HEAD
 
 
-
-// function fitbous(filter) {
-//   // Start the timer
-//   console.time("fitbous execution time");
-
-//   // var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
-//   var layers = ["pmc:IWMS_point", "pmc:IWMS_line", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"]
-//   var bounds = null;
-
-//   // Array to hold promises
-//   var promises = layers.map(function (layerName) {
-//     const urlm = `${main_url}ows?service=WFS&version=1.0.0&request=GetFeature&typeName=${layerName}&CQL_FILTER=${filter}&outputFormat=application/json`;
-
-//     // Return a promise for each layer
-//     return $.getJSON(urlm).then(function (data) {
-//       var geojson = L.geoJson(data);
-//       var layerBounds = geojson.getBounds();
-//       if (bounds) {
-//         bounds.extend(layerBounds);
-//       } else {
-//         bounds = layerBounds;
-//       }
-//     });
-//   });
-
-//   // Execute all promises in parallel
-//   Promise.all(promises).then(function () {
-//     if (bounds) {
-//       // Apply the combined bounds to the map after all layers are processed
-//       map.fitBounds(bounds);
-//     }
-//     // Stop the timer and log the time
-//     console.timeEnd("fitbous execution time");
-//   });
-// }
-
-
+=======
+>>>>>>> 5646ae8d55413b4d4edeaf250c63c1ee0eda697d
 // for dashboard table dynamic
 
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
@@ -702,6 +685,8 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
 
       const pid = [];
 
+      const departmentData = {}; // To store tender amounts by department
+
       // Filter out features where PID is null
       var exampleData = filteredData.features
         .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
@@ -714,6 +699,15 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
           });
           mappedData.geometry = feature.geometry;
           pid.push(feature.properties.PID);
+
+            // Aggregate tender amounts by department for pie chart
+            const department = feature.properties.Department || 'Unknown'; // Replace 'Department' with actual property name
+            // const tenderAmount = parseFloat(feature.properties.TenderAmount) || 0; // Replace 'TenderAmount' with actual property name
+            if (!departmentData[department]) {
+                departmentData[department] = 0;
+            }
+            departmentData[department] += 1; // Sum the tender amounts by department
+
 
           // Ensure geometry is included
           return mappedData;
@@ -741,11 +735,113 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
 
       // Create the table with the sorted data
       createTable(exampleData, headers);
+
+      createDonutChart(departmentData); // Call to show chart alongside table
     });
   }
 
 
 };
+
+// // chart --------------------
+
+function createDonutChart(departmentData) {
+
+  const departmentColors = {
+  "Road": "#FF004F",
+    "Building": "#99EDC3",
+    "Electric": "	#FFE5B4",
+    "Drainage": "#218be6",
+    "Water Supply": "#5155d4",
+    "Garden": "#7e0488",
+    "Garden Horticulture": "#7e0488",
+    "Slum": "#bbb",
+    "City Engineer Office": "#262626",
+    "Education Department": "darkblue",
+    "Environment": "#000000",
+    "Project Work": "#5639b3",
+    "Solid waste Management": "#49a44c",
+    "Market":"yellow",
+    "Encrochment": "#198754",
+    "Sport":"#d63384",
+  };
+  // Convert the departmentData object to an array of [name, count] pairs
+  const departmentArray = Object.entries(departmentData);
+
+  // Sort the array by count in descending order
+  departmentArray.sort((a, b) => b[1] - a[1]);
+
+  // Extract the sorted department names and counts
+  const sortedDepartmentNames = departmentArray.map(entry => entry[0]);
+  const sortedDepartmentCounts = departmentArray.map(entry => entry[1]);
+  // // Extract department names and counts
+  const departmentNames = Object.keys(departmentData);
+  // const departmentCounts = Object.values(departmentData);
+
+  // Get the canvas element
+  var ctx = document.getElementById('pieChart').getContext('2d');
+
+  // Create a new donut chart
+  new Chart(ctx, {
+    type: 'doughnut', // Pie chart type
+    data: {
+      // labels: departmentNames,
+      labels: sortedDepartmentNames,
+      datasets: [{
+        label: 'Department Counts',
+        // data: departmentCounts,
+        data: sortedDepartmentCounts,
+        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), 
+        hoverOffset: 4,
+      }],
+    },
+    options: {
+      responsive: true,
+      cutoutPercentage: 40, // Makes it a donut chart
+      plugins: {
+        legend: {
+       
+          position: 'right',
+          labels: {
+            font: {
+              size: 10, // Set the font size of the legend
+              weight: 'bold', // Bold font style
+            },
+            // Customize legend to show counts along with names
+            generateLabels: function(chart) {
+              const originalLabels = Chart.overrides.pie.plugins.legend.labels.generateLabels(chart);
+              return originalLabels.map(label => {
+                const departmentName = label.text;
+                const count = departmentData[departmentName] || 0;
+                label.text = `${departmentName}: ${count}`; // Append count to legend label
+                return label;
+              });
+            }
+          },
+        },
+        
+        datalabels: {
+          // Enable labels on each segment
+          display: true,
+          color: '#fff', // White text color for better contrast
+          formatter: function(value, context) {
+            return value; // Display the count directly on the segment
+          },
+          font: {
+            weight: 'bold', // Make the label bold
+            size: 10, // Adjust the font size
+          },
+          align: 'center', // Center the label within the segment
+          anchor: 'center', // Ensure the label is anchored at the center of the segment
+        },
+      },
+ 
+      maintainAspectRatio: false
+    }
+  });
+}
+
+// --------------------------
 
 $(document).ready(function () {
   // Handle click event on minimize-button
@@ -1074,12 +1170,12 @@ map.on("contextmenu", async (e) => {
       }
 
       // Generate the URL with Work_ID for both localhost and production
-      let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
+      // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
 
-      // let qrURL = `http://localhost/PMC/IWMS/IWMS_test/login/login.php?work_id=${workID}`;
-      
-    // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
-qrData = qrURL;
+      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login_otp.php?work_id=${workID}`;
+
+      // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
+      qrData = qrURL;
 
       qrData = qrURL;
 
@@ -1158,6 +1254,8 @@ qrData = qrURL;
 // // geotag
 
 
+let activePopup = null;
+
 map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
@@ -1165,10 +1263,10 @@ map.on("click", async (e) => {
   // Define the workspaces and their respective layer details
   const workspaceLayers = {
     'PMC_test': {
-      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
+      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc', ''],
     },
     'pmc': {
-      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
+      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work', ''],
     }
   };
 
@@ -1316,9 +1414,16 @@ map.on("click", async (e) => {
     </div>`;
 
     // Set the popup content and open it
-    L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
+    // L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
 
-    // After the popup is added to the DOM, initialize the popup content
+    // // After the popup is added to the DOM, initialize the popup content
+    // updatePopup();
+
+    activePopup = L.popup({ closeOnClick: false, autoClose: false })
+      .setLatLng(e.latlng)
+      .setContent(detaildata)
+      .openOn(map);
+
     updatePopup();
 
     // Event listeners for navigation buttons
@@ -1335,10 +1440,22 @@ map.on("click", async (e) => {
         updatePopup();
       }
     });
+
+
   } else {
     console.log("No features found");
   }
 });
+
+// Close the popup when clicking outside of it
+map.on("click", function (e) {
+  if (activePopup && !activePopup.getElement().contains(e.originalEvent.target)) {
+    map.closePopup(activePopup);
+    activePopup = null; // Reset the activePopup variable
+  }
+});
+
+
 
 // Helper function to get image dimensions
 function getImageDimensions(url) {
@@ -1360,6 +1477,7 @@ function getImageDimensions(url) {
 }
 
 
+<<<<<<< HEAD
 
 // click on calendar show the div and close the calendar
 document.getElementById('calendartoggle').addEventListener('click', function() {
@@ -1383,3 +1501,62 @@ document.getElementById('searchbutton').addEventListener('click', function() {
       searchBar.style.display = "none";   // Hide the SearchBar button
   }
 });
+=======
+async function GetfilteredPID(cql_filter1) {
+  var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
+  var typeName = layers.join(',');
+  var cqlFilter = cql_filter1;
+  var geoServerURL =
+    `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+  var headers = ['PID'];
+
+  // Return a promise
+  return new Promise((resolve, reject) => {
+    $.getJSON(geoServerURL, function (data) {
+      var filteredData = data;
+
+      const pid = [];
+
+      // Filter out features where PID is null
+      var exampleData = filteredData.features
+        .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
+        .map(feature => {
+          let mappedData = {};
+          headers.forEach(header => {
+            // Convert header to camelCase or other naming convention if necessary
+            let propertyName = header.replace(/ /g, ''); // Remove spaces for property names
+            mappedData[propertyName] = feature.properties[header]; // Map property correctly
+          });
+          mappedData.geometry = feature.geometry;
+          pid.push(feature.properties.PID);
+
+          // Ensure geometry is included
+          return mappedData;
+        });
+
+      // Convert Set to an array to use join()
+      const uniquePIDs = Array.from(new Set(pid));
+
+      console.log(uniquePIDs, "uniquePIDs");
+
+      // Join the array into a comma-separated string
+      const joinedStringPID = uniquePIDs.join(",");
+      const joinedStringPIDfilter = `proj_id IN (${joinedStringPID})`;
+
+      console.log(joinedStringPIDfilter, "joinedStringPIDfilter");
+
+      // Set CQL filter and add to map
+      Geotagged.setParams({
+        CQL_FILTER: joinedStringPIDfilter,
+        maxZoom: 19.5,
+      }).addTo(map);
+
+      // Resolve the uniquePIDs array
+      resolve(uniquePIDs);
+    }).fail((jqxhr, textStatus, error) => {
+      // Handle errors and reject the promise
+      reject(new Error("Request Failed: " + textStatus + ", " + error));
+    });
+  });
+}
+>>>>>>> 5fd6484a4b158035501df6b2ef7e89a6e3cd4708
