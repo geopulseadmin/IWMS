@@ -1477,31 +1477,6 @@ function getImageDimensions(url) {
 }
 
 
-<<<<<<< HEAD
-
-// click on calendar show the div and close the calendar
-document.getElementById('calendartoggle').addEventListener('click', function() {
-  var daterangeContainer = document.getElementById('daterangeContainer');
-  
-  if (daterangeContainer.style.display === "none" || daterangeContainer.style.display === "") {
-      daterangeContainer.style.display = "block";  // Show the div
-  } else {
-      daterangeContainer.style.display = "none";   // Hide the div
-  }
-});
-
-// click on search icon 
-document.getElementById('searchbutton').addEventListener('click', function() {
-  var searchBar = document.getElementById('search2');
-  
-  // Toggle the visibility of the search bar button
-  if (searchBar.style.display === "none" || searchBar.style.display === "") {
-      searchBar.style.display = "block";  // Show the SearchBar button
-  } else {
-      searchBar.style.display = "none";   // Hide the SearchBar button
-  }
-});
-=======
 async function GetfilteredPID(cql_filter1) {
   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
   var typeName = layers.join(',');
@@ -1559,4 +1534,3 @@ async function GetfilteredPID(cql_filter1) {
     });
   });
 }
->>>>>>> 5fd6484a4b158035501df6b2ef7e89a6e3cd4708
