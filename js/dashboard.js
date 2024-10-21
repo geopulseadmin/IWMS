@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
       button.style.right = 'calc(0.8vw )';
       button.innerHTML = '<i class="fa-solid fa-filter-circle-xmark"></i>';
       tableBtn.style.right = 'calc(0.8vw)';
-      tableBtn.style.top = '30vh';
+      tableBtn.style.top = '22vh';
       tableinfo.style.right = 'calc(20vw - 1px)';
     } else {
       filters.style.marginLeft = '-35vw';
@@ -450,11 +450,6 @@ function fitbous(filter) {
   });
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 5646ae8d55413b4d4edeaf250c63c1ee0eda697d
 // for dashboard table dynamic
 
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
