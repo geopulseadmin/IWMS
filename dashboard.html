@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -111,29 +112,32 @@ color: #fff;
       <div class="map-container">
         <img src="png/pmcjpeg.png" alt="" class="logopng">
         <a href="https://geopulsea.com/" class="geopulseaname">@GeoPulse Analytics</a>
+        
         <button class="toggle-button" id="toggleFilters" title="">
           <i class="fa-solid fa-filter"></i> 
       </button>
   
         
         <div id="map"></div>
-        
-        <button id="" class="toggle-button1">
-          <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
-         
-      </button>
-  
-      <div class="daterange-container" id="daterangeContainer">
+        <div class="daterange-container" id="daterangeContainer" style="display: none;">
           <input type="text" name="daterange" id="daterange" class="form-control">
           <i id="calendarIcon" class="fa-solid fa-calendar-days"></i>
       </div>
       
+      
+        <button id="calendartoggle">
+          <i id="calendarIcon" class="fa-solid fa-calendar-days tablebtn1"></i>
+      </button>
+      
+        <button id="searchbutton">
+          <i id="searchIcon" class="fa-solid fa-magnifying-glass tablebtn2"></i>
+      </button>
+      
         <!-- table button -->
         <button id="openTableBtn"><img src="png/dtabasetable.png" alt="" class="tablebtn"></button>
      
-        <button class="SearchBar">
-
-          <select class="form-select ms-auto" aria-label="Select search category" id="search_type">
+        <button class="SearchBar" >
+            <select class="form-select ms-auto" aria-label="Select search category" id="search_type">
             <option value=""> search type</option>
           </select>
 
@@ -144,7 +148,7 @@ color: #fff;
         </button>
     
       </div>
-          <!-- search bar -->
+          <!-- search bar --> 
 
 
       <!-- filter start -->

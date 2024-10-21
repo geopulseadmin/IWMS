@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
       button.style.right = 'calc(0.8vw )';
       button.innerHTML = '<i class="fa-solid fa-filter-circle-xmark"></i>';
       tableBtn.style.right = 'calc(0.8vw)';
-      tableBtn.style.top = '22vh';
+      tableBtn.style.top = '30vh';
       tableinfo.style.right = 'calc(20vw - 1px)';
     } else {
       filters.style.marginLeft = '-35vw';
@@ -1359,4 +1359,27 @@ function getImageDimensions(url) {
   });
 }
 
-// calender click on show the calender div 
+
+
+// click on calendar show the div and close the calendar
+document.getElementById('calendartoggle').addEventListener('click', function() {
+  var daterangeContainer = document.getElementById('daterangeContainer');
+  
+  if (daterangeContainer.style.display === "none" || daterangeContainer.style.display === "") {
+      daterangeContainer.style.display = "block";  // Show the div
+  } else {
+      daterangeContainer.style.display = "none";   // Hide the div
+  }
+});
+
+// click on search icon 
+document.getElementById('searchbutton').addEventListener('click', function() {
+  var searchBar = document.getElementById('search2');
+  
+  // Toggle the visibility of the search bar button
+  if (searchBar.style.display === "none" || searchBar.style.display === "") {
+      searchBar.style.display = "block";  // Show the SearchBar button
+  } else {
+      searchBar.style.display = "none";   // Hide the SearchBar button
+  }
+});
