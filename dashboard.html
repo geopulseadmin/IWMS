@@ -102,12 +102,34 @@ color: #fff;
   font-size: 14px; /* Default font size */
   
 }
-canvas {
-    display: block;
-    width: 100% !important;
-    height: auto !important;
-}
 
+
+.chartStats{
+ 
+ height: 45vh;
+ overflow-x:scroll;
+ overflow-y: scroll;
+ border:2px solid #bbb;
+ background-color: white;
+}
+.chartStats1{
+
+ height: 45vh;
+ overflow-x:scroll;
+ overflow-y: scroll;
+ border:2px solid #bbb;
+ background-color: white;
+}
+#graph{
+ width: 15vw;
+ height: 70vh;
+ position: absolute;
+
+ z-index: 9999;
+ top: 9vh;
+ left: 0.055vw;
+}
+  
 </style>
 <body>
   <div>
@@ -192,18 +214,22 @@ canvas {
             <ul class="select2 abcscroll" multiple="multiple" id="Work_Type"></ul>
           </div>
         </div>
-
-        <h3>Statics</h3>
-
-        <div class="chartStats" id="chartContainer">
-          <canvas id="pieChart" width="400" height="400"></canvas>
-          
+        <div id="graph">
+          <h5>Analytics</h5>
+         
+          <div class="chartStats" id="chartContainer">
+            <canvas id="pieChart" width="70%" height="70%"></canvas>
+           
+         
+            <hr>
+         
+            <canvas id="barGraphChart" width="400" height="300"></canvas>
+          </div>
         </div>
-        
-      </div>
+              <div id="tablecontainer"></div>
+              <div id="pagination"></div>
 
-      <div id="tablecontainer"></div>
-      <div id="pagination"></div>
+    
 
 
     </div>
@@ -235,6 +261,9 @@ canvas {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
+    <!-- charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
     <script src="js/mainmodal/mapLayer.js"></script>

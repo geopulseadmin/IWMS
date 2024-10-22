@@ -452,6 +452,280 @@ function fitbous(filter) {
 
 // for dashboard table dynamic
 
+// async function showtable(typeName, geoServerURL, cqlFilter, headers) {
+//   tableData(typeName, geoServerURL, cqlFilter, headers);
+//   var currentPage = 1;
+//   var rowsPerPage = 10;
+//   var buttonsToShow = 3;
+//   function setupPagination(data, rowsPerPage, headers, tableContainer) {
+//     var paginationContainer = document.createElement('div');
+//     paginationContainer.id = 'pagination';
+//     var pageCount = Math.ceil(data.length / rowsPerPage);
+//     function renderPageButtons(startPage) {
+//       paginationContainer.innerHTML = ""; // Clear any existing content
+//       // Previous Button
+//       var prevButton = document.createElement('button');
+//       prevButton.innerText = 'Previous';
+//       prevButton.disabled = currentPage === 1;
+//       prevButton.addEventListener('click', function () {
+//         if (currentPage > 1) {
+//           currentPage--;
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         }
+//       });
+//       paginationContainer.appendChild(prevButton);
+//       // Page Buttons
+//       var endPage = Math.min(startPage + buttonsToShow - 1, pageCount);
+//       for (var i = startPage; i <= endPage; i++) {
+//         var pageButton = document.createElement('button');
+//         pageButton.innerText = i;
+//         if (i === currentPage) {
+//           pageButton.classList.add('active');
+//         }
+//         pageButton.addEventListener('click', function (event) {
+//           currentPage = Number(event.target.innerText);
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         });
+//         paginationContainer.appendChild(pageButton);
+//       }
+//       // Next Button
+//       var nextButton = document.createElement('button');
+//       nextButton.innerText = 'Next';
+//       nextButton.disabled = currentPage === pageCount;
+//       nextButton.addEventListener('click', function () {
+//         if (currentPage < pageCount) {
+//           currentPage++;
+//           createTable(data, currentPage, rowsPerPage, headers);
+//           renderPageButtons(Math.max(1, currentPage - Math.floor(buttonsToShow / 2)));
+//         }
+//       });
+//       paginationContainer.appendChild(nextButton);
+//     }
+
+//     renderPageButtons(1);
+//     tableContainer.appendChild(paginationContainer); // Append paginationContainer after rendering buttons
+//   }
+
+
+
+//   function createTable(data, headers) {
+//     var tableContainer = document.getElementById('tablecontainer');
+//     if (!tableContainer) {
+//       console.error("Table container not found");
+//       return;
+//     }
+//     tableContainer.innerHTML = ""; // Clear any existing content
+
+//     // Create minimize button
+//     var minimizeButton = document.createElement('button');
+//     minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+//     minimizeButton.className = 'minimize-button';
+//     minimizeButton.addEventListener('click', function () {
+//       var tableDetail = document.querySelector('.tableDetail');
+//       if (tableDetail.style.display === 'none') {
+//         tableDetail.style.display = 'block';
+//         minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
+//         document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
+//       } else {
+//         tableDetail.style.display = 'none';
+//         minimizeButton.style.display = 'none';
+//         document.getElementById('openTableBtn').style.display = 'block'; // Show the show button
+//       }
+//     });
+//     tableContainer.appendChild(minimizeButton);
+
+//     // Create tableDetail div
+//     var tableDetail = document.createElement('div');
+//     tableDetail.className = 'tableDetail';
+//     tableContainer.appendChild(tableDetail);
+
+//     var table = document.createElement('table');
+//     table.className = 'data-table'; // Add a class for styling
+//     table.id = 'data-table'; // Add an ID for DataTables initialization
+
+//     var thead = document.createElement('thead');
+//     var headerRow = document.createElement('tr');
+
+//     headers.unshift('Sr_no'); // Add serial number column
+//     // Create header cells
+//     headers.forEach(headerText => {
+//       var th = document.createElement('th');
+//       th.textContent = headerText;
+
+//       if (headerText === 'Name_of_Work') {
+//         th.style.minWidth = '300px'; // Adjust as needed
+//       }
+//       headerRow.appendChild(th);
+
+
+//     });
+
+//     thead.appendChild(headerRow);
+//     table.appendChild(thead);
+
+//     var tbody = document.createElement('tbody');
+//     // Populate table rows with data
+//     data.forEach((item, index) => {
+//       var row = document.createElement('tr');
+//       // Add serial number as the first column
+//       var serialNumberCell = document.createElement('td');
+//       serialNumberCell.textContent = index + 1;
+//       row.appendChild(serialNumberCell);
+
+//       headers.slice(1).forEach(header => {
+//         var cell = document.createElement('td');
+//         if (header === 'Project_Time') {
+//           let projectTime = item[header] ? moment(item[header]) : null;
+
+//           if (projectTime && projectTime.isValid()) {
+//             // Format the date for display
+//             cell.textContent = projectTime.format('DD/MM/YYYY HH:mm');
+//             // Store the raw date value for sorting
+//             cell.setAttribute('data-sort', projectTime.toISOString());
+//           } else {
+//             // Handle invalid or missing dates
+//             cell.textContent = 'N/A';
+//             cell.setAttribute('data-sort', ''); // For empty sorting
+
+//           }
+//         } else {
+//           cell.textContent = item[header] || ''; // Handle undefined values
+
+//           if (header === 'Name_of_Work') {
+//             cell.style.minWidth = '300px'; // Adjust as needed
+//           }
+//         }
+//         row.appendChild(cell);
+//       });
+
+//       // Add click listener to highlight the geometry on the map
+//       row.addEventListener('click', function () {
+//         var boundsLayer = L.geoJSON(item.geometry, {
+//           style: {
+//             fillColor: "blue", // Fill color
+//             fillOpacity: 0.3, // Fill opacity
+//             color: "blue", // Border color
+//             weight: 2, // Border weight
+//           },
+//         }).addTo(map); // Add the bounds layer to the map
+
+//         var bounds = boundsLayer.getBounds();
+//         map.fitBounds(bounds);
+
+//         // Remove the bounds layer after 5 seconds
+//         setTimeout(function () {
+//           map.removeLayer(boundsLayer);
+//         }, 5000);
+//       });
+
+//       tbody.appendChild(row);
+//     });
+
+//     table.appendChild(tbody);
+//     tableDetail.appendChild(table);
+
+//     // Initialize DataTables after rendering the table
+//     $(document).ready(function () {
+//       if ($.fn.DataTable.isDataTable('#data-table')) {
+//         $('#data-table').DataTable().destroy(); // Destroy existing DataTable if initialized
+//       }
+
+//       // Find the index of 'Project_Time'
+//       const projectTimeIndex = headers.indexOf('Project_Time');
+
+//       $('#data-table').DataTable({
+//         paging: true, // Enable pagination
+//         lengthChange: true, // Enable the 'Show X entries' dropdown
+//         searching: true, // Enable search box
+//         ordering: true, // Enable column sorting
+//         info: true, // Enable showing 'Showing X of Y entries' info
+//         autoWidth: false, // Disable auto width calculation
+//         scrollY: 400,
+//         scrollX: true,
+//         scrollCollapse: true,
+//         fixedHeader: true,
+//         order: [[projectTimeIndex, 'desc']], // Initial sort on the Project_Time column (latest first)
+//         columnDefs: [
+//           {
+//             targets: projectTimeIndex, // Ensure this matches the index of the Project_Time column
+//             type: 'date', // Ensure DataTables treats this column as a date
+//             orderData: [projectTimeIndex], // Sort based on the raw date
+//           }
+//         ]
+//       });
+//     });
+//   }
+
+
+//   // Function to show the hidden table
+//   function showTable() {
+//     var tableDetail = document.querySelector('.tableDetail');
+//     var minimizeButton = document.querySelector('.minimize-button');
+//     tableDetail.style.display = 'block';
+//     minimizeButton.style.display = 'block';
+//     // minimizeButton.innerText = '-';
+//     document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
+//   }
+
+//   // Add event listener to the show table button
+//   document.getElementById('openTableBtn').addEventListener('click', showTable);
+
+
+//   // -------------------------------------------------------------
+//   function tableData(typeName, geoServerURL, cqlFilter, headers) {
+//     $.getJSON(geoServerURL, function (data) {
+//       var filteredData = data;
+
+//       const pid = [];
+
+//       // Filter out features where PID is null
+//       var exampleData = filteredData.features
+//         .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
+//         .map(feature => {
+//           let mappedData = {};
+//           headers.forEach(header => {
+//             // Convert header to camelCase or other naming convention if necessary
+//             let propertyName = header.replace(/ /g, ''); // Remove spaces for property names
+//             mappedData[propertyName] = feature.properties[header]; // Map property correctly
+//           });
+//           mappedData.geometry = feature.geometry;
+//           pid.push(feature.properties.PID);
+
+//           // Ensure geometry is included
+//           return mappedData;
+//         });
+
+//       const uniquePIDs = new Set(pid);
+
+//       // Update the table stats with the count of unique PIDs
+//       updateTableStats(`Total Projects:  ${uniquePIDs.size}`);
+
+//       // console.log(exampleData,"before")
+//       // Sort exampleData by Project_Time in descending order (latest first)
+//       exampleData.sort((a, b) => {
+//         // Access Project_Time using the mapped property name
+//         let dateA = new Date(a.Project_Time); // Ensure this matches your header
+//         let dateB = new Date(b.Project_Time);
+
+//         // Handle invalid dates
+//         if (isNaN(dateA)) return 1; // Treat invalid dates as later
+//         if (isNaN(dateB)) return -1; // Treat invalid dates as earlier
+
+//         return dateB - dateA; // Sort in descending order
+//       });
+//       // console.log(exampleData,"after")
+
+//       // Create the table with the sorted data
+//       createTable(exampleData, headers);
+//     });
+//   }
+// };
+
+// update code 22/10/2024
+
+ 
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
   tableData(typeName, geoServerURL, cqlFilter, headers);
   var currentPage = 1;
@@ -503,13 +777,13 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       });
       paginationContainer.appendChild(nextButton);
     }
-
+ 
     renderPageButtons(1);
     tableContainer.appendChild(paginationContainer); // Append paginationContainer after rendering buttons
   }
-
-
-
+ 
+ 
+ 
   function createTable(data, headers) {
     var tableContainer = document.getElementById('tablecontainer');
     if (!tableContainer) {
@@ -517,7 +791,7 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       return;
     }
     tableContainer.innerHTML = ""; // Clear any existing content
-
+ 
     // Create minimize button
     var minimizeButton = document.createElement('button');
     minimizeButton.innerHTML = '<i class="fas fa-minus"></i>';
@@ -535,36 +809,36 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       }
     });
     tableContainer.appendChild(minimizeButton);
-
+ 
     // Create tableDetail div
     var tableDetail = document.createElement('div');
     tableDetail.className = 'tableDetail';
     tableContainer.appendChild(tableDetail);
-
+ 
     var table = document.createElement('table');
     table.className = 'data-table'; // Add a class for styling
     table.id = 'data-table'; // Add an ID for DataTables initialization
-
+ 
     var thead = document.createElement('thead');
     var headerRow = document.createElement('tr');
-
+ 
     headers.unshift('Sr_no'); // Add serial number column
     // Create header cells
     headers.forEach(headerText => {
       var th = document.createElement('th');
       th.textContent = headerText;
-
+ 
       if (headerText === 'Name_of_Work') {
         th.style.minWidth = '300px'; // Adjust as needed
       }
       headerRow.appendChild(th);
-
-
+ 
+ 
     });
-
+ 
     thead.appendChild(headerRow);
     table.appendChild(thead);
-
+ 
     var tbody = document.createElement('tbody');
     // Populate table rows with data
     data.forEach((item, index) => {
@@ -573,12 +847,12 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       var serialNumberCell = document.createElement('td');
       serialNumberCell.textContent = index + 1;
       row.appendChild(serialNumberCell);
-
+ 
       headers.slice(1).forEach(header => {
         var cell = document.createElement('td');
         if (header === 'Project_Time') {
           let projectTime = item[header] ? moment(item[header]) : null;
-
+ 
           if (projectTime && projectTime.isValid()) {
             // Format the date for display
             cell.textContent = projectTime.format('DD/MM/YYYY HH:mm');
@@ -588,18 +862,18 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
             // Handle invalid or missing dates
             cell.textContent = 'N/A';
             cell.setAttribute('data-sort', ''); // For empty sorting
-
+ 
           }
         } else {
           cell.textContent = item[header] || ''; // Handle undefined values
-
+ 
           if (header === 'Name_of_Work') {
             cell.style.minWidth = '300px'; // Adjust as needed
           }
         }
         row.appendChild(cell);
       });
-
+ 
       // Add click listener to highlight the geometry on the map
       row.addEventListener('click', function () {
         var boundsLayer = L.geoJSON(item.geometry, {
@@ -610,31 +884,31 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
             weight: 2, // Border weight
           },
         }).addTo(map); // Add the bounds layer to the map
-
+ 
         var bounds = boundsLayer.getBounds();
         map.fitBounds(bounds);
-
+ 
         // Remove the bounds layer after 5 seconds
         setTimeout(function () {
           map.removeLayer(boundsLayer);
         }, 5000);
       });
-
+ 
       tbody.appendChild(row);
     });
-
+ 
     table.appendChild(tbody);
     tableDetail.appendChild(table);
-
+ 
     // Initialize DataTables after rendering the table
     $(document).ready(function () {
       if ($.fn.DataTable.isDataTable('#data-table')) {
         $('#data-table').DataTable().destroy(); // Destroy existing DataTable if initialized
       }
-
+ 
       // Find the index of 'Project_Time'
       const projectTimeIndex = headers.indexOf('Project_Time');
-
+ 
       $('#data-table').DataTable({
         paging: true, // Enable pagination
         lengthChange: true, // Enable the 'Show X entries' dropdown
@@ -657,8 +931,8 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
       });
     });
   }
-
-
+ 
+ 
   // Function to show the hidden table
   function showTable() {
     var tableDetail = document.querySelector('.tableDetail');
@@ -668,20 +942,21 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
     // minimizeButton.innerText = '-';
     document.getElementById('openTableBtn').style.display = 'none'; // Hide the show button
   }
-
+ 
   // Add event listener to the show table button
   document.getElementById('openTableBtn').addEventListener('click', showTable);
-
-
+ 
+ 
   // -------------------------------------------------------------
   function tableData(typeName, geoServerURL, cqlFilter, headers) {
     $.getJSON(geoServerURL, function (data) {
       var filteredData = data;
-
+ 
       const pid = [];
-
-      const departmentData = {}; // To store tender amounts by department
-
+ 
+      const departmentData = {}; // To store by department
+      const departmentTenderAmounts = {};
+ 
       // Filter out features where PID is null
       var exampleData = filteredData.features
         .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
@@ -694,7 +969,7 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
           });
           mappedData.geometry = feature.geometry;
           pid.push(feature.properties.PID);
-
+ 
             // Aggregate tender amounts by department for pie chart
             const department = feature.properties.Department || 'Unknown'; // Replace 'Department' with actual property name
             // const tenderAmount = parseFloat(feature.properties.TenderAmount) || 0; // Replace 'TenderAmount' with actual property name
@@ -702,41 +977,212 @@ async function showtable(typeName, geoServerURL, cqlFilter, headers) {
                 departmentData[department] = 0;
             }
             departmentData[department] += 1; // Sum the tender amounts by department
-
-
+ 
+             // Aggregate Tender_Amount by department for the bar chart
+        const tenderAmount = parseFloat(feature.properties.Tender_Amount) || 0; // Replace with actual Tender_Amount property
+        if (!departmentTenderAmounts[department]) {
+          departmentTenderAmounts[department] = 0;
+        }
+        departmentTenderAmounts[department] += tenderAmount;
+ 
           // Ensure geometry is included
           return mappedData;
         });
-
+ 
       const uniquePIDs = new Set(pid);
-
+ 
       // Update the table stats with the count of unique PIDs
       updateTableStats(`Total Projects:  ${uniquePIDs.size}`);
-
+ 
       // console.log(exampleData,"before")
       // Sort exampleData by Project_Time in descending order (latest first)
       exampleData.sort((a, b) => {
         // Access Project_Time using the mapped property name
         let dateA = new Date(a.Project_Time); // Ensure this matches your header
         let dateB = new Date(b.Project_Time);
-
+ 
         // Handle invalid dates
         if (isNaN(dateA)) return 1; // Treat invalid dates as later
         if (isNaN(dateB)) return -1; // Treat invalid dates as earlier
-
+ 
         return dateB - dateA; // Sort in descending order
       });
       // console.log(exampleData,"after")
-
+ 
       // Create the table with the sorted data
       createTable(exampleData, headers);
-
+ 
       createDonutChart(departmentData); // Call to show chart alongside table
+      createBarChart(departmentTenderAmounts); // Call to show bar chart
+   
     });
   }
-
-
+ 
+ 
 };
+ 
+// // chart --------------------
+// pie chart
+function createDonutChart(departmentData) {
+ 
+  const departmentColors = {
+  "Road": "#FF004F",
+    "Building": "#99EDC3",
+    "Electric": " #FFE5B4",
+    "Drainage": "#218be6",
+    "Water Supply": "#5155d4",
+    "Garden": "#7e0488",
+    "Garden Horticulture": "#7e0488",
+    "Slum": "#bbb",
+    "City Engineer Office": "#262626",
+    "Education Department": "darkblue",
+    "Environment": "#000000",
+    "Project Work": "#5639b3",
+    "Solid waste Management": "#49a44c",
+    "Market":"yellow",
+    "Encrochment": "#198754",
+    "Sport":"#d63384",
+  };
+  // Convert the departmentData object to an array of [name, count] pairs
+  const departmentArray = Object.entries(departmentData);
+ 
+  // Sort the array by count in descending order
+  departmentArray.sort((a, b) => b[1] - a[1]);
+ 
+  // Extract the sorted department names and counts
+  const sortedDepartmentNames = departmentArray.map(entry => entry[0]);
+  const sortedDepartmentCounts = departmentArray.map(entry => entry[1]);
+  // // Extract department names and counts
+  const departmentNames = Object.keys(departmentData);
+  // const departmentCounts = Object.values(departmentData);
+ 
+  // Get the canvas element
+  var ctx = document.getElementById('pieChart').getContext('2d');
+ 
+  // Create a new donut chart
+  new Chart(ctx, {
+    type: 'doughnut', // Pie chart type
+    data: {
+      // labels: departmentNames,
+      labels: sortedDepartmentNames,
+      datasets: [{
+        label: 'Department Counts',
+        // data: departmentCounts,
+        data: sortedDepartmentCounts,
+        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'),
+        hoverOffset: 4,
+      }],
+    },
+    options: {
+      responsive: true,
+      cutoutPercentage: 40, // Makes it a donut chart
+      plugins: {
+        legend: {
+       
+          position: 'bottom',
+          labels: {
+            font: {
+              align:'left',
+              size: 10, // Set the font size of the legend
+              weight: 'bold', // Bold font style
+            },
+            // Customize legend to show counts along with names
+            generateLabels: function(chart) {
+              const originalLabels = Chart.overrides.pie.plugins.legend.labels.generateLabels(chart);
+              return originalLabels.map(label => {
+                const departmentName = label.text;
+                const count = departmentData[departmentName] || 0;
+                label.text = `${departmentName}: ${count}`; // Append count to legend label
+                return label;
+              });
+            }
+          },
+        },
+       
+        datalabels: {
+          // Enable labels on each segment
+          display: true,
+          color: '#fff', // White text color for better contrast
+          formatter: function(value, context) {
+            return value; // Display the count directly on the segment
+          },
+          font: {
+            weight: 'bold', // Make the label bold
+            size: 10, // Adjust the font size
+          },
+          align: 'center', // Center the label within the segment
+          anchor: 'center', // Ensure the label is anchored at the center of the segment
+        },
+      },
+ 
+      maintainAspectRatio: false
+    }
+  });
+}
+ 
+// bargraph
+function createBarChart(departmentTenderAmounts) {
+ 
+  // Get department names and their corresponding tender amounts
+  const departmentNames = Object.keys(departmentTenderAmounts);
+  const tenderAmounts = Object.values(departmentTenderAmounts);
+ 
+  // Combine the department names and tender amounts into an array of objects
+  const departmentsWithAmounts = departmentNames.map((name, index) => ({
+    name: name,
+    amount: tenderAmounts[index]
+  }));
+ 
+  // Sort the array by tender amount in descending order
+  departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
+ 
+  // Extract sorted department names and tender amounts
+  const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
+  const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
+ 
+  // Get the canvas element
+  var ctx = document.getElementById('barGraphChart').getContext('2d');
+ 
+  // Create a new bar chart
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: sortedDepartmentNames,
+      datasets: [{
+        label: 'Total Tender Amount',
+        data: sortedTenderAmounts,
+        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+      }],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true, // Ensure y-axis starts at 0
+          title: {
+            display: true,
+            text: 'Tender Amount (in currency)', // Customize based on the currency unit
+          },
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Departments',
+          },
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'bottom',
+        },
+      },
+      maintainAspectRatio: false,
+    }
+  });
+}
+ 
+ 
 
 // // chart --------------------
 
