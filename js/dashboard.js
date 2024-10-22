@@ -1065,29 +1065,90 @@ function createDonutChart(departmentData) {
 }
  
 // bargraph
-function createBarChart(departmentTenderAmounts) {
+// function createBarChart(departmentTenderAmounts) {
  
+//   // Get department names and their corresponding tender amounts
+//   const departmentNames = Object.keys(departmentTenderAmounts);
+//   const tenderAmounts = Object.values(departmentTenderAmounts);
+ 
+//   // Combine the department names and tender amounts into an array of objects
+//   const departmentsWithAmounts = departmentNames.map((name, index) => ({
+//     name: name,
+//     amount: tenderAmounts[index]
+//   }));
+ 
+//   // Sort the array by tender amount in descending order
+//   departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
+ 
+//   // Extract sorted department names and tender amounts
+//   const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
+//   const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
+ 
+//   // Get the canvas element
+//   var ctx = document.getElementById('barGraphChart').getContext('2d');
+ 
+//   // Create a new bar chart
+//   new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//       labels: sortedDepartmentNames,
+//       datasets: [{
+//         label: 'Total Tender Amount',
+//         data: sortedTenderAmounts,
+//         backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+//       }],
+//     },
+//     options: {
+//       responsive: true,
+//       scales: {
+//         y: {
+//           beginAtZero: true, // Ensure y-axis starts at 0
+//           title: {
+//             display: true,
+//             text: 'Tender Amount (in currency)', // Customize based on the currency unit
+//           },
+//         },
+//         x: {
+//           title: {
+//             display: true,
+//             text: 'Departments',
+//           },
+//         }
+//       },
+//       plugins: {
+//         legend: {
+//           display: true,
+//           position: 'bottom',
+//         },
+//       },
+//       maintainAspectRatio: false,
+//     }
+//   });
+// }
+ 
+function createBarChart(departmentTenderAmounts) {
+
   // Get department names and their corresponding tender amounts
   const departmentNames = Object.keys(departmentTenderAmounts);
   const tenderAmounts = Object.values(departmentTenderAmounts);
- 
+
   // Combine the department names and tender amounts into an array of objects
   const departmentsWithAmounts = departmentNames.map((name, index) => ({
     name: name,
     amount: tenderAmounts[index]
   }));
- 
+
   // Sort the array by tender amount in descending order
   departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
- 
+
   // Extract sorted department names and tender amounts
   const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
   const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
- 
+
   // Get the canvas element
   var ctx = document.getElementById('barGraphChart').getContext('2d');
- 
-  // Create a new bar chart
+
+  // Create a new bar chart with horizontal orientation
   new Chart(ctx, {
     type: 'bar',
     data: {
@@ -1099,16 +1160,23 @@ function createBarChart(departmentTenderAmounts) {
       }],
     },
     options: {
+      indexAxis: 'y',  // This makes the bars horizontal
       responsive: true,
       scales: {
-        y: {
-          beginAtZero: true, // Ensure y-axis starts at 0
+        x: {
+          beginAtZero: true, // Ensure x-axis (tender amounts) starts at 0
           title: {
             display: true,
             text: 'Tender Amount (in currency)', // Customize based on the currency unit
           },
+          ticks: {
+            stepSize: 100000, // Set interval to 100,000
+            callback: function(value) {
+              return value.toLocaleString(); // Add commas as thousand separators
+            }
+          }
         },
-        x: {
+        y: {
           title: {
             display: true,
             text: 'Departments',
@@ -1125,7 +1193,7 @@ function createBarChart(departmentTenderAmounts) {
     }
   });
 }
- 
+
  
 
 // -------------------------
@@ -1803,33 +1871,6 @@ map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
 
-  // Retrieve the current filter string based on selected checkboxes
-  let filterString = await getCheckedValuesforpopuups();
-
-  // Additionally, retrieve date range filters if applicable
-  let daterangeValue = $('#daterange').val();
-  let dates = daterangeValue.split(' - ');
-  let startDate = moment(dates[0], 'MMMM D, YYYY').format('YYYY-MM-DD');
-  let endDate = moment(dates[1], 'MMMM D, YYYY').format('YYYY-MM-DD');
-
-  // Retrieve any search filters if applicable
-  var searchtypefield = $("#search_type").val();
-  var searchtypefield1 = $("#searchInputDashboard").val();
-
-  let cqlFilter = "";
-
-  if (searchtypefield1) {
-    cqlFilter = `${searchtypefield} IN ('${searchtypefield1}')`;
-  } else {
-    cqlFilter = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-
-    if (filterString.trim() !== "") {
-      cqlFilter = combineFilters(cqlFilter, filterString);
-    }
-  }
-
-  console.log("Combined CQL Filter:", cqlFilter);
-
   // Define the workspaces and their respective layer details
   const workspaceLayers1 = {
     "pmc:IWMS_point": ["PID", "Name_of_Work","Tender_Amount", "Name_of_JE"],
@@ -2041,4 +2082,61 @@ function debounce(func, wait) {
 // If you need to debounce filter updates, you can wrap getCheckedValuesforpopuups
 const debouncedGetCheckedValuesforpopuups = debounce(getCheckedValuesforpopuups, 300);
 
-// Then use debouncedGetCheckedValuesforpopuups instead of getCheckedValuesforpopuups if necessary
+
+async function GetfilteredPID(cql_filter1) {
+  var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
+  var typeName = layers.join(',');
+  var cqlFilter = cql_filter1;
+  var geoServerURL =
+    `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+  var headers = ['PID'];
+
+  // Return a promise
+  return new Promise((resolve, reject) => {
+    $.getJSON(geoServerURL, function (data) {
+      var filteredData = data;
+
+      const pid = [];
+
+      // Filter out features where PID is null
+      var exampleData = filteredData.features
+        .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
+        .map(feature => {
+          let mappedData = {};
+          headers.forEach(header => {
+            // Convert header to camelCase or other naming convention if necessary
+            let propertyName = header.replace(/ /g, ''); // Remove spaces for property names
+            mappedData[propertyName] = feature.properties[header]; // Map property correctly
+          });
+          mappedData.geometry = feature.geometry;
+          pid.push(feature.properties.PID);
+
+          // Ensure geometry is included
+          return mappedData;
+        });
+
+      // Convert Set to an array to use join()
+      const uniquePIDs = Array.from(new Set(pid));
+
+      console.log(uniquePIDs, "uniquePIDs");
+
+      // Join the array into a comma-separated string
+      const joinedStringPID = uniquePIDs.join(",");
+      const joinedStringPIDfilter = `proj_id IN (${joinedStringPID})`;
+
+      console.log(joinedStringPIDfilter, "joinedStringPIDfilter");
+
+      // Set CQL filter and add to map
+      Geotagged.setParams({
+        CQL_FILTER: joinedStringPIDfilter,
+        maxZoom: 19.5,
+      }).addTo(map);
+
+      // Resolve the uniquePIDs array
+      resolve(uniquePIDs);
+    }).fail((jqxhr, textStatus, error) => {
+      // Handle errors and reject the promise
+      reject(new Error("Request Failed: " + textStatus + ", " + error));
+    });
+  });
+}
