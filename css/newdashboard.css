@@ -351,16 +351,8 @@ color: black; /* Default color */
   background: #e9e9f7; /* Darker scrollbar on hover */
 }
 
-<<<<<<< HEAD
-=======
-  height: 45vh;
-  overflow-x:scroll;
-  overflow-y: scroll;
-  border:2px solid #bbb;
-  background-color: white;
-}
+
 .chartStats1{
->>>>>>> 9a7ba31df16a03ae95534db6f69cc0137f3a13d1
 
   height: 45vh;
   overflow-x:scroll;
