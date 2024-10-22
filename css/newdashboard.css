@@ -91,7 +91,7 @@ text-transform: uppercase;
 }
 
 /* chart */
-.chartStats{
+/* .chartStats{
  
   height: 45vh;
   overflow-x:scroll;
@@ -115,9 +115,44 @@ text-transform: uppercase;
   z-index: 9999;
   top: 9vh;
   left: 0.055vw;
-}
+} */
 
 /* chart */
+
+/* Chart containers */
+#pieChartContainer, #barGraphContainer {
+  border: 2px solid #bbb;
+  background-color: white;
+  margin-bottom: 20px; /* Adds space between the charts */
+  padding: 10px; /* Adds padding inside the chart containers */
+}
+
+/* Pie chart container */
+#pieChartContainer {
+  height: 35vh; /* Adjust the height based on your design */
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+/* Bar graph container */
+#barGraphContainer {
+  height: 35vh; /* Adjust the height based on your design */
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+#graph {
+  width: 15vw;
+  height: 80vh; /* Adjusted height to fit both charts */
+  position: absolute;
+  z-index: 9999;
+  top: 9vh;
+  left: 0.055vw;
+  display: flex;
+  flex-direction: column; /* Vertically stack the charts */
+  gap: 10px; /* Space between the charts */
+}
+
 
 .filters {
 width: 20vw;
@@ -308,34 +343,85 @@ font-size: 15px;
 .icon-container i {
 color: black; /* Default color */
 }
+.scroll-box {
+  height: 40vh;
+  overflow-y: hidden; /* Initially hide overflow */
+  overflow-x: hidden;
+  /* border: 1px solid #ccc; */
+  position: relative;
+}
 
+.scroll-box:hover {
+  overflow-y: scroll; /* Show scrollbar on hover */
+}
+
+/* Firefox scrollbar styles */
+.scroll-box:hover {
+  scrollbar-width:5px; /* Show thin scrollbar */
+}
+
+/* WebKit scrollbar styles */
+.scroll-box::-webkit-scrollbar {
+  width: 8px; /* Set width for scrollbar */
+  display: none; /* Initially hide scrollbar */
+}
+
+.scroll-box:hover::-webkit-scrollbar {
+  display: block; /* Show scrollbar on hover */
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #e9e9f7; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb:hover {
+  background: #e9e9f7; /* Darker scrollbar on hover */
+}
 .abcscroll {
   height: auto;
   max-height: 200px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   overflow-x: hidden;
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: #888 #f1f1f1; /* For Firefox */
+  /* scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1; */
+  position: relative;
 }
 
-/* WebKit (Safari, older Chrome) */
+.abcscroll:hover {
+  overflow-y: scroll; /* Show scrollbar on hover */
+}
+
+/* Firefox scrollbar styles */
+.abcscroll:hover {
+  scrollbar-width:5px; /* Show thin scrollbar */
+}
+
+/* WebKit scrollbar styles */
 .abcscroll::-webkit-scrollbar {
-  width: 10px; /* Makes scrollbars thinner */
+  width: 8px; /* Set width for scrollbar */
+  display: none; /* Initially hide scrollbar */
 }
 
-.abcscroll::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Color of scrollbar track */
-  border-radius: 10px; /* Rounded corners for scrollbar track */
+.abcscroll:hover::-webkit-scrollbar {
+  display: block; /* Show scrollbar on hover */
 }
 
 .abcscroll::-webkit-scrollbar-thumb {
-  background: #888; /* Color of scrollbar handle */
-  border-radius: 10px; /* Rounded corners for scrollbar handle */
+  background: #e9e9f7; /* Scrollbar color */
+  border-radius: 4px;
 }
 
 .abcscroll::-webkit-scrollbar-thumb:hover {
-  background: #555; /* Darker color on hover state for visibility */
+  background: #e9e9f7; /* Darker scrollbar on hover */
 }
+.chartStats{
+
+  height: 30vh;
+  overflow: auto;
+  border:2px solid #bbb;
+}
+
 
 
 #daterange {

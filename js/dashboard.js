@@ -7,7 +7,6 @@ function toggleFilter(label) {
   // Toggle 'active' class for the clicked filter input and its associated ul
   input.classList.toggle('active');
   ul.classList.toggle('active');
-
 }
 
 // Function to close filter groups when clicking outside
@@ -144,27 +143,47 @@ $(document).ready(function () {
 
     loadinitialData(cql_filter1);
 
+    const dataofPID = await GetfilteredPID(cql_filter1)
+
+
+    // const joinedStringPID = dataofPID.join(",");
+    // const joinedStringPIDfilter = `proj_id IN (${joinedStringPID})`
+
+
+    // Geotagged.setParams({
+    //   CQL_FILTER: joinedStringPIDfilter,
+    //   maxZoom: 19.5,
+    // }).addTo(map);
+
+    console.log(dataofPID, "dataofPIDdataofPIDdataofPID")
+
 
     console.log(cql_filter1, "cql_filter1")
-    getCheckedValues(function (filterString) {
+
+    await getCheckedValues(async function (filterString) {
       const mainfilter = combineFilters(cql_filter1, filterString);
       console.log("Main Filterfor checking:", mainfilter);
       FilterAndZoom(mainfilter);
       fitbous(mainfilter)
+
+      const dataofPID =  await GetfilteredPID(mainfilter)
+      console.log(dataofPID, "dataofPIDdataofPIDdataofPID")
+
+
       DataTableFilter(mainfilter)
     });
   }
   $('#calendarIcon').on('click', function () {
     $('#daterange').click();
   });
-  $('#daterange').on('apply.daterangepicker', function (ev, picker) {
+  $('#daterange').on('apply.daterangepicker', async function (ev, picker) {
     var startDate = picker.startDate.format('YYYY-MM-DD');
     var endDate = picker.endDate.format('YYYY-MM-DD');
     console.log('Selected date range:', startDate, 'to', endDate);
     cql_filter1 = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
     loadinitialData(cql_filter1);
     const cql_filter = getCqlFilter();
-    getCheckedValues(function (filterString) {
+    await getCheckedValues(function (filterString) {
       const mainfilter = combineFilters(cql_filter1, filterString);
       console.log("Main Filterfor checking:", mainfilter);
       FilterAndZoom(mainfilter);
@@ -179,6 +198,7 @@ $(document).ready(function () {
   }
 
   function loadinitialData(cql_filter) {
+    // this function helps to populate data in filter from geoserver according to provided filtername
     FilterAndZoom(cql_filter)
     const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "Work_Type"]; //accordn column names , if want add one more filter criteria add here
 
@@ -219,6 +239,8 @@ $(document).ready(function () {
     }
   }
 
+
+
   function initialize() {
 
     $('#daterange').on('apply.daterangepicker', function (ev, picker) {
@@ -248,7 +270,7 @@ $(document).ready(function () {
   initialize();
 });
 
-// -------------------------------------------
+
 
 async function DataTableFilter(cql_filter1) {
   var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
@@ -256,11 +278,13 @@ async function DataTableFilter(cql_filter1) {
   var cqlFilter = cql_filter1;
   var geoServerURL =
     `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+  // var headers = ['Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Created_At'];
   var headers = ['PID', 'Work_ID', 'Name_of_Work', 'Department', 'Budget_Code', 'Work_Type', 'Name_of_JE', 'Agency', 'stage', 'Tender_Amount', 'Project_Time', 'Status'];
   console.log(geoServerURL, "geoserver_url")
   await showtable(typeName, geoServerURL, cqlFilter, headers);
 
 }
+
 
 function populateDropdown(dropdownId, data) {
   var ul = $("#" + dropdownId);
@@ -274,7 +298,8 @@ function populateDropdown(dropdownId, data) {
 }
 
 
-function getCheckedValues(callback) {
+async function getCheckedValues(callback) {
+  // this function helps to get checked values from loadintialdata and return for createting cqlfilter
   var selectedValues = {};
   const filternames = ["Project_Office", "project_fi", "zone", "ward", "Department", "stage", "village", "Work_Type"];
 
@@ -294,10 +319,8 @@ function getCheckedValues(callback) {
         }
       });
 
-      // Update selectedValues for the current filtername
       selectedValues[filtername] = values;
 
-      // Construct filter strings for all filter names
       var filters = [];
       for (var key in selectedValues) {
         if (selectedValues[key].length > 0) {
@@ -305,10 +328,9 @@ function getCheckedValues(callback) {
         }
       }
 
-      // Join all filter strings with "AND"
       var filterString = filters.join(" AND ");
+      callback(filterString, selectedValues["PID"]);
 
-      // Update the selected count in the label
       var label = $('label[for="' + filtername + '"]');
       if (label.length > 0) {
         var selectedCount = values.length;
@@ -316,14 +338,13 @@ function getCheckedValues(callback) {
         label.find('.selected-count').text(countText);
       }
 
-
-      // Call the callback function with filterString
       if (typeof callback === 'function') {
         callback(filterString);
       }
     });
   });
 }
+
 function FilterAndZoom(filter) {
 
   IWMS_point.setParams({
@@ -345,6 +366,39 @@ function FilterAndZoom(filter) {
 
 
 };
+
+
+// function FilterAndZoom(filter, selectedPID) {
+//   console.log("Applying filter:", filter);
+
+//   // Apply the filter to existing layers
+//   IWMS_point.setParams({ CQL_FILTER: filter }).addTo(map);
+//   IWMS_polygon.setParams({ CQL_FILTER: filter }).addTo(map);
+//   IWMS_line.setParams({ CQL_FILTER: filter }).addTo(map);
+//   GIS_Ward_Layer.setParams({ CQL_FILTER: filter }).addTo(map);
+
+//   // Filter for the output_data layer based on selected PID
+//   if (selectedPID) {
+//     Geotagged.setParams({
+//       CQL_FILTER: `PID = '${selectedPID}'`
+//     }).addTo(map);
+
+//     // Filter for geotagphoto layer based on PID
+//     Geotaggedlive.setParams({
+//       CQL_FILTER: `PID = '${selectedPID}'`
+//     }).addTo(map);
+//   }
+// }
+
+$(document).ready(async function () {
+  await getCheckedValues(function (filterString, selectedPID) {
+    console.log("Selected filter:", filterString, "Selected PID:", selectedPID);
+
+    // Apply the filter to all layers, including output_data
+    FilterAndZoom(filterString, selectedPID[0]);
+  });
+});
+
 
 
 function fitbous(filter) {
@@ -1205,7 +1259,10 @@ $(document).ready(function () {
   });
 });
 
+
 // for search button
+
+
 
 document.addEventListener('DOMContentLoaded', (event) => {
   // var columns = {"Work_ID":"Work ID", "Budget_Code":"Budget Code", "Name_of_Work":"Name of Work", "Scope_of_Work":"Scope of Work", "Name_of_JE":"Name of JE", "Agency":"Agency"};
@@ -1219,6 +1276,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var option = document.createElement("option");
       option.text = columns[key];
       option.value = key;
+
+
+
       select.appendChild(option);
 
     }
@@ -1234,6 +1294,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var selectedValue = select.value;
     input.placeholder = "Search " + selectedText;
     input.value = "";
+
+
     // Call autocomplete with empty array and selected column
     autocomplete(input, [], selectedValue);
 
@@ -1308,6 +1370,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             let cqlFilter;
 
             cqlFilter = `${searchtypefield} IN ('${selectedValue}')`;
+
+            // console.log(cqlFilter, "cqlFilter")
+
+
+
+
             IWMS_point.setParams({
               CQL_FILTER: cqlFilter,
               maxZoom: 19.5,
@@ -1339,6 +1407,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             fitbous(cqlFilter);
 
             DataTableFilter(cqlFilter)
+
+
+
             input.value = selectedValue;
             closeAllLists();
           });
@@ -1396,6 +1467,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
   }
 });
+
 
 const layerDetails = {
   "pmc:IWMS_point": ["PID", "Work_ID", "Name_of_Work", "project_fi", "Department ", "Work_Type", "Project_Office", "zone", "ward", "Tender_Amount", "Name_of_JE", "Contact_Number", "GIS_Created_At"],
@@ -1511,9 +1583,13 @@ map.on("contextmenu", async (e) => {
       }
 
       // Generate the URL with Work_ID for both localhost and production
-      // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login.php?work_id=${workID}`;
+      // let qrURL = `https://iwmsgis.pmc.gov.in/gis/iwms/login/login_otp.php?Work_ID=${workID}`;
 
-      let qrURL = `http://localhost/PMC_new/IWMS/IWMS/login/login.php?work_id=${workID}`;
+      let qrURL = `http://localhost/PMC_PROJECT/IWMS/login/login_otp.php?work_id=${workID}`;
+
+      // let qrURL = `http://localhost/IWMS_test2/login/login.php?work_id=${workID}`; // Use login.php with work_id
+      qrData = qrURL;
+
       qrData = qrURL;
 
       let detaildata1 = `
@@ -1657,19 +1733,8 @@ async function fetchImageUrls(passingPid) {
 // -------------------------------------------
 // // geotag
 
-// map.on("click", async (e) => {
-//   let bbox = map.getBounds().toBBoxString();
-//   let size = map.getSize();
 
-//   // Define the workspaces and their respective layer details
-//   const workspaceLayers = {
-//     'PMC_test': {
-//       "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc'],
-//     },
-//     'pmc': {
-//       "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work'],
-//     }
-//   };
+let activePopup = null;
 
 //   let detailsArray = [];
 
@@ -1871,33 +1936,6 @@ map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
 
-  // Retrieve the current filter string based on selected checkboxes
-  let filterString = await getCheckedValuesforpopuups();
-
-  // Additionally, retrieve date range filters if applicable
-  let daterangeValue = $('#daterange').val();
-  let dates = daterangeValue.split(' - ');
-  let startDate = moment(dates[0], 'MMMM D, YYYY').format('YYYY-MM-DD');
-  let endDate = moment(dates[1], 'MMMM D, YYYY').format('YYYY-MM-DD');
-
-  // Retrieve any search filters if applicable
-  var searchtypefield = $("#search_type").val();
-  var searchtypefield1 = $("#searchInputDashboard").val();
-
-  let cqlFilter = "";
-
-  if (searchtypefield1) {
-    cqlFilter = `${searchtypefield} IN ('${searchtypefield1}')`;
-  } else {
-    cqlFilter = `conc_appr_ >= '${startDate}' AND conc_appr_ < '${endDate}'`;
-
-    if (filterString.trim() !== "") {
-      cqlFilter = combineFilters(cqlFilter, filterString);
-    }
-  }
-
-  console.log("Combined CQL Filter:", cqlFilter);
-
   // Define the workspaces and their respective layer details
   const workspaceLayers1 = {
     "pmc:IWMS_point": ["PID", "Name_of_Work","Tender_Amount", "Name_of_JE"],
@@ -2059,9 +2097,16 @@ map.on("click", async (e) => {
     </div>`;
 
     // Set the popup content and open it
-    L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
+    // L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
 
-    // After the popup is added to the DOM, initialize the popup content
+    // // After the popup is added to the DOM, initialize the popup content
+    // updatePopup();
+
+    activePopup = L.popup({ closeOnClick: false, autoClose: false })
+      .setLatLng(e.latlng)
+      .setContent(detaildata)
+      .openOn(map);
+
     updatePopup();
 
     // Event listeners for navigation buttons
@@ -2078,20 +2123,21 @@ map.on("click", async (e) => {
         updatePopup();
       }
     });
+
+
   } else {
-    console.log("No geotag photos found matching the current filters.");
-    // Optionally, display a popup informing the user that no features were found
-    L.popup()
-      .setLatLng(e.latlng)
-      .setContent("<p>No geotag photos found matching the current filters.</p>")
-      .openOn(map);
+    console.log("No features found");
   }
 });
 
-// Ensure that your main_url variable is correctly defined and accessible within this scope.
-// Also, ensure that your CQL_FILTER syntax matches the requirements of your WMS service.
+// Close the popup when clicking outside of it
+map.on("click", function (e) {
+  if (activePopup && !activePopup.getElement().contains(e.originalEvent.target)) {
+    map.closePopup(activePopup);
+    activePopup = null; // Reset the activePopup variable
+  }
+});
 
-// Optional: Debounce the getCheckedValuesforpopuups if the filters are updated frequently to optimize performance.
 
 // Example of debouncing (optional)
 function debounce(func, wait) {
@@ -2101,12 +2147,68 @@ function debounce(func, wait) {
       clearTimeout(timeout);
       func.apply(this, args);
     };
+
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
   };
 }
 
-// If you need to debounce filter updates, you can wrap getCheckedValuesforpopuups
-const debouncedGetCheckedValuesforpopuups = debounce(getCheckedValuesforpopuups, 300);
 
-// Then use debouncedGetCheckedValuesforpopuups instead of getCheckedValuesforpopuups if necessary
+
+async function GetfilteredPID(cql_filter1) {
+  var layers = ["pmc:IWMS_line", "pmc:IWMS_point", "pmc:IWMS_polygon", "pmc:GIS_Ward_Layer"];
+  var typeName = layers.join(',');
+  var cqlFilter = cql_filter1;
+  var geoServerURL =
+    `${main_url}pmc/wms?service=WFS&version=1.1.0&request=GetFeature&typeName=${typeName}&outputFormat=application/json&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
+  var headers = ['PID'];
+
+  // Return a promise
+  return new Promise((resolve, reject) => {
+    $.getJSON(geoServerURL, function (data) {
+      var filteredData = data;
+
+      const pid = [];
+
+      // Filter out features where PID is null
+      var exampleData = filteredData.features
+        .filter(feature => feature.properties.PID !== null) // Filter out null PIDs
+        .map(feature => {
+          let mappedData = {};
+          headers.forEach(header => {
+            // Convert header to camelCase or other naming convention if necessary
+            let propertyName = header.replace(/ /g, ''); // Remove spaces for property names
+            mappedData[propertyName] = feature.properties[header]; // Map property correctly
+          });
+          mappedData.geometry = feature.geometry;
+          pid.push(feature.properties.PID);
+
+          // Ensure geometry is included
+          return mappedData;
+        });
+
+      // Convert Set to an array to use join()
+      const uniquePIDs = Array.from(new Set(pid));
+
+      console.log(uniquePIDs, "uniquePIDs");
+
+      // Join the array into a comma-separated string
+      const joinedStringPID = uniquePIDs.join(",");
+      const joinedStringPIDfilter = `proj_id IN (${joinedStringPID})`;
+
+      console.log(joinedStringPIDfilter, "joinedStringPIDfilter");
+
+      // Set CQL filter and add to map
+      Geotagged.setParams({
+        CQL_FILTER: joinedStringPIDfilter,
+        maxZoom: 19.5,
+      }).addTo(map);
+
+      // Resolve the uniquePIDs array
+      resolve(uniquePIDs);
+    }).fail((jqxhr, textStatus, error) => {
+      // Handle errors and reject the promise
+      reject(new Error("Request Failed: " + textStatus + ", " + error));
+    });
+  });
+}

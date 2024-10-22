@@ -1,6 +1,5 @@
 <?php
 include 'config.php'; // Include your database connection
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve form data
     $fid = $_POST['fid'];
