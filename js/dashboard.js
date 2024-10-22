@@ -722,9 +722,7 @@ function fitbous(filter) {
 //     });
 //   }
 // };
-
-// update code 22/10/2024
-
+// --------------------------------------
  
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
   tableData(typeName, geoServerURL, cqlFilter, headers);
@@ -1184,106 +1182,7 @@ function createBarChart(departmentTenderAmounts) {
  
  
 
-// // chart --------------------
-
-function createDonutChart(departmentData) {
-
-  const departmentColors = {
-  "Road": "#FF004F",
-    "Building": "#99EDC3",
-    "Electric": "	#FFE5B4",
-    "Drainage": "#218be6",
-    "Water Supply": "#5155d4",
-    "Garden": "#7e0488",
-    "Garden Horticulture": "#7e0488",
-    "Slum": "#bbb",
-    "City Engineer Office": "#262626",
-    "Education Department": "darkblue",
-    "Environment": "#000000",
-    "Project Work": "#5639b3",
-    "Solid waste Management": "#49a44c",
-    "Market":"yellow",
-    "Encrochment": "#198754",
-    "Sport":"#d63384",
-  };
-  // Convert the departmentData object to an array of [name, count] pairs
-  const departmentArray = Object.entries(departmentData);
-
-  // Sort the array by count in descending order
-  departmentArray.sort((a, b) => b[1] - a[1]);
-
-  // Extract the sorted department names and counts
-  const sortedDepartmentNames = departmentArray.map(entry => entry[0]);
-  const sortedDepartmentCounts = departmentArray.map(entry => entry[1]);
-  // // Extract department names and counts
-  const departmentNames = Object.keys(departmentData);
-  // const departmentCounts = Object.values(departmentData);
-
-  // Get the canvas element
-  var ctx = document.getElementById('pieChart').getContext('2d');
-
-  // Create a new donut chart
-  new Chart(ctx, {
-    type: 'doughnut', // Pie chart type
-    data: {
-      // labels: departmentNames,
-      labels: sortedDepartmentNames,
-      datasets: [{
-        label: 'Department Counts',
-        // data: departmentCounts,
-        data: sortedDepartmentCounts,
-        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), 
-        hoverOffset: 4,
-      }],
-    },
-    options: {
-      responsive: true,
-      cutoutPercentage: 40, // Makes it a donut chart
-      plugins: {
-        legend: {
-       
-          position: 'right',
-          labels: {
-            font: {
-              size: 10, // Set the font size of the legend
-              weight: 'bold', // Bold font style
-            },
-            // Customize legend to show counts along with names
-            generateLabels: function(chart) {
-              const originalLabels = Chart.overrides.pie.plugins.legend.labels.generateLabels(chart);
-              return originalLabels.map(label => {
-                const departmentName = label.text;
-                const count = departmentData[departmentName] || 0;
-                label.text = `${departmentName}: ${count}`; // Append count to legend label
-                return label;
-              });
-            }
-          },
-        },
-        
-        datalabels: {
-          // Enable labels on each segment
-          display: true,
-          color: '#fff', // White text color for better contrast
-          formatter: function(value, context) {
-            return value; // Display the count directly on the segment
-          },
-          font: {
-            weight: 'bold', // Make the label bold
-            size: 10, // Adjust the font size
-          },
-          align: 'center', // Center the label within the segment
-          anchor: 'center', // Ensure the label is anchored at the center of the segment
-        },
-      },
- 
-      maintainAspectRatio: false
-    }
-  });
-}
-
-// --------------------------
-
+// -------------------------
 $(document).ready(function () {
   // Handle click event on minimize-button
   $('#minimize-button').click(function () {
