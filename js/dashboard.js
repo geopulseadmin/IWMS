@@ -847,29 +847,24 @@ function createDonutChart(departmentData) {
 }
 
 // bargraph
-
 function createBarChart(departmentTenderAmounts) {
-  // const departmentColors = {
-  //   "Road": "#FF004F",
-  //   "Building": "#99EDC3",
-  //   "Electric": "#FFE5B4",
-  //   "Drainage": "#218be6",
-  //   "Water Supply": "#5155d4",
-  //   "Garden": "#7e0488",
-  //   "Garden Horticulture": "#7e0488",
-  //   "Slum": "#bbb",
-  //   "City Engineer Office": "#262626",
-  //   "Education Department": "darkblue",
-  //   "Environment": "#000000",
-  //   "Project Work": "#5639b3",
-  //   "Solid waste Management": "#49a44c",
-  //   "Market":"yellow",
-  //   "Encrochment": "#198754",
-  //   "Sport":"#d63384",
-  // };
 
+  // Get department names and their corresponding tender amounts
   const departmentNames = Object.keys(departmentTenderAmounts);
   const tenderAmounts = Object.values(departmentTenderAmounts);
+
+  // Combine the department names and tender amounts into an array of objects
+  const departmentsWithAmounts = departmentNames.map((name, index) => ({
+    name: name,
+    amount: tenderAmounts[index]
+  }));
+
+  // Sort the array by tender amount in descending order
+  departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
+
+  // Extract sorted department names and tender amounts
+  const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
+  const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
 
   // Get the canvas element
   var ctx = document.getElementById('barGraphChart').getContext('2d');
@@ -878,11 +873,11 @@ function createBarChart(departmentTenderAmounts) {
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: departmentNames,
+      labels: sortedDepartmentNames,
       datasets: [{
         label: 'Total Tender Amount',
-        data: tenderAmounts,
-        backgroundColor: departmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+        data: sortedTenderAmounts,
+        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
       }],
     },
     options: {
@@ -912,6 +907,7 @@ function createBarChart(departmentTenderAmounts) {
     }
   });
 }
+
 
 
 // --------------------------
