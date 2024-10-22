@@ -1727,19 +1727,19 @@ map.on("click", function (e) {
 
 
 // Example of debouncing (optional)
-// function debounce(func, wait) {
-//   let timeout;
-//   return function (...args) {
-//     const later = () => {
-//       clearTimeout(timeout);
-//       func.apply(this, args);
-//     };
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func.apply(this, args);
+    };
 
-//     img.onerror = function () {
-//       reject(`Error loading image at ${url}`);
-//     };
-//   });
-// }
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 
 
 async function GetfilteredPID(cql_filter1) {
