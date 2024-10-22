@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $rating = $_POST['rating'];
     $live_location = $_POST['live_location'];
     $ip_address = $_POST['ip_address'];
-    $category = $_POST['category']; // Add this field
+    $category = $_POST['category']?? null; // Add this field
     $subcategory = $_POST['subcategory']; // Add this field
 
     // Handle the 'otherText' field if 'subcategory' is 'other'
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Prepare and execute the SQL statement using PDO
-        $stmt = $pdo->prepare("INSERT INTO work_details (fid, work_id, department, username, contact, rating, live_location, ip_address,category, subcategory, other_text) 
+        $stmt = $pdo->prepare( "INSERT INTO work_details (fid, work_id, department, username, contact, rating, live_location, ip_address,category, subcategory, other_text) 
                                VALUES (:fid, :work_id, :department, :username, :contact, :rating, :live_location, :ip_address,:category, :subcategory, :other_text)");
         $stmt->bindParam(':fid', $fid);
         $stmt->bindParam(':work_id', $work_id);
