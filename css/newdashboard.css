@@ -89,6 +89,36 @@ text-transform: uppercase;
 
 /* position: fixed; color: darkblue; font-size: 12px;font-weight: bold;  z-index: 9999; margin-top: 45px; margin-left:0px; */
 }
+
+/* chart */
+.chartStats{
+ 
+  height: 45vh;
+  overflow-x:scroll;
+  overflow-y: scroll;
+  border:2px solid #bbb;
+  background-color: white;
+}
+.chartStats1{
+ 
+  height: 45vh;
+  overflow-x:scroll;
+  overflow-y: scroll;
+  border:2px solid #bbb;
+  background-color: white;
+}
+#graph{
+  width: 15vw;
+  height: 70vh;
+  position: absolute;
+ 
+  z-index: 9999;
+  top: 9vh;
+  left: 0.055vw;
+}
+
+/* chart */
+
 .filters {
 width: 20vw;
 margin-left: -5vw;
@@ -516,8 +546,6 @@ border-right: 1px solid;
 #nextIcon {
   right: 10px;
 }
-
-/* chart */
 
 
 .pagination-icon:disabled {

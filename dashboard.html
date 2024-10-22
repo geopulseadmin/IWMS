@@ -102,33 +102,6 @@ color: #fff;
   font-size: 14px; /* Default font size */
   
 }
-
-
-.chartStats{
- 
- height: 45vh;
- overflow-x:scroll;
- overflow-y: scroll;
- border:2px solid #bbb;
- background-color: white;
-}
-.chartStats1{
-
- height: 45vh;
- overflow-x:scroll;
- overflow-y: scroll;
- border:2px solid #bbb;
- background-color: white;
-}
-#graph{
- width: 15vw;
- height: 70vh;
- position: absolute;
-
- z-index: 9999;
- top: 9vh;
- left: 0.055vw;
-}
   
 </style>
 <body>
@@ -214,22 +187,22 @@ color: #fff;
             <ul class="select2 abcscroll" multiple="multiple" id="Work_Type"></ul>
           </div>
         </div>
-        <div id="graph">
-          <h5>Analytics</h5>
+      
+      </div>
+      <div id="graph">
+        <h5>Analytics</h5>
+       
+        <div class="chartStats" id="chartContainer">
+          <canvas id="pieChart" width="70%" height="70%"></canvas>
          
-          <div class="chartStats" id="chartContainer">
-            <canvas id="pieChart" width="70%" height="70%"></canvas>
-           
-         
-            <hr>
-         
-            <canvas id="barGraphChart" width="400" height="300"></canvas>
-          </div>
+       
+          <hr>
+       
+          <canvas id="barGraphChart" width="400" height="300"></canvas>
         </div>
-              <div id="tablecontainer"></div>
-              <div id="pagination"></div>
-
-    
+      </div>
+      <div id="tablecontainer"></div>
+      <div id="pagination"></div>
 
 
     </div>

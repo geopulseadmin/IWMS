@@ -668,9 +668,7 @@ function fitbous(filter) {
 //     });
 //   }
 // };
-
-// update code 22/10/2024
-
+// --------------------------------------
  
 async function showtable(typeName, geoServerURL, cqlFilter, headers) {
   tableData(typeName, geoServerURL, cqlFilter, headers);
@@ -1130,6 +1128,7 @@ function createBarChart(departmentTenderAmounts) {
  
  
 
+// -------------------------
 $(document).ready(function () {
   // Handle click event on minimize-button
   $('#minimize-button').click(function () {
