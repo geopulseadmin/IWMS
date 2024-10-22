@@ -847,29 +847,24 @@ function createDonutChart(departmentData) {
 }
 
 // bargraph
-
 function createBarChart(departmentTenderAmounts) {
-  // const departmentColors = {
-  //   "Road": "#FF004F",
-  //   "Building": "#99EDC3",
-  //   "Electric": "#FFE5B4",
-  //   "Drainage": "#218be6",
-  //   "Water Supply": "#5155d4",
-  //   "Garden": "#7e0488",
-  //   "Garden Horticulture": "#7e0488",
-  //   "Slum": "#bbb",
-  //   "City Engineer Office": "#262626",
-  //   "Education Department": "darkblue",
-  //   "Environment": "#000000",
-  //   "Project Work": "#5639b3",
-  //   "Solid waste Management": "#49a44c",
-  //   "Market":"yellow",
-  //   "Encrochment": "#198754",
-  //   "Sport":"#d63384",
-  // };
 
+  // Get department names and their corresponding tender amounts
   const departmentNames = Object.keys(departmentTenderAmounts);
   const tenderAmounts = Object.values(departmentTenderAmounts);
+
+  // Combine the department names and tender amounts into an array of objects
+  const departmentsWithAmounts = departmentNames.map((name, index) => ({
+    name: name,
+    amount: tenderAmounts[index]
+  }));
+
+  // Sort the array by tender amount in descending order
+  departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
+
+  // Extract sorted department names and tender amounts
+  const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
+  const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
 
   // Get the canvas element
   var ctx = document.getElementById('barGraphChart').getContext('2d');
@@ -878,11 +873,11 @@ function createBarChart(departmentTenderAmounts) {
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: departmentNames,
+      labels: sortedDepartmentNames,
       datasets: [{
         label: 'Total Tender Amount',
-        data: tenderAmounts,
-        backgroundColor: departmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+        data: sortedTenderAmounts,
+        backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
       }],
     },
     options: {
@@ -912,6 +907,7 @@ function createBarChart(departmentTenderAmounts) {
     }
   });
 }
+
 
 
 // --------------------------
@@ -1233,8 +1229,11 @@ map.on("contextmenu", async (e) => {
       let txtk1 = "";
       let qrData = "";
       let workID = htmldata["Work_ID"]; // Extract Work_ID
-      let PID_ID = htmldata["PID"]
-      console.log(PID_ID,"dvvnjvnjvdfijvfndv")
+      let PIDID = htmldata["PID"]; // Extract Work_ID
+      console.log(PIDID, "OOOOOOOOOOOOOOOOO")
+
+      const dd = await fetchImageUrls(PIDID)
+      console.log(dd, "llllllllllllllllll")
 
       for (let key of selectedKeys) {
         if (htmldata.hasOwnProperty(key)) {
@@ -1268,12 +1267,14 @@ map.on("contextmenu", async (e) => {
               </table>
           </div>
       `;
+      if (PIDID) {
+        const popup = L.popup().setLatLng(e.latlng).setContent(detaildata1).openOn(map);
 
-      const popup = L.popup().setLatLng(e.latlng).setContent(detaildata1).openOn(map);
 
-      // Generate QR code when the button is clicked
-      document.getElementById('generateQR').addEventListener('click', () => {
-        let qrPopupContent = `
+
+        // Generate QR code when the button is clicked
+        document.getElementById('generateQR').addEventListener('click', () => {
+          let qrPopupContent = `
             <div style='max-height: 350px; height:auto; display: flex; flex-direction: column; align-items: center; gap: 10px;'>
                 <div id="qrcode"></div>
                 <button id="downloadQR" style="background-color: #20B2AA; color: white; border: none; border-radius: 8px; padding: 5px 10px;">
@@ -1288,124 +1289,392 @@ map.on("contextmenu", async (e) => {
             </div>
         `;
 
-        // Open a new popup for the QR code
-        let qrPopup = L.popup().setLatLng(e.latlng).setContent(qrPopupContent).openOn(map);
+          // Open a new popup for the QR code
+          let qrPopup = L.popup().setLatLng(e.latlng).setContent(qrPopupContent).openOn(map);
 
-        // Generate the QR code
-        let qrcode = new QRCode(document.getElementById('qrcode'), {
-          text: qrData,
-          width: 128,
-          height: 128,
+          // Generate the QR code
+          let qrcode = new QRCode(document.getElementById('qrcode'), {
+            text: qrData,
+            width: 128,
+            height: 128,
+          });
+
+          // Add click event for downloading the QR code
+          document.getElementById('downloadQR').addEventListener('click', () => {
+            let qrCanvas = document.getElementById('qrcode').querySelector('canvas');
+            if (qrCanvas) {
+              let qrImage = qrCanvas.toDataURL("image/png");
+              let a = document.createElement('a');
+              a.href = qrImage;
+              a.download = `QRCode_WorkID_${workID}.png`;
+              a.click();
+            }
+          });
+
+          // Share QR code image on WhatsApp when the share button is clicked
+          document.getElementById('shareQR').addEventListener('click', () => {
+            let qrCanvas = document.getElementById('qrcode').querySelector('canvas');
+            if (qrCanvas) {
+              let qrImage = qrCanvas.toDataURL("image/png");
+              let whatsappURL = `https://wa.me/?text=${encodeURIComponent(qrURL)}&media=${encodeURIComponent(qrImage)}`;
+              window.open(whatsappURL, '_blank');
+            }
+          });
         });
 
-        // Add click event for downloading the QR code
-        document.getElementById('downloadQR').addEventListener('click', () => {
-          let qrCanvas = document.getElementById('qrcode').querySelector('canvas');
-          if (qrCanvas) {
-            let qrImage = qrCanvas.toDataURL("image/png");
-            let a = document.createElement('a');
-            a.href = qrImage;
-            a.download = `QRCode_WorkID_${workID}.png`;
-            a.click();
-          }
-        });
-
-        // Share QR code image on WhatsApp when the share button is clicked
-        document.getElementById('shareQR').addEventListener('click', () => {
-          let qrCanvas = document.getElementById('qrcode').querySelector('canvas');
-          if (qrCanvas) {
-            let qrImage = qrCanvas.toDataURL("image/png");
-            let whatsappURL = `https://wa.me/?text=${encodeURIComponent(qrURL)}&media=${encodeURIComponent(qrImage)}`;
-            window.open(whatsappURL, '_blank');
-          }
-        });
-      });
+      } else {
+        alert("Project not estimated yet")
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   }
 });
+
+
+
+
+
+
+
+// Function to get image URLs and categories as a dictionary
+async function fetchImageUrls(passingPid) {
+  try {
+    // API endpoint
+    const apiUrl = `http://iwms.punecorporation.org/api/uploaded-img?stage=ts_details&tsId=${passingPid}&ra=0&userId=11`;
+
+    // Fetching data
+    const response = await fetch(apiUrl, {
+      method: 'POST'
+    });
+
+    // Convert to JSON
+    const data = await response.json();
+
+    // Check if status is true
+    if (data.status) {
+      const images = data.data;
+
+      // Creating a dictionary of image URLs and categories
+      const imageDetails = {};
+
+      images.forEach((image) => {
+        imageDetails[image.f_id] = {
+          image_url: image.image_url,   // Storing the image URL
+          category: image.category      // Storing the category
+        };
+      });
+
+      // Returning the dictionary of image details
+      return imageDetails;
+    } else {
+      console.error('No images found');
+      return {};
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {};
+  }
+}
+
+// // Example of calling the function
+// fetchImageUrls(20795).then(imageDetails => {
+//   console.log(imageDetails);  // Output the dictionary of image details
+// });
+
+
+
+
+
+
+
+
+
+
 // -------------------------------------------
 // // geotag
 
 
 let activePopup = null;
 
+//   let detailsArray = [];
+
+//   for (let workspace in workspaceLayers) {
+//     for (let layer in workspaceLayers[workspace]) {
+//       let selectedKeys = workspaceLayers[workspace][layer];
+//       let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+
+//       try {
+//         let response = await fetch(urrr);
+//         let html = await response.json();
+//         let features = html.features;
+
+//         for (let feature of features) {
+//           let htmldata = feature.properties;
+//           let txtk1 = "";
+//           let imageUrl = "";
+//           let pdfUrl = "";
+//           let Is_Panoromic = false;  // Flag to track panoramic images
+//           let category = htmldata['category'] || 'N/A';  // Get the category
+
+//           for (let key of selectedKeys) {
+//             if (htmldata.hasOwnProperty(key)) {
+//               let value = htmldata[key];
+
+//               if (key === "imagepath") {
+//                 let imagename = htmldata["photo"];
+//                 imageUrl = `${value}${imagename}`;
+//               } else if (key === "image_url") {
+//                 if (value.toLowerCase().endsWith(".png") || value.toLowerCase().endsWith(".jpeg") || value.toLowerCase().endsWith(".jpg")) {
+//                   imageUrl = value;
+//                 } else if (value.toLowerCase().endsWith(".pdf")) {
+//                   pdfUrl = value;
+//                 }
+//               }
+
+//               // Add the data to the HTML
+//               txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${key}</td><td>${value}</td></tr>`;
+//             }
+//           }
+
+//           // Get the image dimensions to determine if it's panoramic
+//           if (imageUrl) {
+//             try {
+//               let dimensions = await getImageDimensions(imageUrl);
+//               if (dimensions.ratio > 2) {
+//                 Is_Panoromic = true;  // Set the flag if the ratio is greater than 2
+//               }
+//             } catch (err) {
+//               console.error("Error fetching image dimensions:", err);
+//             }
+//           }
+
+//           // Add to details array
+//           detailsArray.push({
+//             index: detailsArray.length + 1,
+//             category: category,
+//             txtk1: txtk1,
+//             imageUrl: imageUrl,
+//             pdfUrl: pdfUrl,
+//             Is_Panoromic: Is_Panoromic
+//           });
+//         }
+//       } catch (error) {
+//         console.error(`Error fetching data for layer ${layer} in workspace ${workspace}:`, error);
+//       }
+//     }
+//   }
+
+//   if (detailsArray.length > 0) {
+//     let currentIndex = 0;
+
+//     function updatePopup() {
+//       let imageElement = document.getElementById('popupImage');
+//       let pdfElement = document.getElementById('popupPdf');
+//       let panoElement = document.getElementById('panoramaViewer');  // Panoramic viewer container
+//       let tableBodyElement = document.getElementById('popupTableBody');
+//       let featureTitleElement = document.getElementById('featureTitle');
+//       let prevIcon = document.getElementById('prevIcon');
+//       let nextIcon = document.getElementById('nextIcon');
+
+//       // Clear existing Pannellum viewer to prevent multiple instances
+//       if (window.panoViewer) {
+//         window.panoViewer.destroy();
+//         window.panoViewer = null;
+//       }
+
+//       if (detailsArray[currentIndex].Is_Panoromic) {
+//         panoElement.style.display = 'block';
+//         imageElement.style.display = 'none';
+//         pdfElement.style.display = 'none';
+
+//         // Initialize Pannellum viewer
+//         window.panoViewer = pannellum.viewer('panoramaViewer', {
+//           type: 'equirectangular',
+//           panorama: detailsArray[currentIndex].imageUrl,
+//           autoLoad: true,
+//           autoRotate: 0,
+//           showFullscreenCtrl: false
+//         });
+//       } else if (detailsArray[currentIndex].imageUrl) {
+//         imageElement.src = detailsArray[currentIndex].imageUrl;
+//         imageElement.style.display = 'block';
+//         panoElement.style.display = 'none';
+//         pdfElement.style.display = 'none';
+//       } else if (detailsArray[currentIndex].pdfUrl) {
+//         pdfElement.src = detailsArray[currentIndex].pdfUrl;
+//         pdfElement.style.display = 'block';
+//         panoElement.style.display = 'none';
+//         imageElement.style.display = 'none';
+//       }
+
+//       tableBodyElement.innerHTML = detailsArray[currentIndex].txtk1;
+//       featureTitleElement.textContent = `Feature ${detailsArray[currentIndex].index} - ${detailsArray[currentIndex].category}`;
+
+//       prevIcon.disabled = currentIndex === 0;
+//       nextIcon.disabled = currentIndex === detailsArray.length - 1;
+//     }
+
+//     let detaildata = `<div id="popup-content" style='max-height: 350px; max-width: 270px; position: relative;'>
+//       <button id='prevIcon' class='pagination-icon' style='left: 10px;' disabled>
+//         <i class='fas fa-chevron-left'></i>
+//       </button>
+//       <h6 id="featureTitle">Feature 1 - ${detailsArray[0].category}</h6>
+
+//       <!-- Container for Panoramic Viewer -->
+//       <div id="panoramaViewer" style="width: 100%; height: 200px; display: ${detailsArray[0].Is_Panoromic ? 'block' : 'none'};"></div>
+
+//       <!-- Image Element for Normal Images -->
+//       <img id="popupImage" src="${detailsArray[0].imageUrl}" alt="Image" style="width: 100%; height: auto; display: ${detailsArray[0].imageUrl && !detailsArray[0].Is_Panoromic ? 'block' : 'none'};">
+
+//       <!-- Iframe for PDF Display -->
+//       <iframe id="popupPdf" src="${detailsArray[0].pdfUrl}" style="width: 100%; height: 200px; display: ${detailsArray[0].pdfUrl ? 'block' : 'none'};"></iframe>
+
+//       <button id='nextIcon' class='pagination-icon' style='right: 10px;' ${detailsArray.length > 1 ? '' : 'disabled'}>
+//         <i class='fas fa-chevron-right'></i>
+//       </button>
+//       <table class='popuptable'>
+//         <tbody id="popupTableBody">
+//           ${detailsArray[0].txtk1}
+//         </tbody>
+//       </table>
+//     </div>`;
+
+//     // Set the popup content and open it
+//     L.popup().setLatLng(e.latlng).setContent(detaildata).openOn(map);
+
+//     // After the popup is added to the DOM, initialize the popup content
+//     updatePopup();
+
+//     // Event listeners for navigation buttons
+//     document.getElementById('prevIcon').addEventListener('click', () => {
+//       if (currentIndex > 0) {
+//         currentIndex--;
+//         updatePopup();
+//       }
+//     });
+
+//     document.getElementById('nextIcon').addEventListener('click', () => {
+//       if (currentIndex < detailsArray.length - 1) {
+//         currentIndex++;
+//         updatePopup();
+//       }
+//     });
+//   } else {
+//     console.log("No features found");
+//   }
+// });
+
+// // Helper function to get image dimensions
+// function getImageDimensions(url) {
+//   return new Promise((resolve, reject) => {
+//     const img = new Image();
+//     img.src = url;
+
+//     img.onload = function () {
+//       const width = img.width;
+//       const height = img.height;
+//       const ratio = width / height;
+//       resolve({ width, height, ratio });
+//     };
+
+//     img.onerror = function () {
+//       reject(`Error loading image at ${url}`);
+//     };
+//   });
+// }
+
+// update code filter with geotag
+
+
+// geotag
+// Ensure you have the getCheckedValuesforpopuups and combineFilters functions defined as in your original code.
+
+// Modified map.on("click") handler to include filters
+
+
 map.on("click", async (e) => {
   let bbox = map.getBounds().toBBoxString();
   let size = map.getSize();
 
   // Define the workspaces and their respective layer details
-  const workspaceLayers = {
-    'PMC_test': {
-      "PMC_test:geotagphoto": ['photo', 'category', 'createdAt', 'works_aa_approval_id', 'timestamp', 'imagepath', 'distance_calc', ''],
-    },
-    'pmc': {
-      "pmc:output_data": ['proj_id', 'category', 'file', 'verify_role_id', 'image_url', 'Name_of_Work', ''],
-    }
-  };
+  const workspaceLayers1 = {
+    "pmc:IWMS_point": ["PID", "Name_of_Work","Tender_Amount", "Name_of_JE"],
+    "pmc:IWMS_line": ["PID","Name_of_Work","Tender_Amount", "Name_of_JE"],
+    "pmc:IWMS_polygon": ["PID","Name_of_Work","Tender_Amount", "Name_of_JE"],
+  }
+
 
   let detailsArray = [];
 
-  for (let workspace in workspaceLayers) {
-    for (let layer in workspaceLayers[workspace]) {
-      let selectedKeys = workspaceLayers[workspace][layer];
-      let urrr = `${main_url}${workspace}/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${layer}&STYLES&LAYERS=${layer}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}`;
+  for (let workspace in workspaceLayers1) {
+    for (let layer in workspaceLayers1[workspace]) {
+      let selectedKeys = workspaceLayers1[workspace][layer];
+
+      let urrr = `${main_url}pmc/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&FORMAT=image%2Fpng&TRANSPARENT=true&QUERY_LAYERS=${workspace}&STYLES&LAYERS=${workspace}&exceptions=application%2Fvnd.ogc.se_inimage&INFO_FORMAT=application/json&FEATURE_COUNT=50&X=${Math.round(e.containerPoint.x)}&Y=${Math.round(e.containerPoint.y)}&SRS=EPSG%3A4326&WIDTH=${size.x}&HEIGHT=${size.y}&BBOX=${bbox}&CQL_FILTER=${encodeURIComponent(cqlFilter)}`;
 
       try {
         let response = await fetch(urrr);
         let html = await response.json();
-        let features = html.features;
+        let features = html.features
 
         for (let feature of features) {
           let htmldata = feature.properties;
-          let txtk1 = "";
           let imageUrl = "";
           let pdfUrl = "";
           let Is_Panoromic = false;  // Flag to track panoramic images
-          let category = htmldata['category'] || 'N/A';  // Get the category
+          let category1 = ""; // Get the category
+          const pidfromlayers = htmldata['PID'] || 'N/A';
+          const NameofWork  = htmldata['Name_of_Work'] || 'N/A';
+          const Tenstedramount  = htmldata['Tender_Amount'] || 'N/A';
+          const  JEName = htmldata['Name_of_JE'] || 'N/A';
 
-          for (let key of selectedKeys) {
-            if (htmldata.hasOwnProperty(key)) {
-              let value = htmldata[key];
 
-              if (key === "imagepath") {
-                let imagename = htmldata["photo"];
-                imageUrl = `${value}${imagename}`;
-              } else if (key === "image_url") {
-                if (value.toLowerCase().endsWith(".png") || value.toLowerCase().endsWith(".jpeg") || value.toLowerCase().endsWith(".jpg")) {
-                  imageUrl = value;
-                } else if (value.toLowerCase().endsWith(".pdf")) {
-                  pdfUrl = value;
+
+          const imageDetails = await fetchImageUrls(pidfromlayers)
+
+
+
+          for (const fId in imageDetails) {
+            let txtk1 = "";
+            if (imageDetails.hasOwnProperty(fId)) {
+              const { image_url, category } = imageDetails[fId];
+              // alert(image_url, category)
+              category1 = category;
+              if (image_url) {
+                if (image_url.toLowerCase().endsWith(".png") || image_url.toLowerCase().endsWith(".jpeg") || image_url.toLowerCase().endsWith(".jpg")) {
+                  imageUrl = image_url; // Store image URL
+                }
+                else if (image_url.toLowerCase().endsWith(".pdf")) {
+                  pdfUrl = image_url; // Store PDF URL
                 }
               }
-
-              // Add the data to the HTML
-              txtk1 += `<tr><td style="background-color: #9393d633; width:30px;">${key}</td><td>${value}</td></tr>`;
+              txtk1 += `<tr><td style="background-color: #9393d633; width:30px;"> Project ID </td><td>${pidfromlayers}</td></tr>
+              <tr><td style="background-color: #9393d633; width:30px;"> Name of Work </td><td>${NameofWork}</td></tr>
+              <tr><td style="background-color: #9393d633; width:30px;"> Je Name </td><td>${JEName}</td></tr>
+              <tr><td style="background-color: #9393d633; width:30px;"> Tender Amount </td><td>${Tenstedramount}</td></tr>`;
             }
-          }
-
-          // Get the image dimensions to determine if it's panoramic
-          if (imageUrl) {
-            try {
-              let dimensions = await getImageDimensions(imageUrl);
-              if (dimensions.ratio > 2) {
-                Is_Panoromic = true;  // Set the flag if the ratio is greater than 2
+            if (imageUrl) {
+              try {
+                let dimensions = await getImageDimensions(imageUrl);
+                if (dimensions.ratio > 2) {
+                  Is_Panoromic = true;  // Set the flag if the ratio is greater than 2
+                }
+              } catch (err) {
+                console.error("Error fetching image dimensions:", err);
               }
-            } catch (err) {
-              console.error("Error fetching image dimensions:", err);
             }
-          }
 
-          // Add to details array
-          detailsArray.push({
-            index: detailsArray.length + 1,
-            category: category,
-            txtk1: txtk1,
-            imageUrl: imageUrl,
-            pdfUrl: pdfUrl,
-            Is_Panoromic: Is_Panoromic
-          });
+            // Add to details array
+            detailsArray.push({
+              index: detailsArray.length + 1,
+              category: category1,
+              txtk1: txtk1,
+              imageUrl: imageUrl,
+              pdfUrl: pdfUrl,
+              Is_Panoromic: Is_Panoromic
+            });
+          }
         }
       } catch (error) {
         console.error(`Error fetching data for layer ${layer} in workspace ${workspace}:`, error);
@@ -1531,24 +1800,17 @@ map.on("click", function (e) {
 });
 
 
-
-// Helper function to get image dimensions
-function getImageDimensions(url) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.src = url;
-
-    img.onload = function () {
-      const width = img.width;
-      const height = img.height;
-      const ratio = width / height;
-      resolve({ width, height, ratio });
+// Example of debouncing (optional)
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func.apply(this, args);
     };
+  }
 
-    img.onerror = function () {
-      reject(`Error loading image at ${url}`);
-    };
-  });
+  
 }
 
 
