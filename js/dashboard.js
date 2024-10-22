@@ -1119,67 +1119,8 @@ function createDonutChart(departmentData) {
 }
  
 // bargraph
-// function createBarChart(departmentTenderAmounts) {
- 
-//   // Get department names and their corresponding tender amounts
-//   const departmentNames = Object.keys(departmentTenderAmounts);
-//   const tenderAmounts = Object.values(departmentTenderAmounts);
- 
-//   // Combine the department names and tender amounts into an array of objects
-//   const departmentsWithAmounts = departmentNames.map((name, index) => ({
-//     name: name,
-//     amount: tenderAmounts[index]
-//   }));
- 
-//   // Sort the array by tender amount in descending order
-//   departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
- 
-//   // Extract sorted department names and tender amounts
-//   const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
-//   const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
- 
-//   // Get the canvas element
-//   var ctx = document.getElementById('barGraphChart').getContext('2d');
- 
-//   // Create a new bar chart
-//   new Chart(ctx, {
-//     type: 'bar',
-//     data: {
-//       labels: sortedDepartmentNames,
-//       datasets: [{
-//         label: 'Total Tender Amount',
-//         data: sortedTenderAmounts,
-//         backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
-//       }],
-//     },
-//     options: {
-//       responsive: true,
-//       scales: {
-//         y: {
-//           beginAtZero: true, // Ensure y-axis starts at 0
-//           title: {
-//             display: true,
-//             text: 'Tender Amount (in currency)', // Customize based on the currency unit
-//           },
-//         },
-//         x: {
-//           title: {
-//             display: true,
-//             text: 'Departments',
-//           },
-//         }
-//       },
-//       plugins: {
-//         legend: {
-//           display: true,
-//           position: 'bottom',
-//         },
-//       },
-//       maintainAspectRatio: false,
-//     }
-//   });
-// }
- 
+
+
 function createBarChart(departmentTenderAmounts) {
 
   // Get department names and their corresponding tender amounts
@@ -1198,6 +1139,9 @@ function createBarChart(departmentTenderAmounts) {
   // Extract sorted department names and tender amounts
   const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
   const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
+
+  // Get the minimum tender amount for setting the minimum value on the X-axis
+  const minTenderAmount = Math.min(...sortedTenderAmounts);
 
   // Get the canvas element
   var ctx = document.getElementById('barGraphChart').getContext('2d');
@@ -1218,19 +1162,21 @@ function createBarChart(departmentTenderAmounts) {
       responsive: true,
       scales: {
         x: {
-          beginAtZero: true, // Ensure x-axis (tender amounts) starts at 0
+          beginAtZero: false, // Start from the minimum tender amount
+          min: minTenderAmount, // Set minimum X-axis value to the lowest tender amount
           title: {
             display: true,
             text: 'Tender Amount (in currency)', // Customize based on the currency unit
           },
           ticks: {
-            stepSize: 100000, // Set interval to 100,000
+            stepSize: 50000, // Set the step size (e.g., 50,000 or adjust as needed)
             callback: function(value) {
               return value.toLocaleString(); // Add commas as thousand separators
             }
           }
         },
         y: {
+          reverse: true, 
           title: {
             display: true,
             text: 'Departments',
@@ -1247,6 +1193,75 @@ function createBarChart(departmentTenderAmounts) {
     }
   });
 }
+
+//  -----------------------------------
+// function createBarChart(departmentTenderAmounts) {
+
+//   // Get department names and their corresponding tender amounts
+//   const departmentNames = Object.keys(departmentTenderAmounts);
+//   const tenderAmounts = Object.values(departmentTenderAmounts);
+
+//   // Combine the department names and tender amounts into an array of objects
+//   const departmentsWithAmounts = departmentNames.map((name, index) => ({
+//     name: name,
+//     amount: tenderAmounts[index]
+//   }));
+
+//   // Sort the array by tender amount in descending order
+//   departmentsWithAmounts.sort((a, b) => b.amount - a.amount);
+
+//   // Extract sorted department names and tender amounts
+//   const sortedDepartmentNames = departmentsWithAmounts.map(dept => dept.name);
+//   const sortedTenderAmounts = departmentsWithAmounts.map(dept => dept.amount);
+
+//   // Get the canvas element
+//   var ctx = document.getElementById('barGraphChart').getContext('2d');
+
+//   // Create a new bar chart with horizontal orientation
+//   new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//       labels: sortedDepartmentNames,
+//       datasets: [{
+//         label: 'Total Tender Amount',
+//         data: sortedTenderAmounts,
+//         backgroundColor: sortedDepartmentNames.map(name => departmentColors[name] || '#ccc'), // Map department colors
+//       }],
+//     },
+//     options: {
+//       indexAxis: 'y',  // This makes the bars horizontal
+//       responsive: true,
+//       scales: {
+//         x: {
+//           beginAtZero: true, // Ensure x-axis (tender amounts) starts at 0
+//           title: {
+//             display: true,
+//             text: 'Tender Amount (in currency)', // Customize based on the currency unit
+//           },
+//           ticks: {
+//             stepSize: 100000, // Set interval to 100,000
+//             callback: function(value) {
+//               return value.toLocaleString(); // Add commas as thousand separators
+//             }
+//           }
+//         },
+//         y: {
+//           title: {
+//             display: true,
+//             text: 'Departments',
+//           },
+//         }
+//       },
+//       plugins: {
+//         legend: {
+//           display: true,
+//           position: 'bottom',
+//         },
+//       },
+//       maintainAspectRatio: false,
+//     }
+//   });
+// }
 
  
 

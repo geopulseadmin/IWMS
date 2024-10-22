@@ -90,39 +90,13 @@ text-transform: uppercase;
 /* position: fixed; color: darkblue; font-size: 12px;font-weight: bold;  z-index: 9999; margin-top: 45px; margin-left:0px; */
 }
 
-/* chart */
-/* .chartStats{
- 
-  height: 45vh;
-  overflow-x:scroll;
-  overflow-y: scroll;
-  border:2px solid #bbb;
-  background-color: white;
-}
-.chartStats1{
- 
-  height: 45vh;
-  overflow-x:scroll;
-  overflow-y: scroll;
-  border:2px solid #bbb;
-  background-color: white;
-}
-#graph{
-  width: 15vw;
-  height: 70vh;
-  position: absolute;
- 
-  z-index: 9999;
-  top: 9vh;
-  left: 0.055vw;
-} */
 
 /* chart */
 
 /* Chart containers */
 #pieChartContainer, #barGraphContainer {
   border: 2px solid #bbb;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   margin-bottom: 20px; /* Adds space between the charts */
   padding: 10px; /* Adds padding inside the chart containers */
 }
@@ -133,8 +107,20 @@ text-transform: uppercase;
   overflow-x: hidden;
   overflow-y: hidden;
   position: relative;
+  border: 2px solid #ddd; /* Light grey border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  border-radius: 8px; /* Optional: rounded corners */
 }
 
+/* Bar graph container */
+#barGraphContainer {
+  height: 35vh; /* Adjust the height based on your design */
+  overflow-x: hidden;
+  overflow-y: hidden;
+  border: 2px solid #ddd; /* Light grey border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  border-radius: 8px; /* Optional: rounded corners */
+}
 
 #pieChartContainer:hover {
   overflow-y: scroll; /* Show scrollbar on hover */
@@ -164,12 +150,6 @@ text-transform: uppercase;
   background: #e9e9f7; /* Darker scrollbar on hover */
 }
 
-/* Bar graph container */
-#barGraphContainer {
-  height: 35vh; /* Adjust the height based on your design */
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
 
 #graph {
   width: 15vw;
@@ -180,7 +160,7 @@ text-transform: uppercase;
   left: 0.055vw;
   display: flex;
   flex-direction: column; /* Vertically stack the charts */
-  gap: 10px; /* Space between the charts */
+  /* gap: 5px; Space between the charts */
 }
 
 
@@ -302,10 +282,6 @@ height: 4.5%;
 position: absolute;
 top: 2%;
 left: 12.8%;
-/* border-left: 2px solid darkblue !important;
-border-right: 2px solid darkblue !important;
-border-top: 2px solid darkblue !important;
-border-bottom: 2px solid darkblue !important; */
 z-index: 9999999;
 border-radius: 0;
 border-top-left-radius: 10px;
