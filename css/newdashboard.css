@@ -130,15 +130,45 @@ text-transform: uppercase;
 /* Pie chart container */
 #pieChartContainer {
   height: 35vh; /* Adjust the height based on your design */
-  overflow-x: scroll;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+
+#pieChartContainer:hover {
+  overflow-y: scroll; /* Show scrollbar on hover */
+}
+
+/* Firefox scrollbar styles */
+#pieChartContainer:hover, #barGraphContainer:hover {
+  scrollbar-width:5px; /* Show thin scrollbar */
+}
+
+/* WebKit scrollbar styles */
+#pieChartContainer::-webkit-scrollbar, #barGraphContainer::-webkit-scrollbar  {
+  width: 8px; /* Set width for scrollbar */
+  display: none; /* Initially hide scrollbar */
+}
+
+#pieChartContainer:hover::-webkit-scrollbar,#barGraphContainer:hover::-webkit-scrollbar {
+  display: block; /* Show scrollbar on hover */
+}
+
+#pieChartContainer::-webkit-scrollbar-thumb , #barGraphContainer::-webkit-scrollbar-thumb{
+  background: #e9e9f7; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+#pieChartContainer::-webkit-scrollbar-thumb:hover ,#barGraphContainer::-webkit-scrollbar-thumb:hover {
+  background: #e9e9f7; /* Darker scrollbar on hover */
 }
 
 /* Bar graph container */
 #barGraphContainer {
   height: 35vh; /* Adjust the height based on your design */
-  overflow-x: scroll;
-  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 #graph {
