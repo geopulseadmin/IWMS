@@ -151,7 +151,7 @@ var Geotagged = L.tileLayer.wms(
     maxZoom: 21,
     opacity: 1,
   }
-).addTo(map);
+);
 
 
 
@@ -167,7 +167,7 @@ var Geotaggedlive = L.tileLayer.wms(
     maxZoom: 21,
     opacity: 1,
   }
-).addTo(map);
+);
 
 
 

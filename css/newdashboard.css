@@ -517,6 +517,9 @@ border-right: 1px solid;
   right: 10px;
 }
 
+/* chart */
+
+
 .pagination-icon:disabled {
   opacity: 0.5;
   cursor: not-allowed;

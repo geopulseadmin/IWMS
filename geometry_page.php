@@ -68,119 +68,117 @@ if (!$userData) {
     <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
 
     <style>
-       /* General Modal Styles */
-/* Modal Dialog: Adjust width and remove extra margins */
-.modal-dialog {
-    max-width: 500px; 
-    margin: 1rem auto; 
-}
-.modal-content {
-    border-radius: 15px;
-    border: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    background-color: #f9f9f9;
-    padding: 1rem; 
-}
+              .modal-dialog {
+            max-width: 500px;
+            margin: 1rem auto;
+        }
 
-.modal-header {
-    background-color: #0077DA;
-    color: white;
-    border-bottom: none;
-    padding: 0.75rem 1rem; 
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-}
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background-color: #f9f9f9;
+            padding: 1rem;
+        }
 
-.modal-title {
-    font-size: 1.125rem; 
-    font-weight: 600;
-}
+        .modal-header {
+            background-color: #0077DA;
+            color: white;
+            border-bottom: none;
+            padding: 0.75rem 1rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
 
-.btn-close {
-    border: none;
-    color: white;
-    font-size: 1rem;
-    opacity: 0.8;
-}
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
 
-.modal-body {
-    padding: 1rem; 
-}
+        .btn-close {
+            border: none;
+            color: white;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
 
-.form-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: #555;
-    margin-bottom: 0.25rem;
-}
+        .modal-body {
+            padding: 1rem;
+        }
 
-.form-control, .form-select {
-    background: white;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    padding: 0.5rem;
-    font-size: 0.875rem;
-    color: #495057;
-}
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 0.25rem;
+        }
 
-.modal-footer {
-    padding: 0.5rem 1rem; 
-    border-top: none;
-    display: flex;
-    justify-content: space-between;
-}
+        .form-control,
+        .form-select {
+            background: white;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            color: #495057;
+        }
 
-.modal-footer .btn {
-    padding: 0.5rem 1rem; 
-    border-radius: 8px;
-    font-size: 0.875rem;
-    font-weight: 600;
-}
+        .modal-footer {
+            padding: 0.5rem 1rem;
+            border-top: none;
+            display: flex;
+            justify-content: space-between;
+        }
 
-.btn-secondary, .btn-primary {
-    min-width: 100px; 
-}
+        .modal-footer .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
 
-#workDetailsModal {
-    position: absolute;
-    z-index: 99999;
-    height: 100vh;
-    top: 76px;
-    overflow: auto;
-    scrollbar-width: thin;
-}
+        .btn-secondary,
+        .btn-primary {
+            min-width: 100px;
+        }
 
-@media (max-width: 768px) {
-    .modal-dialog {
-        max-width: 100%;
-        margin: 0.5rem auto; 
-    }
+        #workDetailsModal {
+            position: absolute;
+            z-index: 99999;
+            height: 100vh;
+            top: 76px;
+            overflow: auto;
+            scrollbar-width: thin;
+        }
 
-    .modal-content {
-        padding: 0.75rem; 
-    }
+        @media (max-width: 768px) {
+            .modal-dialog {
+                max-width: 100%;
+                margin: 0.5rem auto;
+            }
 
-    .modal-header, .modal-footer {
-        padding: 0.5rem 1rem; 
-    }
+            .modal-content {
+                padding: 0.75rem;
+            }
 
-    .modal-body {
-        padding: 0.5rem; 
-    }
-}
+            .modal-header,
+            .modal-footer {
+                padding: 0.5rem 1rem;
+            }
 
-#successModal .modal-dialog {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; 
-}
+            .modal-body {
+                padding: 0.5rem;
+            }
+        }
 
-/* #successModal .modal-content {
-    margin: auto; 
-} */
+        #successModal .modal-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-#successModal .modal-content {
+        #successModal .modal-content {
             margin: auto;
             position: fixed;
             /* Keeps the modal in place during scroll */
@@ -193,9 +191,7 @@ if (!$userData) {
             width: fit-content;
             /* Optional: Adjust width if needed */
         }
-
     </style>
-    
 
 </head>
 
@@ -267,6 +263,7 @@ if (!$userData) {
     </div>
 
     <!-- Modal Structure -->
+    <!-- Modal Structure -->
     <div class="modal fade" id="workDetailsModal" tabindex="-1" aria-labelledby="workDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -289,7 +286,7 @@ if (!$userData) {
                             <input type="tel" class="form-control" id="contact" name="contact" value="<?php echo htmlspecialchars($userData['contact_no']); ?>" readonly>
                         </div> -->
 
-
+                        <!-- Row 2: FID, Work ID, Department -->
                         <div class="form-row mb-2">
                             <label for="fid" class="form-label">FID</label>
                             <input class="form-control" id="fid" name="fid" readonly>
@@ -303,47 +300,29 @@ if (!$userData) {
                             <input type="text" class="form-control" id="department" name="department" readonly>
                         </div>
 
+                        <!-- <div id="categoryWrapper" style="display:none;">
+                            <select id="category"></select>
+                        </div> -->
 
-
-                        <div class="form-row mb-2">
+                        <div id="categoryWrapper" style="display:none;">
                             <label for="category" class="form-label">Category</label>
-
-                            <select class="form-select form-select1" id="category" name="category" required>
-                                <option value="">-- Select Category --</option>
-                                <option value="1">रस्ते</option>
-                                <option value="2">फूटपाथ</option>
-                                <option value="3">भवन</option>
-                                <option value="4">मलनिःसारण</option>
-                                <option value="5">पाणीपुरवठा</option>
-                                <option value="6">विद्युत</option>
-                                <option value="6">अतिक्रमण</option>
-                                <option value="6">उद्यान</option>
-                                <option value="6">घनकचरा</option>
-                                <option value="6">पर्यावरण</option>
-                                <option value="6">क्रिडा</option>
-                                <option value="6">झोपडपट्टी</option>
-                                <option value="6">प्राथमिक शिक्षण</option>
-                                <option value="6">वृक्ष प्राधिकरण</option>
-                                <option value="6">मुख्य अभियंता प्रकल्प</option>
-
-                            </select>
+                            <select id="category" class="form-select form-select1" name="category" required></select>
                         </div>
 
                         <div class="form-row mb-2" id="subcategory-wrapper" style="display:none;">
                             <label for="subcategory" class="form-label">Subcategory</label>
-                            <select class="form-select form-select2" id="subcategory" name="subcategory" required>
-
-
+                            <select class="form-select form-select1" id="subcategory" name="subcategory" required>
                             </select>
                         </div>
 
-                        <div class="form-row mb-2 " id="otherTextWrapper" style="display:none;">
+                        <div class="form-row mb-2" id="otherTextWrapper" style="display:none;">
                             <label for="otherText" class="form-label">Please specify</label>
                             <input type="text" class="form-control" id="otherText" name="otherText" placeholder="Enter details" />
                         </div>
 
 
 
+                        <!-- Rate Us -->
                         <div class="rate mb-2">
                             <p class="fw-bold mt-2">Rate Us:</p>
                             <div class="rating d-flex justify-content-between">
@@ -543,7 +522,6 @@ if (!$userData) {
                 console.log(userIP, "userIP");
             });
 
-            // Fetch the Work_ID dynamically from the URL or wherever it is stored
             const urlParams = new URLSearchParams(window.location.search);
             const workId = urlParams.get('Work_ID'); // Assuming Work_ID is passed in the URL
             console.log('Work_ID:', workId);
@@ -572,6 +550,9 @@ if (!$userData) {
                             $('#fid').val(fid);
                             $('#workId').val(workID);
                             $('#department').val(department);
+
+                            // Trigger the department change event to update subcategories
+                            updateSubcategoryOptions(department);
                         } else {
                             console.error('Unexpected response structure:', response);
                         }
@@ -638,174 +619,7 @@ if (!$userData) {
             // Initialize stars
             updateStars(0);
 
-
-        //     document.getElementById('category').addEventListener('change', function() {
-        //         const subcategoryWrapper = document.getElementById('subcategory-wrapper');
-        //         const subcategory = document.getElementById('subcategory');
-        //         const otherTextWrapper = document.getElementById('otherTextWrapper');
-        //         const otherText = document.getElementById('otherText');
-        //         subcategory.innerHTML = '';
-        //         otherTextWrapper.style.display = 'none';
-        //         otherText.value = '';
-
-        //         const selectedCategory = this.value;
-        //         subcategoryWrapper.style.display = 'none';
-        //         if (selectedCategory == "1") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="1">नव्याने केलेल्या रस्त्यावर पाणी साठत आहे.</option>
-        //     <option value="2">रस्त्याच्या बाजूला पावसाळी लाईन नाही. </option>
-        //     <option value="3">स्त्याचा उतार पावसाळी लाईन कडे ठेवला नाही.  </option>
-        //     <option value="4">नव्याने केलेल्या रस्त्यावर खड्डे झाले आहेत. </option>
-        //     <option value="5">नव्याने केलेला रस्ता धसला आहे. </option>
-        //     <option value="6">नवीन केलेल्या रस्त्यावर भुंगिर दिसत आहे. </option>
-        //     <option value="7">चेंबर / म्यानहोल कवर रस्त्याच्या समपातळीत उचलले नाही.</option>
-        //     <option value="8">चेंबर / म्यानहोल कवर तुटले आहे.</option>
-        //     option value="9">नव्याने केलेल्या रस्त्यावर क्रॉस-कट केले आहेत. </option>
-        //     option value="10">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याला तडे पडले आहेत. </option>
-        //     option value="11">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याला ग्रूव कटिंग केले नाही. </option>
-        //     option value="12">नव्याने केलेल्या सीमेंट कौंक्रीट रस्त्याच्या ग्रूव कटिंग मध्ये सिलंट भरले नाही.</option>
-        //     option value="13">नव्याने केलेला रस्ता खोदला आहे, परंतु तो सुस्थितीत पुन्हा दुरूस्त केला नाही. </option>
-        //     option value="14">नवीन रास्ता ओबड-धोबड केला आहे. </option>
-        //     option value="15">नवीन रस्त्यावर तुरंत वाहतूक सुरू केली आहे. </option>
-        //     option value="16">रस्त्याच्या बाजूला पार्क केलेल्या वाहनांच्यामुळे नवीन रस्ता त्या जागी केला जात नाही. </option>
-        //     option value="17">स्पीडब्रेकर वरील पेंट केला नाही.</option>
-        //     option value="18">नवीन रस्त्याच्या बाजूला खोदाईतील राडारोडा पडले आहे. </option>
-        //     option value="19">रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत. </option>
-        //     <option value="20">other</option>
-        // `;
-        //         } else if (selectedCategory == "2") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="1">नव्याने केलेल्या फूटपाथ मधील पेविंग ब्लॉक उखडले आहेत. </option>
-        //     <option value="2">नव्याने केलेल्या फूटपाथचे कर्ब-स्टोन तुटले आहेत. </option>
-        //     <option value="3">नव्याने केलेला फूटपाथ धसला आहे. </option>
-        //     <option value="4">नव्याने केलेल्या फूटपाथवरुन दुचाकी वाहतूक होत आहे. </option>
-        //     <option value="5">नव्याने केलेल्या फूटपाथवर अडथळे आहेत. </option>
-        //     <option value="6">फूटपाथवर फेरीवाले आणि इतर विक्रेते बसत आहेत.</option>
-        //     <option value="20">other</option>
-            
-        // `;
-        //         } else if (selectedCategory == "3") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="1">इमारतीच्या सीमेंट कौंक्रीटला पाण्याने पुरेसे क्युरिंग केले जात नाही.</option>
-        //     <option value="2">इमारतीच्या सीमेंट कौंक्रीटला तडे गेले आहेत./option>
-        //         <option value="3">इमारतीच्या केलेल्या प्लास्टरला पाण्याने क्युरिंग केले जात नाही. </option>
-        //         <option value="4">इमारतीच्या केलेल्या प्लास्टरला तडे गेले आहेत.</option>
-        //         <option value="5">इमारतीच्या काम सुरू असताना सेफ्टीनेट लावले नाहीत.</option>
-        //         <option value="6">साईटवर काम करणार्‍या मजूराला सेफ्टी साठीचे पीपीईस (PPE’S) दिले नाहीत.</option>
-        //         <option value="20">other</option>
-        // `;
-        //         } else if (selectedCategory == "4") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="1">ड्रेनेज लाइन मधून लिकेज होत आहे.</option>
-        //     <option value="2">डॅमेज झालेल्या आरसीसी पाईप वापरल्या जात आहेत.</option>
-        //     <option value="3">ड्रेनेज लाइन टाकताना रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत.</option>
-        //     <option value="4">खोदाई केलेला राडारोडा उचलला नाही.</option>
-        //     <option value="5">ड्रेनेज लाइनचे चेंबर ब्लॉक झाले आहे.</option>
-        //     <option value="6">ड्रेनेज लाइनचे चेंबर कवर तुटले आहे. </option>
-        //     <option value="20">other</option>
-
-        // `;
-        //         } else if (selectedCategory == "5") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="1">पिण्याच्या पाण्याच्या लाइन मधून लिकेज होत आहे.</option>
-        //     <option value="2">पिण्याच्या पाण्याची लाइन टाकताना रस्त्यावरील खोदाईच्या बाजूला सेफ्टी ब्यारिगेट लावले नाहीत.</option>
-        //     <option value="3">खोदाई केलेला राडारोडा उचलला नाही.</option>
-        //     <option value="4">पिण्याच्या पाण्याच्या लाइनवर बसविलेले स्लुस-वाल्हला पेटी बांधली नाही. </option>
-        //     <option value="5">पिण्याच्या पाण्याच्या लाइनवर बसविलेले स्लुस-वाल्हला पेटीवर झाकण नाही. </option>
-        //     <option value="6">पिण्याच्या पाण्याच्या लाइनवर बसविलेले स्लुस-वाल्ह रस्त्याच्या वर आला आहे. </option>
-        //     <option value="20">other</option>
-        // `;
-        //         } else if (selectedCategory == "6") {
-        //             subcategoryWrapper.style.display = 'block';
-        //             subcategory.innerHTML = `
-        //     <option value="">-- Select Option --</option>
-        //     <option value="20">other</option>
-        // `;
-        //         }
-
-        //     });
-
-        //     document.getElementById('subcategory').addEventListener('change', function() {
-        //         const otherTextWrapper = document.getElementById('otherTextWrapper');
-        //         if (this.value === '20') { // Show input field if 'other' is selected
-        //             otherTextWrapper.style.display = 'block';
-        //         } else {
-        //             otherTextWrapper.style.display = 'none';
-        //         }
-        //     });
-
-
-
-
-        //     document.getElementById('saveChangesBtn').addEventListener('click', function(e) {
-        //         const rating = document.querySelector('input[name="rating"]:checked');
-        //         const categoryElement = document.getElementById('category');
-        //         const subcategoryElement = document.getElementById('subcategory');
-
-        //         // Get the selected text for category and subcategory
-        //         const category = categoryElement.options[categoryElement.selectedIndex].text;
-        //         const subcategory = subcategoryElement.options[subcategoryElement.selectedIndex].text;
-
-        //         const otherText = document.getElementById('otherText').value;
-
-        //         // Ensure all required fields are filled
-        //         if (!rating || !category || (!subcategory && !otherText)) {
-        //             e.preventDefault();
-        //             alert('Please fill in all required fields.');
-        //             return;
-        //         }
-        //         // Disable the submit button to prevent multiple submissions
-        //         this.disabled = true;
-
-        //         document.getElementById('loader').style.display = 'block'; // Show loader
-        //         // Append form data and submit
-        //         const form = document.getElementById('workDetailsForm');
-        //         const formData = new FormData(form);
-        //         formData.append('rating', rating.value);
-        //         formData.append('live_location', userLocation);
-        //         formData.append('ip_address', userIP);
-        //         formData.append('category', category);
-        //         formData.append('subcategory', subcategory);
-
-        //         if (subcategory === '20') { // Append 'other' text if 'other' option is selected
-        //             formData.append('otherText', otherText);
-        //         }
-
-
-        //         fetch('APIS/save_form_work.php', {
-        //                 method: 'POST',
-        //                 body: formData
-        //             })
-        //             .then(response => response.text())
-        //             .then(data => {
-        //                 // Hide loader
-        //                 document.getElementById('loader').style.display = 'none';
-        //                 $('#successModal').modal('show');
-        //                 setTimeout(function() {
-        //                     $('#successModal').modal('hide');
-        //                 }, 3000);
-        //                 form.reset();
-        //                 $('#workDetailsModal').modal('hide');
-
-        //                 // Hide loader and re-enable the button if there's an error
-        //                 document.getElementById('loader').style.display = 'none';
-        //                 this.disabled = false;
-        //             })
-        //             .catch(error => console.error('Error:', error));
-        //     });
-        // });
-
-        // Function to update subcategory options based on department
+   // Function to update subcategory options based on department
    function updateSubcategoryOptions(department) {
                 const categoryWrapper = document.getElementById('categoryWrapper');
                 const category = document.getElementById('category');
