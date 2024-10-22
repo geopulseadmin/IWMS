@@ -308,97 +308,35 @@ font-size: 15px;
 .icon-container i {
 color: black; /* Default color */
 }
-.scroll-box {
-  height: 40vh;
-  overflow-y: hidden; /* Initially hide overflow */
-  overflow-x: hidden;
-  /* border: 1px solid #ccc; */
-  position: relative;
-}
 
-.scroll-box:hover {
-  overflow-y: scroll; /* Show scrollbar on hover */
-}
-
-/* Firefox scrollbar styles */
-.scroll-box:hover {
-  scrollbar-width:5px; /* Show thin scrollbar */
-}
-
-/* WebKit scrollbar styles */
-.scroll-box::-webkit-scrollbar {
-  width: 8px; /* Set width for scrollbar */
-  display: none; /* Initially hide scrollbar */
-}
-
-.scroll-box:hover::-webkit-scrollbar {
-  display: block; /* Show scrollbar on hover */
-}
-
-.scroll-box::-webkit-scrollbar-thumb {
-  background: #e9e9f7; /* Scrollbar color */
-  border-radius: 4px;
-}
-
-.scroll-box::-webkit-scrollbar-thumb:hover {
-  background: #e9e9f7; /* Darker scrollbar on hover */
-}
 .abcscroll {
   height: auto;
   max-height: 200px;
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: hidden;
-  /* scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1; */
-  position: relative;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #888 #f1f1f1; /* For Firefox */
 }
 
-.abcscroll:hover {
-  overflow-y: scroll; /* Show scrollbar on hover */
-}
-
-/* Firefox scrollbar styles */
-.abcscroll:hover {
-  scrollbar-width:5px; /* Show thin scrollbar */
-}
-
-/* WebKit scrollbar styles */
+/* WebKit (Safari, older Chrome) */
 .abcscroll::-webkit-scrollbar {
-  width: 8px; /* Set width for scrollbar */
-  display: none; /* Initially hide scrollbar */
+  width: 10px; /* Makes scrollbars thinner */
 }
 
-.abcscroll:hover::-webkit-scrollbar {
-  display: block; /* Show scrollbar on hover */
+.abcscroll::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of scrollbar track */
+  border-radius: 10px; /* Rounded corners for scrollbar track */
 }
 
 .abcscroll::-webkit-scrollbar-thumb {
-  background: #e9e9f7; /* Scrollbar color */
-  border-radius: 4px;
+  background: #888; /* Color of scrollbar handle */
+  border-radius: 10px; /* Rounded corners for scrollbar handle */
 }
 
 .abcscroll::-webkit-scrollbar-thumb:hover {
-  background: #e9e9f7; /* Darker scrollbar on hover */
+  background: #555; /* Darker color on hover state for visibility */
 }
 
-
-.chartStats1{
-
-  height: 45vh;
-  overflow-x:scroll;
-  overflow-y: scroll;
-  border:2px solid #bbb;
-  background-color: white;
-}
-#graph{
-  width: 15vw;
-  height: 70vh;
-  position: absolute;
- 
-  z-index: 9999;
-  top: 9vh;
-  left: 0.055vw;
-}
 
 #daterange {
   z-index: 9999;
@@ -955,7 +893,7 @@ text-align: center;
   padding-right: 25px; /* Adjust padding to make space for the icon */
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6"><path d="M0 0h10L5 6z" fill="black"/></svg>') no-repeat; /* Custom SVG arrow */
   background-position: right 5px center; /* Default position */
-  background-size: 9px; /* Size of the icon */
+  background-size: 13px; /* Size of the icon */
   border: none; /* Remove the default border */
   border-right: 2px solid darkblue; /* Add a border only to the right side */
   /* padding: 8px; */
@@ -996,62 +934,4 @@ text-align: center;
 .data-table th, .data-table td {
   padding: 8px 12px; /* Consistent padding for readability */
   text-align: left;
-}
-
-#calendartoggle {
-  position: absolute;
-  z-index: 999;
-  top: 30vh;
-  width: auto;
-  padding: 6px;
-  color: darkblue;
-  right: 10px;
-  background-color: white;
-  border-radius: 5px;
-  border: 2px solid #383899;
-}
-
-.tablebtn1 {
-  width: 20px;
-  height: 20px;
-}
-
-.tablebtn2{
-  width: 20px;
-  height: 20px;
-}
-#searchbutton {
-  position: absolute;
-  z-index: 999;
-  top: 22vh;
-  width: auto;
-  padding: 6px;
-  color: darkblue;
-  right: 10px;
-  background-color: white;
-  border-radius: 5px;
-  border: 2px solid #383899;
-}
-
-.chartStats {
-  height: 30vh;
-  overflow: auto;
-  border: 2px solid #bbb;
-  padding: 10px; /* Optional padding */
-}
-#chartContainer {
-  display: flex;
-  justify-content: center; /* Centers the chart horizontally */
-  align-items: center; /* Centers the chart vertically */
-  padding: 10px; /* Reduce padding */
-  margin: 20px auto; /* Centers the container */
-  border-radius: 10px; /* Adds rounded corners */
-  background-color: #f8f9fa; /* Light background */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  overflow-y: auto; /* Enables vertical scroll if the content exceeds height */
-}
-
-canvas {
-  max-width: 100%;
-  max-height: 100%;
 }
